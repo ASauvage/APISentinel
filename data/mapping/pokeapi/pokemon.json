@@ -1,0 +1,32 @@
+{
+    "count": {
+        "_type": "Number"
+    },
+    "next": {
+        "_type": "String",
+        "_regex": "[(http(s)?):\\/\\/(www\\.)?a-zA-Z0-9@:%._\\+~#=]{2,256}\\.[a-z]{2,6}\\b([-a-zA-Z0-9@:%_\\+.~#?&//=]*)",
+        "_nullable": true
+    },
+    "previous": {
+         "_type": "String",
+        "_regex": "[(http(s)?):\\/\\/(www\\.)?a-zA-Z0-9@:%._\\+~#=]{2,256}\\.[a-z]{2,6}\\b([-a-zA-Z0-9@:%_\\+.~#?&//=]*)",
+        "_nullable": true
+    },
+    "results": {
+        "_type": "Array",
+        "_values": [
+            {
+                "_type": "Object",
+                "_properties": {
+                    "name": {
+                        "_type": "String"
+                    },
+                    "url": {
+                        "_type": "String",
+                        "_regex": "[(http(s)?):\\/\\/(www\\.)?a-zA-Z0-9@:%._\\+~#=]{2,256}\\.[a-z]{2,6}\\b([-a-zA-Z0-9@:%_\\+.~#?&//=]*)"
+                    }
+                }
+            }
+        ]
+    }
+}
