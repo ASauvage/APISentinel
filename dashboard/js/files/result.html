@@ -1,0 +1,20 @@
+<div class="css-container css-card css-white css-margin-bottom">
+    <h2 class="css-text-grey css-padding-16"><i class="fa fa-file-code-o fa-fw css-margin-right css-xxlarge css-text-teal"></i>
+        {title}
+    </h2>
+    <div class="css-container">
+        <h5 class="css-opacity">
+            <b>Status: <span class="css-tag css-{status-color} css-round">{status}</span></b>
+        </h5>
+        <h6 class="css-text-teal css-code">
+            <a href="{url}">{url}</a>
+        </h6>
+        <button type="button" class="css-large css-button css-theme collapsible" onclick="collapse_errors(this)">
+            <i class="fa fa-list-alt fa-fw"></i> Errors
+        </button>
+        <div class="content css-light-grey">
+          {errors}
+        </div>
+        <hr>
+    </div>
+</div>
