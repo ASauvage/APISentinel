@@ -1,0 +1,23 @@
+[
+    {
+        "title": "Mapping test on pokemon.json",
+        "env": "production",
+        "service": "pokeapi",
+        "status": false,
+        "errors": [
+            "MissingFieldError: ['field'] not found",
+            "WrongTypeError: ['field', 0] should be a(n) ['list', 'tupple] not 'str'"
+        ],
+        "request": "https://pokeapi.co/api/v2/pokemon",
+        "datetime": "19 sept 2023 - 16:38:24"
+    },
+    {
+        "title": "Mapping test on pokemon.json",
+        "env": "production",
+        "service": "pokeapi",
+        "status": true,
+        "errors": [],
+        "request": "https://pokeapi.co/api/v2/pokemon",
+        "datetime": "19 sept 2023 - 16:38:24"
+    }
+]
