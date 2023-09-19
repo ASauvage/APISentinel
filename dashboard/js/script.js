@@ -23,18 +23,18 @@ async function load_elements(session_id) {
                     data = data.replace('{status-color}', "green");
                     data = data.replace('{status}', "Success");
 
-                    data = data.replace('{errors}', "No errors in this test");
+                    data = data.replace('{errors}', "<li>No errors in this test</li>");
                     total_success++;
                 } else {
                     data = data.replace('{status-color}', "red");
                     data = data.replace('{status}', "Failure");
 
-                    var errors = "<ul>"
+                    var errors = ""
                     for (y = 0; y < session[x].errors.length; y++) {
                         errors += "<li>" + session[x].errors[y] + "</li>";
                     }
 
-                    data = data.replace('{errors}', errors + "</li>");
+                    data = data.replace('{errors}', errors);
                 }
 
                 results_div.innerHTML += data;
@@ -42,13 +42,31 @@ async function load_elements(session_id) {
                 env_html.innerHTML = session[0].env;
                 service_html.innerHTML = session[0].service;
                 total_html.innerHTML = session.length;
-                success_rate_html.style = "width:" + (total_success/session.length)*100 + "%;";
-                success_rate_html.innerHTML = (total_success/session.length)*100 + "%";
+
+                var width = 1;
+                var id = setInterval(frame, 10);
+                function frame() {
+                    if (width >= (total_success/session.length)*100) {
+                        clearInterval(id);
+                    } else {
+                        width++;
+                        success_rate_html.style.width = width + '%';
+                        success_rate_html.innerHTML =  width + '%';
+                    }
+                }
+//                success_rate_html.style = "width:" + (total_success/session.length)*100 + "%;";
+//                success_rate_html.innerHTML = (total_success/session.length)*100 + "%";
             });
         }
     } catch (error) {
         console.log(error)
-        results_div.innerHTML = '<h2 class="css-text-grey css-padding-16"><i class="fa fa-file-code-o fa-fw css-margin-right css-xxlarge css-text-teal"></i>Session ID does not exist :(</h2>';
+        results_div.innerHTML = '<h2 class="css-text-grey css-padding-16"><i class="fa fa-warning fa-fw css-margin-right css-xxlarge css-text-teal"></i>Session ID does not exist :(</h2>';
+        date_html.innerHTML = "N.A";
+        env_html.innerHTML = "N.A";
+        service_html.innerHTML = "N.A";
+        total_html.innerHTML = "0";
+        success_rate_html.style = "width:100%;";
+        success_rate_html.innerHTML = "N.A";
     }
 }
 
