@@ -5,7 +5,7 @@ from utils.mapping import is_mapping_ok
 
 
 def apitester(env: str, service: Service, **specifications):
-    response = api_get_json(service.url(env, specifications['api']))
+    response = api_get_json(service.url(env, specifications['api']), headers=specifications['headers'])
 
     errors = list()
     is_mapping_ok(response, '{}/data/mapping/{}'.format(os.getcwd(), service.path + specifications['filename']), errors)
