@@ -18,94 +18,85 @@
 </head>
 <body class="css-light-grey">
 
-<!-- Page Container -->
-<div class="css-content css-margin-top" style="max-width:1400px;">
+    <!-- Page Container -->
+    <div class="css-content css-margin-top" style="max-width:1400px;">
 
-    <!-- The Grid -->
-    <div class="css-row-padding">
+        <!-- The Grid -->
+        <div class="css-row-padding">
 
-        <!-- Left Column -->
-        <div class="css-third">
+            <!-- Left Column -->
+            <div class="css-third">
 
-            <div class="css-white css-text-grey css-card-4">
-                <div class="css-container">
-                    <p>
-                ░░░░░░░░░░░░░░░░░░░░░█████████░░░░░░░░░░<br/>
-                ░░███████░░░░░░░░░░███▒▒▒▒▒▒▒▒███░░░░░░░<br/>
-                ░░█▒▒▒▒▒▒█░░░░░░░███▒▒▒▒▒▒▒▒▒▒▒▒▒███░░░░<br/>
-                ░░░█▒▒▒▒▒▒█░░░░██▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒██░░<br/>
-                ░░░░█▒▒▒▒▒█░░░██▒▒▒▒▒██▒▒▒▒▒▒██▒▒▒▒▒███░<br/>
-                ░░░░░█▒▒▒█░░░█▒▒▒▒▒▒████▒▒▒▒████▒▒▒▒▒▒██<br/>
-                ░░░█████████████▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒██<br/>
-                ░░░█▒▒▒▒▒▒▒▒▒▒▒▒█▒▒▒▒▒▒▒▒▒█▒▒▒▒▒▒▒▒▒▒▒██<br/>
-                ░██▒▒▒▒▒▒▒▒▒▒▒▒▒█▒▒▒██▒▒▒▒▒▒▒▒▒▒██▒▒▒▒██<br/>
-                ██▒▒▒███████████▒▒▒▒▒██▒▒▒▒▒▒▒▒██▒▒▒▒▒██<br/>
-                █▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒█▒▒▒▒▒▒████████▒▒▒▒▒▒▒██<br/>
-                ██▒▒▒▒▒▒▒▒▒▒▒▒▒▒█▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒██░<br/>
-                ░█▒▒▒███████████▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒██░░░<br/>
-                ░██▒▒▒▒▒▒▒▒▒▒████▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒█░░░░░<br/>
-                ░░████████████░░░█████████████████░░░░░░
-            </p>
-                    <p>
-                        <label for="session_id"><i class="fa fa-id-card fa-fw css-margin-right css-large css-text-teal"></i>Session ID</label>
-                        <input type="text" class="css-input" id="session_id" name="session_id" maxlength="22" placeholder="xxxxxx-xxxxxx-xxxxxxxx" onchange="load_elements(this.value)">
-                    </p>
-                    <p class="css-large"><b><i class="fa fa-asterisk fa-fw css-margin-right css-text-teal"></i>Informations</b></p>
-                    <p><i class="fa fa-calendar fa-fw css-margin-right css-large css-text-teal"></i><a id="datetime">N.A</a></p>
-                    <p><i class="fa fa-gear fa-fw css-margin-right css-large css-text-teal"></i>Service: <a id="service">N.A</a></p>
-                    <p><i class="fa fa-server fa-fw css-margin-right css-large css-text-teal"></i>Environement: <a id="env">N.A</a></p>
-                    <p><i class="fa fa-sort-numeric-asc fa-fw css-margin-right css-large css-text-teal"></i><a id="total">0</a> test found</p>
-                    <hr>
+                <div class="css-white css-text-grey css-card-4">
+                    <div class="css-container">
+                        <p>
+                            ░░░░░░░░░░░░░░░░░░░░░█████████░░░░░░░░░░<br/>
+                            ░░███████░░░░░░░░░░███▒▒▒▒▒▒▒▒███░░░░░░░<br/>
+                            ░░█▒▒▒▒▒▒█░░░░░░░███▒▒▒▒▒▒▒▒▒▒▒▒▒███░░░░<br/>
+                            ░░░█▒▒▒▒▒▒█░░░░██▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒██░░<br/>
+                            ░░░░█▒▒▒▒▒█░░░██▒▒▒▒▒██▒▒▒▒▒▒██▒▒▒▒▒███░<br/>
+                            ░░░░░█▒▒▒█░░░█▒▒▒▒▒▒████▒▒▒▒████▒▒▒▒▒▒██<br/>
+                            ░░░█████████████▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒██<br/>
+                            ░░░█▒▒▒▒▒▒▒▒▒▒▒▒█▒▒▒▒▒▒▒▒▒█▒▒▒▒▒▒▒▒▒▒▒██<br/>
+                            ░██▒▒▒▒▒▒▒▒▒▒▒▒▒█▒▒▒██▒▒▒▒▒▒▒▒▒▒██▒▒▒▒██<br/>
+                            ██▒▒▒███████████▒▒▒▒▒██▒▒▒▒▒▒▒▒██▒▒▒▒▒██<br/>
+                            █▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒█▒▒▒▒▒▒████████▒▒▒▒▒▒▒██<br/>
+                            ██▒▒▒▒▒▒▒▒▒▒▒▒▒▒█▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒██░<br/>
+                            ░█▒▒▒███████████▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒██░░░<br/>
+                            ░██▒▒▒▒▒▒▒▒▒▒████▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒█░░░░░<br/>
+                            ░░████████████░░░█████████████████░░░░░░
+                        </p>
+                        <p>
+                            <label for="session_id"><i class="fa fa-id-card fa-fw css-margin-right css-large css-text-teal"></i>Session ID</label>
+                            <input type="text" class="css-input" id="session_id" name="session_id" maxlength="22" placeholder="xxxxxx-xxxxxx-xxxxxxxx" onchange="load_elements(this.value)">
+                        </p>
+                        <p class="css-large"><b><i class="fa fa-asterisk fa-fw css-margin-right css-text-teal"></i>Informations</b></p>
+                        <p><i class="fa fa-calendar fa-fw css-margin-right css-large css-text-teal"></i><a id="datetime">N.A</a></p>
+                        <p><i class="fa fa-gear fa-fw css-margin-right css-large css-text-teal"></i>Service: <a id="service">N.A</a></p>
+                        <p><i class="fa fa-server fa-fw css-margin-right css-large css-text-teal"></i>Environement: <a id="env">N.A</a></p>
+                        <p><i class="fa fa-sort-numeric-asc fa-fw css-margin-right css-large css-text-teal"></i><a id="total">0</a> test found</p>
+                        <hr>
 
-                    <p>Sucess Rate</p>
-                    <div class="css-light-grey css-round-xlarge css-small">
-                        <div class="css-container css-center css-round-xlarge css-teal" style="width:100%" id="success_rate">N.A</div>
+                        <p>Sucess Rate</p>
+                        <div class="css-light-grey css-round-xlarge css-small">
+                            <div class="css-container css-center css-round-xlarge css-teal" style="width:100%" id="success_rate">N.A</div>
+                        </div>
+                        <br>
+                        <br>
                     </div>
-                    <br>
-                    <br>
                 </div>
-            </div>
-            <br>
+                <br>
 
-            <!-- End Left Column -->
+                <!-- End Left Column -->
+            </div>
+
+            <!-- Right Column -->
+            <div class="css-twothird" id="results">
+                <div class="css-middleleft">
+                    <h2 class="css-text-grey css-padding-16"><i class="fa fa-arrow-left fa-fw css-margin-right css-xxlarge css-text-teal"></i>Put your session ID here</h2>
+                </div>
+                <!-- End Right Column -->
+            </div>
+
+            <!-- End Grid -->
         </div>
 
-        <!-- Right Column -->
-        <div class="css-twothird" id="results">
-            <div class="css-middleleft">
-                <h2 class="css-text-grey css-padding-16"><i class="fa fa-arrow-left fa-fw css-margin-right css-xxlarge css-text-teal"></i>Put your session ID here</h2>
-            </div>
-            <!-- End Right Column -->
-        </div>
-
-        <!-- End Grid -->
+        <!-- End Page Container -->
     </div>
 
-    <!-- End Page Container -->
-</div>
+    <footer class="css-container css-teal css-center css-margin-top footer">
+        <p>
+            <i class="fa fa-star fa-fw"></i><u>RESULTINATOR</u> by Alexandre SAUVAGE POTEL<i class="fa fa-star fa-fw"></i>
+        </p>
+    </footer>
 
-<footer class="css-container css-teal css-center css-margin-top footer">
-    <p>
-        <i class="fa fa-star fa-fw"></i><u>RESULTINATOR</u> by Alexandre SAUVAGE POTEL<i class="fa fa-star fa-fw"></i>
-    </p>
-</footer>
+    <script>
+        const queryString = window.location.search;
+        console.log(queryString);
 
-<script>
-    var coll = document.getElementsByClassName("collapsible");
-    var i;
-
-    for (i = 0; i < coll.length; i++) {
-      coll[i].addEventListener("click", function() {
-        this.classList.toggle("active");
-        var content = this.nextElementSibling;
-        if (content.style.maxHeight){
-          content.style.maxHeight = null;
-        } else {
-          content.style.maxHeight = content.scrollHeight + "px";
-        }
-      });
-    }
-</script>
-
+        const urlParams = new URLSearchParams(queryString);
+        const session_id = urlParams.get('session_id');
+        document.getElementById("session_id").value = session_id;
+    </script>
 </body>
 </html>

@@ -1,3 +1,5 @@
+var fs = require('fs');
+
 
 async function load_elements(session_id) {
     try {
@@ -8,7 +10,7 @@ async function load_elements(session_id) {
         total_html = document.getElementById("total");
         success_rate_html = document.getElementById("success_rate");
 
-        const response = await fetch("/data/saved/" + session_id + ".json");
+        const response = await fetch("../data/saved/" + session_id + ".json");
         const session = await response.json();
         var total_success = 0;
 
@@ -43,13 +45,13 @@ async function load_elements(session_id) {
                 service_html.innerHTML = session[0].service;
                 total_html.innerHTML = session.length;
 
-                var width = 1;
+                var width = 100;
                 var id = setInterval(frame, 10);
                 function frame() {
-                    if (width >= (total_success/session.length)*100) {
+                    if (width <= (total_success/session.length)*100) {
                         clearInterval(id);
                     } else {
-                        width++;
+                        width--;
                         success_rate_html.style.width = width + '%';
                         success_rate_html.innerHTML =  width + '%';
                     }
@@ -59,8 +61,12 @@ async function load_elements(session_id) {
             });
         }
     } catch (error) {
-        console.log(error)
-        results_div.innerHTML = '<h2 class="css-text-grey css-padding-16"><i class="fa fa-warning fa-fw css-margin-right css-xxlarge css-text-teal"></i>Session ID does not exist :(</h2>';
+        console.log(session_id);
+        if (session_id == "") {
+            results_div.innerHTML = '<div class="css-middleleft"><h2 class="css-text-grey css-padding-16"><i class="fa fa-arrow-left fa-fw css-margin-right css-xxlarge css-text-teal"></i>Put your session ID here</h2></div>';
+        } else {
+            results_div.innerHTML = '<h2 class="css-text-grey css-padding-16"><i class="fa fa-warning fa-fw css-margin-right css-xxlarge css-text-teal"></i>Session ID does not exist :(</h2>';
+        }
         date_html.innerHTML = "N.A";
         env_html.innerHTML = "N.A";
         service_html.innerHTML = "N.A";
@@ -78,4 +84,9 @@ function collapse_errors(element) {
     } else {
       content.style.maxHeight = content.scrollHeight + "px";
     }
+}
+
+function display_session_id(nbr) {
+    var files = fs.readdirSync('./');
+    console.log(files);
 }
