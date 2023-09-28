@@ -65,7 +65,7 @@ async function load_elements(session_id) {
         if (session_id == "") {
             results_div.innerHTML = '<div class="css-middleleft"><h2 class="css-text-grey css-padding-16"><i class="fa fa-arrow-left fa-fw css-margin-right css-xxlarge css-text-teal"></i>Put your session ID here</h2></div>';
         } else {
-            results_div.innerHTML = '<h2 class="css-text-grey css-padding-16"><i class="fa fa-warning fa-fw css-margin-right css-xxlarge css-text-teal"></i>Session ID does not exist :(</h2>';
+            results_div.innerHTML = '<h2 class="css-text-grey css-padding-16 css-animate-top"><i class="fa fa-warning fa-fw css-margin-right css-xxlarge css-text-teal"></i>Session ID does not exist :(</h2>';
         }
         date_html.innerHTML = "N.A";
         env_html.innerHTML = "N.A";

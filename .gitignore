@@ -9,4 +9,4 @@ __pycache__/
 
 # Other
 data/mapping/*
-mapping_creator/
+data/saved/*
