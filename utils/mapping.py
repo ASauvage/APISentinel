@@ -50,6 +50,7 @@ def check_field(path: list, mapping: dict, response: dict, errors: list) -> list
             # check _type
             if type(value) not in value_type:
                 errors.append(WrongTypeError(value_path, type(value), value_type))
+                return
 
             # check for type
             if value is not None:
