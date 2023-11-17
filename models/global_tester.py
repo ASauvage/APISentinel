@@ -27,7 +27,8 @@ class GlobalTester:
                 self.test_executer(filename=file, api=file[:-5], headers=self.service.headers, query_specs=query_specs)
 
         with open('{}/data/saved/{}.json'.format(os.getcwd(), self.session_id), 'w') as file:
-            json.dump(self.tests, file, ensure_ascii=False, indent=4)
+            json_object = json.dumps(self.tests, ensure_ascii=False, indent=4)
+            file.write(json_object)
         print("\nYour session ID: " + self.session_id)
 
     def test_executer(self, **specifications):

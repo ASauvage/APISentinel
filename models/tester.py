@@ -11,7 +11,6 @@ def apitester(env: str, service: Service, **specifications):
         **specifications['query_specs']
     )
 
-    errors = list()
-    is_mapping_ok(response, '{}/data/mapping/{}'.format(os.getcwd(), service.path + specifications['filename']), errors)
+    errors = is_mapping_ok(response, '{}/data/mapping/{}'.format(os.getcwd(), service.path + specifications['filename']))
 
     return errors

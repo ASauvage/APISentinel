@@ -70,7 +70,7 @@ def simulation_test(mapping_path: str) -> dict:
 
 
 if __name__ == "__main__":
-    mapping = "./data/mapping/boiv/apix/poi.json"
+    mapping = "./data/mapping/pokeapi/pokemon.json"
 
     errors = integrity_test(mapping)
 
