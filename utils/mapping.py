@@ -13,7 +13,7 @@ TYPE = {
 }
 
 
-def is_mapping_ok(response: dict, mapping_path: str, errors: list) -> list:
+def is_mapping_ok(response: dict, mapping_path: str) -> list:
     """
 
     :param response:
@@ -24,7 +24,10 @@ def is_mapping_ok(response: dict, mapping_path: str, errors: list) -> list:
     with open(mapping_path, 'r') as file:
         mapping_json = json.load(file)
 
-        return check_field([], mapping_json, response, errors)
+        errors = []
+        check_field([], mapping_json, response, errors)
+
+        return errors
 
 
 def check_field(path: list, mapping: dict, response: dict, errors: list) -> list:
@@ -40,7 +43,7 @@ def check_field(path: list, mapping: dict, response: dict, errors: list) -> list
         try:
             # variable declaration
             value_path = path + [field_name] if field_name != "_tmpfield" else path
-            value_type = TYPE[field_value['_type']]
+            value_type = TYPE[field_value['_type']].copy()
             value = get_value(response, value_path)
 
             # check _nullable
@@ -50,6 +53,7 @@ def check_field(path: list, mapping: dict, response: dict, errors: list) -> list
             # check _type
             if type(value) not in value_type:
                 errors.append(WrongTypeError(value_path, type(value), value_type))
+                continue
 
             # check for type
             if value is not None:

@@ -70,7 +70,7 @@ def simulation_test(mapping_path: str) -> dict:
 
 
 if __name__ == "__main__":
-    mapping = "API_Mapping/mapping.json"
+    mapping = "./data/mapping/pokeapi/pokemon.json"
 
     errors = integrity_test(mapping)
 
@@ -79,6 +79,6 @@ if __name__ == "__main__":
             print(error)
     else:
         print("This mapping file is correct")
-        with open("../output.json", 'w') as file:
+        with open("./output.json", 'w') as file:
             json.dump(simulation_test(mapping), file, indent=4)
 

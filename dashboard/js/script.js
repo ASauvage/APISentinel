@@ -33,7 +33,7 @@ async function load_elements(session_id) {
 
                     var errors = ""
                     for (y = 0; y < session[x].errors.length; y++) {
-                        errors += "<li>" + session[x].errors[y] + "</li>";
+                        errors += "<li>" + html_encode(session[x].errors[y]) + "</li>";
                     }
 
                     data = data.replace('{errors}', errors);
@@ -84,6 +84,13 @@ function collapse_errors(element) {
     } else {
       content.style.maxHeight = content.scrollHeight + "px";
     }
+}
+
+function html_encode(s) {
+  var el = document.createElement("div");
+  el.innerText = el.textContent = s;
+  s = el.innerHTML;
+  return s;
 }
 
 function display_session_id(nbr) {
