@@ -6,6 +6,7 @@ class Service:
     Service
     """
     def __init__(self, name: str):
+        self.name = name
         self.service = SERVICE[name]
 
     @property

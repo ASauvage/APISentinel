@@ -37,12 +37,12 @@ class GlobalTester:
         self.tests.append({
             "title": f"Mapping test on {specifications['filename']}",
             "env": self.env,
-            "service": "pokeapi",
+            "service": self.service.name,
 
             "status": False if errors else True,
             "errors": [error.__str__() for error in errors],
 
             "request": self.service.url(self.env, specifications['api']),
-            "datetime": datetime.now().strftime("%d %b %Y - %H:M:S")
+            "datetime": datetime.now().strftime("%d %b %Y - %H:%M:%S")
         })
         print("F" if errors else ".", end='')
