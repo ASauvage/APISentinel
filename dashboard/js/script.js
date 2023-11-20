@@ -71,7 +71,7 @@ async function load_elements(session_id) {
         $env_html.html("N.A");
         $service_html.html("N.A");
         $total_html.html("0");
-        $success_rate_html.css("width", "width:100%;");
+        $success_rate_html.css("width", "100%");
         $success_rate_html.html("N.A");
     }
 }
