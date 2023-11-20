@@ -1,21 +1,13 @@
-var fs = require('fs');
-
 
 async function load_elements(session_id) {
     try {
-        results_div = document.getElementById("results");
-        date_html = document.getElementById("datetime");
-        env_html = document.getElementById("env");
-        service_html = document.getElementById("service");
-        total_html = document.getElementById("total");
-        success_rate_html = document.getElementById("success_rate");
-
         const response = await fetch("../data/saved/" + session_id + ".json");
         const session = await response.json();
         var total_success = 0;
 
-        results_div.innerHTML = "";
+        $results_div.html('');
         for (let x = 0; x < session.length; x++) {
+            // use id with jquery
             $.get( "./js/files/result.html", function( data ) {
                 data = data.replace('{title}', session[x].title);
 
@@ -39,40 +31,48 @@ async function load_elements(session_id) {
                     data = data.replace('{errors}', errors);
                 }
 
-                results_div.innerHTML += data;
-                date_html.innerHTML = session[0].datetime;
-                env_html.innerHTML = session[0].env;
-                service_html.innerHTML = session[0].service;
-                total_html.innerHTML = session.length;
+                $results_div.append(data);
+                $date_html.html(session[0].datetime);
+                $env_html.html(session[0].env);
+                $service_html.html(session[0].service);
+                $total_html.html(session.length);
 
                 var width = 100;
                 var id = setInterval(frame, 10);
                 function frame() {
                     if (width <= (total_success/session.length)*100) {
+                        $success_rate_html.html(width + '%');
                         clearInterval(id);
                     } else {
                         width--;
-                        success_rate_html.style.width = width + '%';
-                        success_rate_html.innerHTML =  width + '%';
+                        $success_rate_html.css("width", width + '%');
+                        $success_rate_html.html(width + '%');
                     }
                 }
-//                success_rate_html.style = "width:" + (total_success/session.length)*100 + "%;";
-//                success_rate_html.innerHTML = (total_success/session.length)*100 + "%";
             });
         }
     } catch (error) {
         console.log(session_id);
         if (session_id == "") {
-            results_div.innerHTML = '<div class="css-middleleft"><h2 class="css-text-grey css-padding-16"><i class="fa fa-arrow-left fa-fw css-margin-right css-xxlarge css-text-teal"></i>Put your session ID here</h2></div>';
+            $results_div.html($('<div></div>', {
+                class: 'css-middleleft',
+                html: $('<h2></h2>', {
+                    class: 'css-text-grey css-padding-16',
+                    html: '<i class="fa fa-arrow-left fa-fw css-margin-right css-xxlarge css-text-teal"></i>Put your session ID here'
+                })
+            }))
         } else {
-            results_div.innerHTML = '<h2 class="css-text-grey css-padding-16 css-animate-top"><i class="fa fa-warning fa-fw css-margin-right css-xxlarge css-text-teal"></i>Session ID does not exist :(</h2>';
+            $results_div.html($('<h2></h2>', {
+                class: 'css-text-grey css-padding-16',
+                html: '<i class="fa fa-warning fa-fw css-margin-right css-xxlarge css-text-teal"></i>Session ID does not exist :('
+            }))
         }
-        date_html.innerHTML = "N.A";
-        env_html.innerHTML = "N.A";
-        service_html.innerHTML = "N.A";
-        total_html.innerHTML = "0";
-        success_rate_html.style = "width:100%;";
-        success_rate_html.innerHTML = "N.A";
+        $date_html.html("N.A");
+        $env_html.html("N.A");
+        $service_html.html("N.A");
+        $total_html.html("0");
+        $success_rate_html.css("width", "width:100%;");
+        $success_rate_html.html("N.A");
     }
 }
 
