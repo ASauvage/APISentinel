@@ -2,6 +2,7 @@ from uuid import uuid4
 from datetime import datetime
 from functools import reduce
 
+
 def get_value(data: dict, keys: list) -> dict:
     return reduce(lambda d, key: d[key], keys, data)
 

@@ -528,79 +528,79 @@ a{
 .css-col.s12{
     width:99.99999%
 }
- @media (min-width:601px){
-   .css-col.m1{
+@media (min-width:601px){
+    .css-col.m1{
         width:8.33333%
     }
-   .css-col.m2{
+    .css-col.m2{
         width:16.66666%
     }
-   .css-col.m3,.css-quarter{
+    .css-col.m3,.css-quarter{
         width:24.99999%
     }
-   .css-col.m4,.css-third{
+    .css-col.m4,.css-third{
         width:33.33333%
     }
     .css-col.m5{
         width:41.66666%
     }
-   .css-col.m6,.css-half{
+    .css-col.m6,.css-half{
         width:49.99999%
     }
-   .css-col.m7{
+    .css-col.m7{
         width:58.33333%
     }
-   .css-col.m8,.css-twothird{
+    .css-col.m8,.css-twothird{
         width:66.66666%
     }
     .css-col.m9,.css-threequarter{
         width:74.99999%
     }
-   .css-col.m10{
+    .css-col.m10{
         width:83.33333%
     }
-   .css-col.m11{
+    .css-col.m11{
         width:91.66666%
     }
-   .css-col.m12{
+    .css-col.m12{
         width:99.99999%
     }
 }
- @media (min-width:993px){
-   .css-col.l1{
+@media (min-width:993px){
+    .css-col.l1{
         width:8.33333%
     }
-   .css-col.l2{
+    .css-col.l2{
         width:16.66666%
     }
-   .css-col.l3{
+    .css-col.l3{
         width:24.99999%
     }
-   .css-col.l4{
+    .css-col.l4{
         width:33.33333%
     }
     .css-col.l5{
         width:41.66666%
     }
-   .css-col.l6{
+    .css-col.l6{
         width:49.99999%
     }
-   .css-col.l7{
+    .css-col.l7{
         width:58.33333%
     }
-   .css-col.l8{
+    .css-col.l8{
         width:66.66666%
     }
     .css-col.l9{
         width:74.99999%
     }
-   .css-col.l10{
+    .css-col.l10{
         width:83.33333%
     }
-   .css-col.l11{
+    .css-col.l11{
         width:91.66666%
     }
-   .css-col.l12{
+    .css-col.l12{
         width:99.99999%
     }
 }
@@ -646,17 +646,17 @@ a{
 .css-show-inline-block{
     display:inline-block!important
 }
- @media (max-width:1205px){
-   .css-auto{
+@media (max-width:1205px){
+    .css-auto{
         max-width:95%
     }
 }
- @media (max-width:600px){
-   .css-modal-content{
+@media (max-width:600px){
+    .css-modal-content{
         margin:0 10px;
         width:auto!important
     }
-   .css-modal{
+    .css-modal{
         padding-top:30px
     }
     .css-dropdown-hover.css-mobile.css-dropdown-content,.css-dropdown-click.css-mobile.css-dropdown-content{
@@ -665,50 +665,50 @@ a{
     .css-hide-small{
         display:none!important
     }
-   .css-mobile{
+    .css-mobile{
         display:block;
         width:100%!important
     }
-   .css-bar-item.css-mobile,.css-dropdown-hover.css-mobile,.css-dropdown-click.css-mobile{
+    .css-bar-item.css-mobile,.css-dropdown-hover.css-mobile,.css-dropdown-click.css-mobile{
         text-align:center
     }
     .css-dropdown-hover.css-mobile,.css-dropdown-hover.css-mobile.css-btn,.css-dropdown-hover.css-mobile.css-button,.css-dropdown-click.css-mobile,.css-dropdown-click.css-mobile.css-btn,.css-dropdown-click.css-mobile.css-button{
         width:100%
     }
 }
- @media (max-width:768px){
-   .css-modal-content{
+@media (max-width:768px){
+    .css-modal-content{
         width:500px
     }
-   .css-modal{
+    .css-modal{
         padding-top:50px
     }
 }
- @media (min-width:993px){
-   .css-modal-content{
+@media (min-width:993px){
+    .css-modal-content{
         width:900px
     }
-   .css-hide-large{
+    .css-hide-large{
         display:none!important
     }
-   .css-sidebar.css-collapse{
+    .css-sidebar.css-collapse{
         display:block!important
     }
 }
- @media (max-width:992px) and (min-width:601px){
-   .css-hide-medium{
+@media (max-width:992px) and (min-width:601px){
+    .css-hide-medium{
         display:none!important
     }
 }
- @media (max-width:992px){
-   .css-sidebar.css-collapse{
+@media (max-width:992px){
+    .css-sidebar.css-collapse{
         display:none
     }
-   .css-main{
+    .css-main{
         margin-left:0!important;
         margin-right:0!important
     }
-   .css-auto{
+    .css-auto{
         max-width:100%
     }
 }
@@ -1136,34 +1136,6 @@ a{
     box-shadow:none!important
 }
 /* Colors */
-.css-amber,.css-hover-amber:hover{
-    color:#000!important;
-    background-color:#ffc107!important
-}
-.css-aqua,.css-hover-aqua:hover{
-    color:#000!important;
-    background-color:#00ffff!important
-}
-.css-blue,.css-hover-blue:hover{
-    color:#fff!important;
-    background-color:#2196F3!important
-}
-.css-light-blue,.css-hover-light-blue:hover{
-    color:#000!important;
-    background-color:#87CEEB!important
-}
-.css-brown,.css-hover-brown:hover{
-    color:#fff!important;
-    background-color:#795548!important
-}
-.css-cyan,.css-hover-cyan:hover{
-    color:#000!important;
-    background-color:#00bcd4!important
-}
-.css-blue-grey,.css-hover-blue-grey:hover,.css-blue-gray,.css-hover-blue-gray:hover{
-    color:#fff!important;
-    background-color:#607d8b!important
-}
 .css-green,.css-hover-green:hover{
     color:#fff!important;
     background-color:#4CAF50!important
@@ -1172,53 +1144,17 @@ a{
     color:#000!important;
     background-color:#8bc34a!important
 }
-.css-indigo,.css-hover-indigo:hover{
-    color:#fff!important;
-    background-color:#3f51b5!important
-}
-.css-khaki,.css-hover-khaki:hover{
-    color:#000!important;
-    background-color:#f0e68c!important
-}
 .css-lime,.css-hover-lime:hover{
     color:#000!important;
     background-color:#cddc39!important
-}
-.css-orange,.css-hover-orange:hover{
-    color:#000!important;
-    background-color:#ff9800!important
-}
-.css-deep-orange,.css-hover-deep-orange:hover{
-    color:#fff!important;
-    background-color:#ff5722!important
-}
-.css-pink,.css-hover-pink:hover{
-    color:#fff!important;
-    background-color:#e91e63!important
-}
-.css-purple,.css-hover-purple:hover{
-    color:#fff!important;
-    background-color:#9c27b0!important
-}
-.css-deep-purple,.css-hover-deep-purple:hover{
-    color:#fff!important;
-    background-color:#673ab7!important
 }
 .css-red,.css-hover-red:hover{
     color:#fff!important;
     background-color:#f44336!important
 }
-.css-sand,.css-hover-sand:hover{
-    color:#000!important;
-    background-color:#fdf5e6!important
-}
 .css-teal,.css-hover-teal:hover{
     color:#fff!important;
     background-color:#009688!important
-}
-.css-yellow,.css-hover-yellow:hover{
-    color:#000!important;
-    background-color:#ffeb3b!important
 }
 .css-white,.css-hover-white:hover{
     color:#000!important;
@@ -1240,84 +1176,8 @@ a{
     color:#fff!important;
     background-color:#616161!important
 }
-.css-pale-red,.css-hover-pale-red:hover{
-    color:#000!important;
-    background-color:#ffdddd!important
-}
-.css-pale-green,.css-hover-pale-green:hover{
-    color:#000!important;
-    background-color:#ddffdd!important
-}
-.css-pale-yellow,.css-hover-pale-yellow:hover{
-    color:#000!important;
-    background-color:#ffffcc!important
-}
-.css-pale-blue,.css-hover-pale-blue:hover{
-    color:#000!important;
-    background-color:#ddffff!important
-}
-.css-text-amber,.css-hover-text-amber:hover{
-    color:#ffc107!important
-}
-.css-text-aqua,.css-hover-text-aqua:hover{
-    color:#00ffff!important
-}
-.css-text-blue,.css-hover-text-blue:hover{
-    color:#2196F3!important
-}
-.css-text-light-blue,.css-hover-text-light-blue:hover{
-    color:#87CEEB!important
-}
-.css-text-brown,.css-hover-text-brown:hover{
-    color:#795548!important
-}
-.css-text-cyan,.css-hover-text-cyan:hover{
-    color:#00bcd4!important
-}
-.css-text-blue-grey,.css-hover-text-blue-grey:hover,.css-text-blue-gray,.css-hover-text-blue-gray:hover{
-    color:#607d8b!important
-}
-.css-text-green,.css-hover-text-green:hover{
-    color:#4CAF50!important
-}
-.css-text-light-green,.css-hover-text-light-green:hover{
-    color:#8bc34a!important
-}
-.css-text-indigo,.css-hover-text-indigo:hover{
-    color:#3f51b5!important
-}
-.css-text-khaki,.css-hover-text-khaki:hover{
-    color:#b4aa50!important
-}
-.css-text-lime,.css-hover-text-lime:hover{
-    color:#cddc39!important
-}
-.css-text-orange,.css-hover-text-orange:hover{
-    color:#ff9800!important
-}
-.css-text-deep-orange,.css-hover-text-deep-orange:hover{
-    color:#ff5722!important
-}
-.css-text-pink,.css-hover-text-pink:hover{
-    color:#e91e63!important
-}
-.css-text-purple,.css-hover-text-purple:hover{
-    color:#9c27b0!important
-}
-.css-text-deep-purple,.css-hover-text-deep-purple:hover{
-    color:#673ab7!important
-}
-.css-text-red,.css-hover-text-red:hover{
-    color:#f44336!important
-}
-.css-text-sand,.css-hover-text-sand:hover{
-    color:#fdf5e6!important
-}
 .css-text-teal,.css-hover-text-teal:hover{
     color:#009688!important
-}
-.css-text-yellow,.css-hover-text-yellow:hover{
-    color:#d2be0e!important
 }
 .css-text-white,.css-hover-text-white:hover{
     color:#fff!important
@@ -1328,102 +1188,7 @@ a{
 .css-text-grey,.css-hover-text-grey:hover,.css-text-gray,.css-hover-text-gray:hover{
     color:#757575!important
 }
-.css-text-light-grey,.css-hover-text-light-grey:hover,.css-text-light-gray,.css-hover-text-light-gray:hover{
-    color:#f1f1f1!important
-}
-.css-text-dark-grey,.css-hover-text-dark-grey:hover,.css-text-dark-gray,.css-hover-text-dark-gray:hover{
-    color:#3a3a3a!important
-}
-.css-border-amber,.css-hover-border-amber:hover{
-    border-color:#ffc107!important
-}
-.css-border-aqua,.css-hover-border-aqua:hover{
-    border-color:#00ffff!important
-}
-.css-border-blue,.css-hover-border-blue:hover{
-    border-color:#2196F3!important
-}
-.css-border-light-blue,.css-hover-border-light-blue:hover{
-    border-color:#87CEEB!important
-}
-.css-border-brown,.css-hover-border-brown:hover{
-    border-color:#795548!important
-}
-.css-border-cyan,.css-hover-border-cyan:hover{
-    border-color:#00bcd4!important
-}
-.css-border-blue-grey,.css-hover-border-blue-grey:hover,.css-border-blue-gray,.css-hover-border-blue-gray:hover{
-    border-color:#607d8b!important
-}
-.css-border-green,.css-hover-border-green:hover{
-    border-color:#4CAF50!important
-}
-.css-border-light-green,.css-hover-border-light-green:hover{
-    border-color:#8bc34a!important
-}
-.css-border-indigo,.css-hover-border-indigo:hover{
-    border-color:#3f51b5!important
-}
-.css-border-khaki,.css-hover-border-khaki:hover{
-    border-color:#f0e68c!important
-}
-.css-border-lime,.css-hover-border-lime:hover{
-    border-color:#cddc39!important
-}
-.css-border-orange,.css-hover-border-orange:hover{
-    border-color:#ff9800!important
-}
-.css-border-deep-orange,.css-hover-border-deep-orange:hover{
-    border-color:#ff5722!important
-}
-.css-border-pink,.css-hover-border-pink:hover{
-    border-color:#e91e63!important
-}
-.css-border-purple,.css-hover-border-purple:hover{
-    border-color:#9c27b0!important
-}
-.css-border-deep-purple,.css-hover-border-deep-purple:hover{
-    border-color:#673ab7!important
-}
-.css-border-red,.css-hover-border-red:hover{
-    border-color:#f44336!important
-}
-.css-border-sand,.css-hover-border-sand:hover{
-    border-color:#fdf5e6!important
-}
-.css-border-teal,.css-hover-border-teal:hover{
-    border-color:#009688!important
-}
-.css-border-yellow,.css-hover-border-yellow:hover{
-    border-color:#ffeb3b!important
-}
-.css-border-white,.css-hover-border-white:hover{
-    border-color:#fff!important
-}
-.css-border-black,.css-hover-border-black:hover{
-    border-color:#000!important
-}
-.css-border-grey,.css-hover-border-grey:hover,.css-border-gray,.css-hover-border-gray:hover{
-    border-color:#9e9e9e!important
-}
-.css-border-light-grey,.css-hover-border-light-grey:hover,.css-border-light-gray,.css-hover-border-light-gray:hover{
-    border-color:#f1f1f1!important
-}
-.css-border-dark-grey,.css-hover-border-dark-grey:hover,.css-border-dark-gray,.css-hover-border-dark-gray:hover{
-    border-color:#616161!important
-}
-.css-border-pale-red,.css-hover-border-pale-red:hover{
-    border-color:#ffe7e7!important
-}
-.css-border-pale-green,.css-hover-border-pale-green:hover{
-    border-color:#e7ffe7!important
-}
-.css-border-pale-yellow,.css-hover-border-pale-yellow:hover{
-    border-color:#ffffcc!important
-}
-.css-border-pale-blue,.css-hover-border-pale-blue:hover{
-    border-color:#e7ffff!important
-}
+
 .css-middleleft {
   position: fixed;
   top: 25em;
