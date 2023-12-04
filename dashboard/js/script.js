@@ -12,6 +12,7 @@ async function load_elements(session_id) {
                 data = data.replace('{title}', session[x].title);
 
                 data = data.replaceAll('{url}', session[x].request);
+                data = data.replace('{errors.length}', session[x].errors.length)
 
                 if (session[x].status) {
                     data = data.replace('{status-color}', "green");
