@@ -73,7 +73,9 @@
 .fa-drivers-license:before,.fa-id-card:before{
     content:"\f2c2"
 }
-
+.fa-warning:before,.fa-exclamation-triangle:before{
+    content:"\f071"
+}
 .fa-github:before{
     content:"\f09b"
 }
