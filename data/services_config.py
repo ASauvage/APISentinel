@@ -10,7 +10,6 @@ SERVICE = {
             "production": "https://pokeapi.co/api/v2/",
         },
         "headers": {},
-        "uri": "{url}/{api}/charizard",
-        "index_elk": "pokeapi",
+        "uri": "{url}/{api}",
     }
 }

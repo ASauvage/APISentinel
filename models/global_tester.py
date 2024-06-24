@@ -4,6 +4,7 @@ import json
 import yaml
 from datetime import datetime
 from utils.commons import generate_session_id
+from utils.mongodb import MongoCon
 from models.tester import apitester
 from models.service import Service
 
@@ -26,9 +27,8 @@ class GlobalTester:
 
                 self.test_executer(filename=file, api=file[:-5], headers=self.service.headers, query_specs=query_specs)
 
-        with open('{}/data/saved/{}.json'.format(os.getcwd(), self.session_id), 'w') as file:
-            json_object = json.dumps(self.tests, ensure_ascii=False, indent=4)
-            file.write(json_object)
+        MongoCon().save_results(self.tests)
+
         print("\nYour session ID: " + self.session_id)
 
     def test_executer(self, **specifications):
@@ -36,6 +36,7 @@ class GlobalTester:
 
         self.tests.append({
             "title": f"Mapping test on {specifications['filename']}",
+            "session_id": self.session_id,
             "env": self.env,
             "service": self.service.name,
 
