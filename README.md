@@ -138,7 +138,6 @@ SERVICE = {
             },
             "headers": {},
             "uri": "{url}/{api}/",
-            "index_elk": "pokeapi",
     }
 }
 ```
@@ -161,4 +160,4 @@ from shortcut import PokeAPIGlobalTester
 PokeAPIGlobalTester('production')
 ```
 
-your will get a session ID, you have to copy/paste it in the web interface to get test result
+your will get a session ID to find your tests results in mongoDB.

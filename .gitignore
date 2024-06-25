@@ -10,5 +10,6 @@ __pycache__/
 # venv
 .venv/
 
-# Other
+# Your gitignore begin here
+#
 data/mapping/*
