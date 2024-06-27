@@ -48,7 +48,7 @@ class GlobalTester:
                 "status": False if errors else True,
                 "errors": [error.__str__() for error in errors],
 
-                "request": self.service.url(self.env, specifications['api']),
+                "request": self.service.url(self.env, specifications['api']) + extended_path,
                 "datetime": int(datetime.now().timestamp())
             })
             print("F" if errors else ".", end='')
