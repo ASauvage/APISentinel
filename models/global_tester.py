@@ -23,7 +23,7 @@ class GlobalTester:
                 if os.path.isfile('{}/data/mapping/{}/{}'.format(os.getcwd(), self.service.path, file[:-4] + 'yaml')):
                     with open('{}/data/mapping/{}/{}'.format(os.getcwd(), self.service.path, file[:-4] + 'yaml'), 'r') as yaml_file:
                         specs = yaml.load(yaml_file, Loader=yaml.FullLoader)
-                        extended_paths = specs['extended_paths'] if 'extended_paths' in specs.keys() else ''
+                        extended_paths = specs['extended_paths'] if 'extended_paths' in specs.keys() else ['']
                         query_specs = specs['query_specs'] if 'query_specs' in specs.keys() else {}
 
                 self.test_executer(filename=file, api=file[:-5], headers=self.service.headers, query_specs=query_specs, extended_paths=extended_paths)
