@@ -2,6 +2,7 @@ import json
 import re
 from models.errors import *
 from utils.commons import get_value
+from datetime import datetime
 
 TYPE = {
     'Object': [dict],
@@ -12,15 +13,14 @@ TYPE = {
     'Null': [type(None)]
 }
 
+FORMAT = {
+    'int': int,
+    'float': float,
+    'datetime': datetime
+}
+
 
 def is_mapping_ok(response: dict, mapping_path: str) -> list:
-    """
-
-    :param response:
-    :param mapping_path:
-    :param errors:
-    :return:
-    """
     with open(mapping_path, 'r') as file:
         mapping_json = json.load(file)
 
@@ -57,6 +57,16 @@ def check_field(path: list, mapping: dict, response: dict, errors: list) -> list
 
             # check for type
             if value is not None:
+                # check _format
+                if '_format' in field_value:
+                    if field_value['_format'] == 'datetime':
+                        try:
+                            datetime.fromisoformat(value)
+                        except ValueError:
+                            errors.append(WrongDatetimeFormatError(value_path, value))
+                    elif isinstance(type(value), FORMAT[field_value['_format']]):
+                        errors.append(WrongFormatError(value_path, value, field_value['_format']))
+
                 # check _enum
                 if '_enums' in field_value and value not in field_value['_enums']:
                     errors.append(WrongValueError(value_path, value, field_value['_enums']))

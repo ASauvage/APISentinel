@@ -91,6 +91,57 @@ class WrongValueError(Error):
         )
 
 
+class WrongFormatError(Error):
+    @property
+    def explicit_content(self):
+        return "WrongFormatError"
+
+    def __init__(self, field, received, expected):
+        self.field = field
+        self.received = received
+        self.expected = expected
+
+    def __str__(self):
+        return "{}: '{}' should be a(n) {} but got '{}' instead".format(
+            self.explicit_content,
+            self.field,
+            self.expected,
+            self.received
+        )
+
+    def as_dict(self):
+        return dict(
+            explicit_content=self.explicit_content,
+            field=self.field,
+            received=self.received,
+            expected=self.expected
+        )
+
+
+class WrongDatetimeFormatError(Error):
+    @property
+    def explicit_content(self):
+        return "WrongFormatError"
+
+    def __init__(self, field, received):
+        self.field = field
+        self.received = received
+
+    def __str__(self):
+        return "{}: '{}' not in datetime format".format(
+            self.explicit_content,
+            self.field,
+            self.received
+        )
+
+    def as_dict(self):
+        return dict(
+            explicit_content=self.explicit_content,
+            field=self.field,
+            received=self.received
+        )
+
+
 class RegexError(Error):
     @property
     def explicit_content(self):

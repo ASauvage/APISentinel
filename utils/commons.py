@@ -3,7 +3,7 @@ from datetime import datetime
 from functools import reduce
 
 
-def get_value(data: dict, keys: list) -> dict:
+def get_value(data: dict, keys: list):
     return reduce(lambda d, key: d[key], keys, data)
 
 
