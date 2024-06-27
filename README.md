@@ -33,6 +33,7 @@ To define a field of type `Number`:
 These properties are avalaible for `Number` field: 
 
 - `_type` a String that define the type of field (here `Number`). Return `WrongTypeValue` if the type doesn't match
+- `_format` (optional) a String that define the type format of field (can be `int` or `float`)
 - `_optional` (optional) a Boolean that define if the field is optional. Return an error of type `MissingFIeldError` if st to `false` and the field is missing
 - `_nullable` (optional) a Boolean that defin if the field can be `null`. Return an `WrongValueError` if set to `false` and the field is `null`
 
@@ -51,6 +52,7 @@ To define a field of type `String`:
 These properties are avalaible for `String` field: 
 
 - `_type` a String that define the type of field (here `String`). Return `WrongTypeValue` if the type doesn't match
+- `_format` (optional) a String that define the type format of field (can be `datetime`)
 - `_enums` (optional) an Array containing all enumerations available of this field. Return an `WrongEnumsError` if value isn't in this Array
 - `_regex` (optional) A String containing a regular expression pattern. Return `RegexError` if the pattern doesn't match
 - `_optional` (optional) a Boolean that define if the field is optional. Return an error of type `MissingFIeldError` if st to `false` and the field is missing
@@ -122,6 +124,21 @@ These properties are avalaible for `Array` field:
 - `_optional` (optional) a Boolean that define if the field is optional. Return an error of type `MissingFIeldError` if st to `false` and the field is missing
 - `_nullable` (optional) a Boolean that defin if the field can be `null`. Return an `WrongValueError` if set to `false` and the field is `null`
 
+---------
+
+You have to start with unamed field in your json file
+```json
+{
+    "_type": "Array",
+    "_values": [
+        {
+            "_type": "Object",
+            "_properties": {}
+        }
+    ]
+}
+```
+
 ### Create your service configuration
 
 In the python file `data/service_config.py`, you can add your service config in the `SERVICE` variable.
@@ -143,6 +160,20 @@ SERVICE = {
 ```
 
 You can then create a new child class in the `shortcut.py` file
+
+#### Create endpoint's specifications
+You can create a YAML file with the same name and location of your mapping file to use some specification with tests.
+```yaml
+extended_path:  # extend path for your API's url
+    - '/charizard'
+    - '/bulbasaur'
+
+query_specs:  # kwargs for request library (get)
+    headers:
+        token: 'mon_token'
+```
+
+Each path attribute are optional, even the YAML file itself!
 
 ```python
 class PokeAPIGlobalTester(GlobalTester):
