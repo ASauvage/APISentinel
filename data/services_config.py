@@ -7,7 +7,7 @@ SERVICE = {
             "localhost": None,
             "snapshot": None,
             "recette": None,
-            "production": "https://pokeapi.co/api/v2/",
+            "production": "https://pokeapi.co/api/v2",
         },
         "headers": {},
         "uri": "{url}/{api}",

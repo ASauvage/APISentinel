@@ -1,18 +1,60 @@
 {
-    "count": {
-        "_type": "Number"
+    "id": {
+        "_type": "Number",
+        "_format": "int"
     },
-    "next": {
-        "_type": "String",
-        "_regex": "[(http(s)?):\\/\\/(www\\.)?a-zA-Z0-9@:%._\\+~#=]{2,256}\\.[a-z]{2,6}\\b([-a-zA-Z0-9@:%_\\+.~#?&//=]*)",
-        "_nullable": true
+    "name": {
+        "_type": "String"
     },
-    "previous": {
-         "_type": "String",
-        "_regex": "[(http(s)?):\\/\\/(www\\.)?a-zA-Z0-9@:%._\\+~#=]{2,256}\\.[a-z]{2,6}\\b([-a-zA-Z0-9@:%_\\+.~#?&//=]*)",
-        "_nullable": true
+    "base_experience": {
+        "_type": "Number",
+        "_format": "int"
     },
-    "results": {
+    "height": {
+        "_type": "Number",
+        "_format": "int"
+    },
+    "is_default": {
+        "_type": "Boolean"
+    },
+    "order": {
+        "_type": "Number",
+        "_format": "int"
+    },
+    "weight": {
+        "_type": "Number",
+        "_format": "int"
+    },
+    "abilities": {
+        "_type": "Array",
+        "_values": [
+            {
+                "_type": "Object",
+                "_properties": {
+                    "is_hidden": {
+                        "_type": "Boolean"
+                    },
+                    "slot": {
+                        "_type": "Number",
+                        "_format": "int"
+                    },
+                    "ability": {
+                        "_type": "Object",
+                        "_properties": {
+                            "name": {
+                                "_type": "String"
+                            },
+                            "url": {
+                                "_type": "String",
+                                "_regex": "[(http(s)?):\\/\\/(www\\.)?a-zA-Z0-9@:%._\\+~#=]{2,256}\\.[a-z]{2,6}\\b[-a-zA-Z0-9@:%_\\+.~#?&//=]*"
+                            }
+                        }
+                    }
+                }
+            }
+        ]
+    },
+    "forms": {
         "_type": "Array",
         "_values": [
             {
@@ -23,7 +65,315 @@
                     },
                     "url": {
                         "_type": "String",
-                        "_regex": "[(http(s)?):\\/\\/(www\\.)?a-zA-Z0-9@:%._\\+~#=]{2,256}\\.[a-z]{2,6}\\b([-a-zA-Z0-9@:%_\\+.~#?&//=]*)"
+                        "_regex": "[(http(s)?):\\/\\/(www\\.)?a-zA-Z0-9@:%._\\+~#=]{2,256}\\.[a-z]{2,6}\\b[-a-zA-Z0-9@:%_\\+.~#?&//=]*"
+                    }
+                }
+            }
+        ]
+    },
+    "game_indices": {
+        "_type": "Array",
+        "_values": [
+            {
+                "_type": "Object",
+                "_properties": {
+                    "game_index": {
+                        "_type": "Number",
+                        "_format": "int"
+                    },
+                    "version": {
+                        "_type": "Object",
+                        "_properties": {
+                            "name": {
+                                "_type": "String"
+                            },
+                            "url": {
+                                "_type": "String",
+                                "_regex": "[(http(s)?):\\/\\/(www\\.)?a-zA-Z0-9@:%._\\+~#=]{2,256}\\.[a-z]{2,6}\\b[-a-zA-Z0-9@:%_\\+.~#?&//=]*"
+                            }
+                        }
+                    }
+                }
+            }
+        ]
+    },
+    "held_items": {
+        "_type": "Array",
+        "_values": [
+            {
+                "_type": "Object",
+                "_properties": {
+                    "item": {
+                        "_type": "Object",
+                        "_properties": {
+                            "name": {
+                                "_type": "String"
+                            },
+                            "url": {
+                                "_type": "String",
+                                "_regex": "[(http(s)?):\\/\\/(www\\.)?a-zA-Z0-9@:%._\\+~#=]{2,256}\\.[a-z]{2,6}\\b[-a-zA-Z0-9@:%_\\+.~#?&//=]*"
+                            }
+                        }
+                    },
+                    "version_details": {
+                        "_type": "Array",
+                        "_values": [
+                            {
+                                "_type": "Object",
+                                "_properties": {
+                                    "rarity": {
+                                        "_type": "Number",
+                                        "_format": "int"
+                                    },
+                                    "version": {
+                                        "_type": "Object",
+                                        "_properties": {
+                                            "name": {
+                                                "_type": "String"
+                                            },
+                                            "url": {
+                                                "_type": "String",
+                                                "_regex": "[(http(s)?):\\/\\/(www\\.)?a-zA-Z0-9@:%._\\+~#=]{2,256}\\.[a-z]{2,6}\\b[-a-zA-Z0-9@:%_\\+.~#?&//=]*"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        ]
+                    },
+                    "location_area_encounters": {
+                        "_type": "String"
+                    }
+                }
+            }
+        ]
+    },
+    "moves": {
+        "_type": "Array",
+        "_values": [
+            {
+                "_type": "Object",
+                "_properties": {
+                    "move": {
+                        "_type": "Object",
+                        "_properties": {
+                            "name": {
+                            "_type": "String"
+                            },
+                            "url": {
+                                "_type": "String",
+                                "_regex": "[(http(s)?):\\/\\/(www\\.)?a-zA-Z0-9@:%._\\+~#=]{2,256}\\.[a-z]{2,6}\\b[-a-zA-Z0-9@:%_\\+.~#?&//=]*"
+                            }
+                        }
+                    },
+                    "version_group_details": {
+                        "_type": "Array",
+                        "_values": [
+                            {
+                                "_type": "Object",
+                                "_properties": {
+                                    "level_learned_at": {
+                                        "_type": "Number",
+                                        "_format": "int"
+                                    },
+                                    "version_group": {
+                                        "_type": "Object",
+                                        "_properties": {
+                                            "name": {
+                                            "_type": "String"
+                                            },
+                                            "url": {
+                                                "_type": "String",
+                                                "_regex": "[(http(s)?):\\/\\/(www\\.)?a-zA-Z0-9@:%._\\+~#=]{2,256}\\.[a-z]{2,6}\\b[-a-zA-Z0-9@:%_\\+.~#?&//=]*"
+                                            }
+                                        }
+                                    },
+                                    "move_learn_method": {
+                                        "_type": "Object",
+                                        "_properties": {
+                                            "name": {
+                                                "_type": "String"
+                                            },
+                                            "url": {
+                                                "_type": "String",
+                                                "_regex": "[(http(s)?):\\/\\/(www\\.)?a-zA-Z0-9@:%._\\+~#=]{2,256}\\.[a-z]{2,6}\\b[-a-zA-Z0-9@:%_\\+.~#?&//=]*"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        ]
+                    }
+                }
+            }
+        ]
+    },
+    "species": {
+        "_type": "Object",
+        "_properties": {
+            "name": {
+                "_type": "String"
+            },
+            "url": {
+                "_type": "String",
+                "_regex": "[(http(s)?):\\/\\/(www\\.)?a-zA-Z0-9@:%._\\+~#=]{2,256}\\.[a-z]{2,6}\\b[-a-zA-Z0-9@:%_\\+.~#?&//=]*"
+            }
+        }
+    },
+    "sprites": {
+        "_type": "Object",
+        "_properties": {
+            "front_default": {
+                "_type": "String",
+                "_nullable": true
+            },
+            "front_shiny": {
+                "_type": "String",
+                "_nullable": true
+            },
+            "front_female": {
+                "_type": "String",
+                "_nullable": true
+            },
+            "front_shiny_female": {
+                "_type": "String",
+                "_nullable": true
+            },
+            "back_default": {
+                "_type": "String",
+                "_nullable": true
+            },
+            "back_shiny": {
+                "_type": "String",
+                "_nullable": true
+            },
+            "back_female": {
+                "_type": "String",
+                "_nullable": true
+            },
+            "back_shiny_female": {
+                "_type": "String",
+                "_nullable": true
+            },
+            "other": {
+                "_type": "Object",
+                "_properties": {}
+            },
+            "versions": {
+                "_type": "Object",
+                "_properties": {}
+            }
+        }
+    },
+    "cries": {
+        "_type": "Object",
+        "_properties": {
+            "latest": {
+                "_type": "String",
+                "_regex": "[(http(s)?):\\/\\/(www\\.)?a-zA-Z0-9@:%._\\+~#=]{2,256}\\.[a-z]{2,6}\\b[-a-zA-Z0-9@:%_\\+.~#?&//=]*"
+            },
+            "legacy": {
+                "_type": "String",
+                "_regex": "[(http(s)?):\\/\\/(www\\.)?a-zA-Z0-9@:%._\\+~#=]{2,256}\\.[a-z]{2,6}\\b[-a-zA-Z0-9@:%_\\+.~#?&//=]*"
+            }
+        }
+    },
+    "stats": {
+        "_type": "Array",
+        "_values": [
+            {
+                "_type": "Object",
+                "_properties": {
+                    "base_stat": {
+                        "_type": "Number",
+                        "_format": "int"
+                    },
+                    "effort": {
+                        "_type": "Number",
+                        "_format": "int"
+                    },
+                    "stat": {
+                        "_type": "Object",
+                        "_properties": {
+                            "name": {
+                                "_type": "String"
+                            },
+                            "url": {
+                                "_type": "String",
+                                "_regex": "[(http(s)?):\\/\\/(www\\.)?a-zA-Z0-9@:%._\\+~#=]{2,256}\\.[a-z]{2,6}\\b[-a-zA-Z0-9@:%_\\+.~#?&//=]*"
+                            }
+                        }
+                    }
+                }
+            }
+        ]
+    },
+    "types": {
+        "_type": "Array",
+        "_values": [
+            {
+                "_type": "Object",
+                "_properties": {
+                    "slot": {
+                        "_type": "Number",
+                        "_format": "int"
+                    },
+                    "type": {
+                        "_type": "Object",
+                        "_properties": {
+                            "name": {
+                                "_type": "String"
+                            },
+                            "url": {
+                                "_type": "String",
+                                "_regex": "[(http(s)?):\\/\\/(www\\.)?a-zA-Z0-9@:%._\\+~#=]{2,256}\\.[a-z]{2,6}\\b[-a-zA-Z0-9@:%_\\+.~#?&//=]*"
+                            }
+                        }
+                    }
+                }
+            }
+        ]
+    },
+    "past_types": {
+        "_type": "Array",
+        "_values": [
+            {
+                "_type": "Object",
+                "_properties": {
+                    "generation": {
+                        "_type": "Object",
+                        "_properties": {
+                            "name": {
+                                "_type": "String"
+                            },
+                            "url": {
+                                "_type": "String",
+                                "_regex": "[(http(s)?):\\/\\/(www\\.)?a-zA-Z0-9@:%._\\+~#=]{2,256}\\.[a-z]{2,6}\\b[-a-zA-Z0-9@:%_\\+.~#?&//=]*"
+                            }
+                        }
+                    },
+                    "types": {
+                        "_type": "Array",
+                        "_properties": [
+                            {
+                                "slot": {
+                                    "_type": "Number",
+                                    "_format": "int"
+                                },
+                                "type": {
+                                    "_type": "Object",
+                                    "_properties": {
+                                        "name": {
+                                            "_type": "String"
+                                        },
+                                        "url": {
+                                            "_type": "String",
+                                            "_regex": "[(http(s)?):\\/\\/(www\\.)?a-zA-Z0-9@:%._\\+~#=]{2,256}\\.[a-z]{2,6}\\b[-a-zA-Z0-9@:%_\\+.~#?&//=]*"
+                                        }
+                                    }
+                                }
+                            }
+                        ]
                     }
                 }
             }
