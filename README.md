@@ -192,3 +192,5 @@ PokeAPIGlobalTester('production')
 ```
 
 your will get a session ID to find your tests results in mongoDB.
+
+**You can use [ApiTester Dashboard](https://github.com/ASauvage/ApiTester_Dashboard) to analyze the results.** 
