@@ -44,11 +44,11 @@ class GlobalTester:
                 "session_id": self.session_id,
                 "env": self.env,
                 "service": self.service.name,
+                "request": self.service.url(self.env, specifications['api']) + extended_path,
 
                 "status": False if errors else True,
                 "errors": [error.__str__() for error in errors],
 
-                "request": self.service.url(self.env, specifications['api']) + extended_path,
                 "datetime": int(datetime.now().timestamp())
             })
             print("F" if errors else ".", end='')
