@@ -64,8 +64,8 @@ def check_field(path: list, mapping: dict, response: dict, errors: list) -> list
                             datetime.fromisoformat(value)
                         except ValueError:
                             errors.append(WrongDatetimeFormatError(value_path, value))
-                    elif isinstance(type(value), FORMAT[field_value['_format']]):
-                        errors.append(WrongFormatError(value_path, value, field_value['_format']))
+                    elif not isinstance(value, FORMAT[field_value['_format']]):
+                        errors.append(WrongFormatError(value_path, type(value), field_value['_format']))
 
                 # check _enum
                 if '_enums' in field_value and value not in field_value['_enums']:
