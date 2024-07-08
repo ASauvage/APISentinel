@@ -121,6 +121,8 @@ These properties are avalaible for `Array` field:
 
 - `_type` a String that define the type of field (here `Array`). Return `WrongTypeValue` if the type doesn't match
 - `_values` an Array containing all possible values of this Array. All this value will be tested and matching error will be returned
+- `_minlen` (optional) an Integer that define minimal lenght of this Array 
+- `_maxlen` (optional) an Integer that define maximal lenght of this Array
 - `_optional` (optional) a Boolean that define if the field is optional. Return an error of type `MissingFIeldError` if st to `false` and the field is missing
 - `_nullable` (optional) a Boolean that defin if the field can be `null`. Return an `WrongValueError` if set to `false` and the field is `null`
 

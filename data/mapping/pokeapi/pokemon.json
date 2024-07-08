@@ -27,6 +27,7 @@
     },
     "abilities": {
         "_type": "Array",
+        "_minlen": 1,
         "_values": [
             {
                 "_type": "Object",
@@ -142,7 +143,8 @@
                         ]
                     },
                     "location_area_encounters": {
-                        "_type": "String"
+                        "_type": "String",
+                        "_optional": true
                     }
                 }
             }
