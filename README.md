@@ -34,8 +34,8 @@ These properties are avalaible for `Number` field:
 
 - `_type` a String that define the type of field (here `Number`). Return `WrongTypeValue` if the type doesn't match
 - `_format` (optional) a String that define the type format of field (can be `int` or `float`)
-- `_optional` (optional) a Boolean that define if the field is optional. Return an error of type `MissingFIeldError` if st to `false` and the field is missing
-- `_nullable` (optional) a Boolean that defin if the field can be `null`. Return an `WrongValueError` if set to `false` and the field is `null`
+- `_optional` (optional) a Boolean that define if the field is optional. Return an error of type `MissingFIeldError` if set to `false` and the field is missing
+- `_nullable` (optional) a Boolean that define if the field can be `null`. Return an `WrongValueError` if set to `false` and the field is `null`
 
 
 #### String type
@@ -55,8 +55,8 @@ These properties are avalaible for `String` field:
 - `_format` (optional) a String that define the type format of field (can be `datetime`)
 - `_enums` (optional) an Array containing all enumerations available of this field. Return an `WrongEnumsError` if value isn't in this Array
 - `_regex` (optional) A String containing a regular expression pattern. Return `RegexError` if the pattern doesn't match
-- `_optional` (optional) a Boolean that define if the field is optional. Return an error of type `MissingFIeldError` if st to `false` and the field is missing
-- `_nullable` (optional) a Boolean that defin if the field can be `null`. Return an `WrongValueError` if set to `false` and the field is `null`
+- `_optional` (optional) a Boolean that define if the field is optional. Return an error of type `MissingFIeldError` if set to `false` and the field is missing
+- `_nullable` (optional) a Boolean that define if the field can be `null`. Return an `WrongValueError` if set to `false` and the field is `null`
 
 
 #### Boolean type
@@ -73,8 +73,8 @@ To define a field of type `Boolean`:
 These properties are avalaible for `Boolean` field: 
 
 - `_type` a String that define the type of field (here `Boolean`). Return `WrongTypeValue` if the type doesn't match
-- `_optional` (optional) a Boolean that define if the field is optional. Return an error of type `MissingFIeldError` if st to `false` and the field is missing
-- `_nullable` (optional) a Boolean that defin if the field can be `null`. Return an `WrongValueError` if set to `false` and the field is `null`
+- `_optional` (optional) a Boolean that define if the field is optional. Return an error of type `MissingFIeldError` if set to `false` and the field is missing
+- `_nullable` (optional) a Boolean that define if the field can be `null`. Return an `WrongValueError` if set to `false` and the field is `null`
 
 
 #### Object type
@@ -97,8 +97,8 @@ These properties are avalaible for `Object` field:
 
 - `_type` a String that define the type of field (here `Object`). Return `WrongTypeValue` if the type doesn't match
 - `_properties` an Object containing all properties of this Object. All this field will be tested and matching error will be returned
-- `_optional` (optional) a Boolean that define if the field is optional. Return an error of type `MissingFIeldError` if st to `false` and the field is missing
-- `_nullable` (optional) a Boolean that defin if the field can be `null`. Return an `WrongValueError` if set to `false` and the field is `null`
+- `_optional` (optional) a Boolean that define if the field is optional. Return an error of type `MissingFIeldError` if set to `false` and the field is missing
+- `_nullable` (optional) a Boolean that define if the field can be `null`. Return an `WrongValueError` if set to `false` and the field is `null`
 
 
 #### Array type
@@ -123,8 +123,8 @@ These properties are avalaible for `Array` field:
 - `_values` an Array containing all possible values of this Array. All this value will be tested and matching error will be returned
 - `_minlen` (optional) an Integer that define minimal lenght of this Array 
 - `_maxlen` (optional) an Integer that define maximal lenght of this Array
-- `_optional` (optional) a Boolean that define if the field is optional. Return an error of type `MissingFIeldError` if st to `false` and the field is missing
-- `_nullable` (optional) a Boolean that defin if the field can be `null`. Return an `WrongValueError` if set to `false` and the field is `null`
+- `_optional` (optional) a Boolean that define if the field is optional. Return an error of type `MissingFIeldError` if set to `false` and the field is missing
+- `_nullable` (optional) a Boolean that define if the field can be `null`. Return an `WrongValueError` if set to `false` and the field is `null`
 
 ---------
 
@@ -162,6 +162,11 @@ SERVICE = {
 ```
 
 You can then create a new child class in the `shortcut.py` file
+```python
+class PokeAPIGlobalTester(GlobalTester):
+    def __init__(self, env):
+        super().__init__(env, "pokeapi")
+```
 
 #### Create endpoint's specifications
 You can create a YAML file with the same name and location of your mapping file to use some specification with tests.
@@ -176,12 +181,6 @@ query_specs:  # kwargs for request library (get)
 ```
 
 Each path attribute are optional, even the YAML file itself!
-
-```python
-class PokeAPIGlobalTester(GlobalTester):
-    def __init__(self, env):
-        super().__init__(env, "pokeapi")
-```
 
 ## How to test your API
 import the `shortcut` file and call your child class:
