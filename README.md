@@ -148,15 +148,15 @@ In the python file `data/service_config.py`, you can add your service config in 
 ```python
 SERVICE = {
     "pokeapi": {
-            "path": "/pokeapi/",
-            "url": {
+            "path": "/pokeapi/",                            # path to your folder (from `data/mapping`)
+            "url": {                                        # server urls of your api
                 "localhost": None,
                 "snapshot": None,
                 "recette": None,
                 "production": "https://pokeapi.co/api/v2/",
             },
-            "headers": {},
-            "uri": "{url}/{api}/",
+            "headers": {},                                  # headers used when your api are requested (can be setup in yaml too)
+            "uri": "{url}/{api}/",                          # uri build ('{api}' in uri is the api name)
     }
 }
 ```
