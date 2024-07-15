@@ -2,6 +2,10 @@
 
 This project use Python to test your api with predefined mapping.
 
+## Requirements
+- Python 3.9 or higher
+- MongoDB server (url customisable in `utils/mongodb.py`)
+
 ## How to set up
 ### Create your mapping
 
