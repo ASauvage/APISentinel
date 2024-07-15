@@ -17,6 +17,7 @@ class GlobalTester:
 
         self.tests = list()
 
+        print(f"Service: {self.service.name}\nEnv: {self.env}")
         print("Your session ID: " + self.session_id)
         for file in os.listdir('{}/data/mapping/{}'.format(os.getcwd(), self.service.path)):
             if file.endswith('.json'):
