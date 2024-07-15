@@ -7,7 +7,6 @@ from utils.mapping import is_mapping_ok
 def apitester(env: str, service: Service, extended_path: str, **specifications):
     response = api_get_json(
         service.url(env, specifications['api']) + extended_path,
-        headers=specifications['headers'],
         **specifications['query_specs']
     )
 
