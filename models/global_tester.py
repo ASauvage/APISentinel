@@ -21,22 +21,22 @@ class GlobalTester:
         print("Your session ID: " + self.session_id)
         for file in os.listdir('{}/data/mapping/{}'.format(os.getcwd(), self.service.path)):
             if file.endswith('.json'):
+                extended_paths = ['']
+                query_specs = {'headers': self.service.headers}
                 if os.path.isfile('{}/data/mapping/{}/{}'.format(os.getcwd(), self.service.path, file[:-4] + 'yaml')):
                     with open('{}/data/mapping/{}/{}'.format(os.getcwd(), self.service.path, file[:-4] + 'yaml'), 'r') as yaml_file:
                         specs = yaml.load(yaml_file, Loader=yaml.FullLoader)
-                        extended_paths = specs['extended_paths'] if 'extended_paths' in specs.keys() else ['']
-                        query_specs = specs['query_specs'] if 'query_specs' in specs.keys() else {}
+                        extended_paths = specs['extended_paths'] if 'extended_paths' in specs.keys() else extended_paths
+                        query_specs = specs['query_specs'] if 'query_specs' in specs.keys() else query_specs
+                        query_specs['headers'] = (self.service.headers | query_specs['headers']) if 'headers' in query_specs.keys() else self.service.headers
 
-                self.test_executer(filename=file, api=file[:-5], headers=self.service.headers, query_specs=query_specs, extended_paths=extended_paths)
+                self.test_executer(filename=file, api=file[:-5], query_specs=query_specs, extended_paths=extended_paths)
 
         MongoCon().save_results(self.tests)
 
         print("\nYour session ID: " + self.session_id)
 
     def test_executer(self, **specifications):
-        if 'extended_paths' not in specifications.keys() or len(specifications['extended_paths']) == 0:
-            specifications['extended_paths'].append('')
-
         for extended_path in specifications['extended_paths']:
             errors = apitester(self.env, self.service, extended_path, **specifications)
 
@@ -46,6 +46,7 @@ class GlobalTester:
                 "env": self.env,
                 "service": self.service.name,
                 "request": self.service.url(self.env, specifications['api']) + extended_path,
+                "headers": {"User-Agent": "test-mapping", "referer": 'test-mapping', **specifications['query_specs']['headers']},
 
                 "status": False if errors else True,
                 "errors": [error.__str__() for error in errors],
