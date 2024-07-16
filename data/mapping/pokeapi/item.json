@@ -1,0 +1,234 @@
+{
+    "_type": "Object",
+    "_properties": {
+        "id": {
+            "_type": "Number",
+            "_format": "int"
+        },
+        "name": {
+            "_type": "String"
+        },
+        "cost": {
+            "_type": "Number",
+            "_format": "int"
+        },
+        "fling_power": {
+            "_type": "Number",
+            "_format": "int",
+            "_nullable": true
+        },
+        "fling_effect": {
+            "_type": "Object",
+            "_nullable": true,
+            "_properties": {
+                "name": {
+                    "_type": "String"
+                },
+                "url": {
+                    "_type": "String",
+                    "_regex": "[(http(s)?):\\/\\/(www\\.)?a-zA-Z0-9@:%._\\+~#=]{2,256}\\.[a-z]{2,6}\\b[-a-zA-Z0-9@:%_\\+.~#?&//=]*"
+                }
+            }
+        },
+        "attributes": {
+            "_type": "Array",
+            "_values": [
+                {
+                    "_type": "Object",
+                    "_properties": {
+                        "name": {
+                            "_type": "String"
+                        },
+                        "url": {
+                            "_type": "String",
+                            "_regex": "[(http(s)?):\\/\\/(www\\.)?a-zA-Z0-9@:%._\\+~#=]{2,256}\\.[a-z]{2,6}\\b[-a-zA-Z0-9@:%_\\+.~#?&//=]*"
+                        }
+                    }
+                }
+            ]
+        },
+        "category": {
+            "_type": "Object",
+            "_properties": {
+                "name": {
+                    "_type": "String"
+                },
+                "url": {
+                    "_type": "String",
+                    "_regex": "[(http(s)?):\\/\\/(www\\.)?a-zA-Z0-9@:%._\\+~#=]{2,256}\\.[a-z]{2,6}\\b[-a-zA-Z0-9@:%_\\+.~#?&//=]*"
+                }
+            }
+        },
+        "effect_entries": {
+            "_type": "Array",
+            "_values": [
+                {
+                    "_type": "Object",
+                    "_properties": {
+                        "effect": {
+                            "_type": "String"
+                        },
+                        "short_effect": {
+                            "_type": "String"
+                        },
+                        "language": {
+                            "_type": "Object",
+                            "_properties": {
+                                "name": {
+                                    "_type": "String"
+                                },
+                                "url": {
+                                    "_type": "String",
+                                    "_regex": "[(http(s)?):\\/\\/(www\\.)?a-zA-Z0-9@:%._\\+~#=]{2,256}\\.[a-z]{2,6}\\b[-a-zA-Z0-9@:%_\\+.~#?&//=]*"
+                                }
+                            }
+                        }
+                    }
+                }
+            ]
+        },
+        "flavor_text_entries": {
+            "_type": "Array",
+            "_values": [
+                {
+                    "_type": "Object",
+                    "_properties": {
+                        "text": {
+                            "_type": "String"
+                        },
+                        "version_group": {
+                            "_type": "Object",
+                            "_properties": {
+                                "name": {
+                                    "_type": "String"
+                                },
+                                "url": {
+                                    "_type": "String",
+                                    "_regex": "[(http(s)?):\\/\\/(www\\.)?a-zA-Z0-9@:%._\\+~#=]{2,256}\\.[a-z]{2,6}\\b[-a-zA-Z0-9@:%_\\+.~#?&//=]*"
+                                }
+                            }
+                        }
+                    }
+                }
+            ]
+        },
+        "game_indices": {
+            "_type": "Array",
+            "_values": [
+                {
+                    "_type": "Object",
+                    "_properties": {
+                        "game_index": {
+                            "_type": "Number",
+                            "_format": "int"
+                        },
+                        "generation": {
+                            "_type": "Object",
+                            "_properties": {
+                                "name": {
+                                    "_type": "String"
+                                },
+                                "url": {
+                                    "_type": "String",
+                                    "_regex": "[(http(s)?):\\/\\/(www\\.)?a-zA-Z0-9@:%._\\+~#=]{2,256}\\.[a-z]{2,6}\\b[-a-zA-Z0-9@:%_\\+.~#?&//=]*"
+                                }
+                            }
+                        }
+                    }
+                }
+            ]
+        },
+        "names": {
+            "_type": "Array",
+            "_values": [
+                {
+                    "_type": "Object",
+                    "_properties": {
+                        "name": {
+                            "_type": "String"
+                        },
+                        "language": {
+                            "_type": "Object",
+                            "_properties": {
+                                "name": {
+                                    "_type": "String"
+                                },
+                                "url": {
+                                    "_type": "String",
+                                    "_regex": "[(http(s)?):\\/\\/(www\\.)?a-zA-Z0-9@:%._\\+~#=]{2,256}\\.[a-z]{2,6}\\b[-a-zA-Z0-9@:%_\\+.~#?&//=]*"
+                                }
+                            }
+                        }
+                    }
+                }
+            ]
+        },
+        "sprites": {
+            "_type": "Object",
+            "_properties": {
+                "default": {
+                    "_type": "String",
+                    "_regex": "[(http(s)?):\\/\\/(www\\.)?a-zA-Z0-9@:%._\\+~#=]{2,256}\\.[a-z]{2,6}\\b[-a-zA-Z0-9@:%_\\+.~#?&//=]*"
+                }
+            }
+        },
+        "held_by_pokemon": {
+            "_type": "Array",
+            "_values": [
+                {
+                    "_type": "Object",
+                    "_properties": {
+                        "pokemon": {
+                            "_type": "Object",
+                            "_properties": {
+                                "name": {
+                                    "_type": "String"
+                                },
+                                "url": {
+                                    "_type": "String",
+                                    "_regex": "[(http(s)?):\\/\\/(www\\.)?a-zA-Z0-9@:%._\\+~#=]{2,256}\\.[a-z]{2,6}\\b[-a-zA-Z0-9@:%_\\+.~#?&//=]*"
+                                }
+                            }
+                        },
+                        "version_details": {
+                            "_type": "Array",
+                            "_values": [
+                                {
+                                    "_type": "Object",
+                                    "_properties": {
+                                        "rarity": {
+                                            "_type": "Number",
+                                            "_format": "int"
+                                        },
+                                        "version": {
+                                            "_type": "Object",
+                                            "_properties": {
+                                                "name": {
+                                                    "_type": "String"
+                                                },
+                                                "url": {
+                                                    "_type": "String",
+                                                    "_regex": "[(http(s)?):\\/\\/(www\\.)?a-zA-Z0-9@:%._\\+~#=]{2,256}\\.[a-z]{2,6}\\b[-a-zA-Z0-9@:%_\\+.~#?&//=]*"
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                }
+            ]
+        },
+        "baby_trigger_for": {
+            "_type": "Object",
+            "_nullable": true,
+            "_properties": {
+                "url": {
+                    "_type": "String",
+                    "_regex": "[(http(s)?):\\/\\/(www\\.)?a-zA-Z0-9@:%._\\+~#=]{2,256}\\.[a-z]{2,6}\\b[-a-zA-Z0-9@:%_\\+.~#?&//=]*"
+                }
+            }
+        }
+    }
+}
