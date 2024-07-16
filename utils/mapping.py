@@ -22,7 +22,7 @@ FORMAT = {
 
 def is_mapping_ok(response: dict, mapping_path: str) -> list:
     with open(mapping_path, 'r') as file:
-        mapping_json = json.load(file)
+        mapping_json = {"_tmpfield": json.load(file)}
 
         errors = []
         check_field([], mapping_json, response, errors)
