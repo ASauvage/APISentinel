@@ -16,6 +16,7 @@ TYPE = {
 FORMAT = {
     'int': int,
     'float': float,
+    'double': float,
     'datetime': datetime
 }
 
