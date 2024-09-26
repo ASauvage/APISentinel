@@ -2,7 +2,7 @@ import json
 import re
 from models.errors import *
 from utils.commons import get_value
-from datetime import datetime
+from datetime import datetime, date, time
 
 TYPE = {
     'Object': [dict],
@@ -17,7 +17,9 @@ FORMAT = {
     'int': int,
     'float': float,
     'double': float,
-    'datetime': datetime
+    'datetime': datetime,
+    'date': date,
+    'time': time
 }
 
 
@@ -63,6 +65,16 @@ def check_field(path: list, mapping: dict, response: dict, errors: list) -> list
                     if field_value['_format'] == 'datetime':
                         try:
                             datetime.fromisoformat(value)
+                        except ValueError:
+                            errors.append(WrongDatetimeFormatError(value_path, value))
+                    elif field_value['_format'] == 'date':
+                        try:
+                            date.fromisoformat(value)
+                        except ValueError:
+                            errors.append(WrongDatetimeFormatError(value_path, value))
+                    elif field_value['_format'] == 'time':
+                        try:
+                            time.fromisoformat(value)
                         except ValueError:
                             errors.append(WrongDatetimeFormatError(value_path, value))
                     elif not isinstance(value, FORMAT[field_value['_format']]):

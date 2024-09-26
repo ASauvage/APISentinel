@@ -56,7 +56,7 @@ To define a field of type `String`:
 These properties are avalaible for `String` field: 
 
 - `_type` a String that define the type of field (here `String`). Return `WrongTypeValue` if the type doesn't match
-- `_format` (optional) a String that define the type format of field (can be `datetime`)
+- `_format` (optional) a String that define the type format of field (can be `datetime`, `date` or `time`)
 - `_enums` (optional) an Array containing all enumerations available of this field. Return an `WrongEnumsError` if value isn't in this Array
 - `_regex` (optional) A String containing a regular expression pattern. Return `RegexError` if the pattern doesn't match
 - `_optional` (optional) a Boolean that define if the field is optional. Return an error of type `MissingFIeldError` if set to `false` and the field is missing
