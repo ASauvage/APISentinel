@@ -62,21 +62,12 @@ def check_field(path: list, mapping: dict, response: dict, errors: list) -> list
             if value is not None:
                 # check _format
                 if '_format' in field_value:
-                    if field_value['_format'] == 'datetime':
+                    if field_value['_format'] in list(FORMAT.keys())[3:]:
                         try:
-                            datetime.fromisoformat(value)
+                            FORMAT[field_value['_format']].fromisoformat(value)
                         except ValueError:
                             errors.append(WrongDatetimeFormatError(value_path, value))
-                    elif field_value['_format'] == 'date':
-                        try:
-                            date.fromisoformat(value)
-                        except ValueError:
-                            errors.append(WrongDatetimeFormatError(value_path, value))
-                    elif field_value['_format'] == 'time':
-                        try:
-                            time.fromisoformat(value)
-                        except ValueError:
-                            errors.append(WrongDatetimeFormatError(value_path, value))
+
                     elif not isinstance(value, FORMAT[field_value['_format']]):
                         errors.append(WrongFormatError(value_path, type(value), field_value['_format']))
 
