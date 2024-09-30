@@ -100,8 +100,9 @@ def check_field(path: list, mapping: dict, response: dict, errors: list) -> list
                             if len(tmp_errors[-1]) == 0:
                                 break
 
-                        for error in min(tmp_errors, key=len):
-                            errors.append(error)
+                        if tmp_errors:
+                            for error in min(tmp_errors, key=len):
+                                errors.append(error)
 
         except KeyError:
             if '_optional' not in field_value or not field_value['_optional']:
