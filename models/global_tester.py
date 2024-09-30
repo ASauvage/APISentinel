@@ -41,7 +41,7 @@ class GlobalTester:
             errors = apitester(self.env, self.service, extended_path, **specifications)
 
             self.tests.append({
-                "title": f"Mapping test on {specifications['filename']}",
+                "title": f"Test on /{specifications['api'] + extended_path}",
                 "session_id": self.session_id,
                 "env": self.env,
                 "service": self.service.name,
