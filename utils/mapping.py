@@ -1,5 +1,7 @@
 import json
 import re
+from operator import attrgetter
+
 from models.errors import *
 from utils.commons import get_value
 from datetime import datetime, date, time
@@ -96,12 +98,19 @@ def check_field(path: list, mapping: dict, response: dict, errors: list) -> list
                             tmp_errors.append(list())
                             check_field(value_path + [index], {'_tmpfield': map}, response, tmp_errors[-1])
 
-                            # FixMe
                             if len(tmp_errors[-1]) == 0:
                                 break
 
                         if tmp_errors:
-                            for error in min(tmp_errors, key=len):
+                            errors_count = list()
+                            for tmp_error in tmp_errors:
+                                try:
+                                    errors_count.append(len(max(tmp_error, key=attrgetter('field')).field))
+                                except ValueError:
+                                    errors_count = [0 for _ in errors_count] + [1]
+                                    break
+
+                            for error in tmp_errors[errors_count.index(max(errors_count))]:
                                 errors.append(error)
 
         except KeyError:
