@@ -37,7 +37,7 @@ To define a field of type `Number`:
 These properties are avalaible for `Number` field: 
 
 - `_type` a String that define the type of field (here `Number`). Return `WrongTypeValue` if the type doesn't match
-- `_format` (optional) a String that define the type format of field (can be `int` or `float`)
+- `_format` (optional) a String that define the type format of field (can be `int`, `float` or `double`)
 - `_optional` (optional) a Boolean that define if the field is optional. Return an error of type `MissingFIeldError` if set to `false` and the field is missing
 - `_nullable` (optional) a Boolean that define if the field can be `null`. Return an `WrongValueError` if set to `false` and the field is `null`
 
