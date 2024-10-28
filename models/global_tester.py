@@ -1,6 +1,4 @@
-import json
 import os
-import json
 import yaml
 from datetime import datetime
 from utils.commons import generate_session_id
@@ -31,7 +29,8 @@ class GlobalTester:
                         specs = yaml.load(yaml_file, Loader=yaml.FullLoader)
                         extended_paths = specs['extended_paths'] if 'extended_paths' in specs.keys() else extended_paths
                         query_specs = specs['query_specs'] if 'query_specs' in specs.keys() else query_specs
-                        query_specs['headers'] = (self.service.headers | query_specs['headers'] | headers) if 'headers' in query_specs.keys() else self.service.headers
+                        query_specs['headers'] = (self.service.headers | query_specs['headers']) if 'headers' in query_specs.keys() else self.service.headers
+                        query_specs['headers'] = query_specs['headers'] | headers
 
                 self.test_executer(filename=file, api=file[:-5], query_specs=query_specs, extended_paths=extended_paths)
 
