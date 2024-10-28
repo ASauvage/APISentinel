@@ -22,7 +22,3 @@ class Service:
     @property
     def headers(self) -> dict:
         return self.service['headers'] if 'headers' in self.service.keys() else {}
-
-    @property
-    def index_elk(self) -> str:
-        return self.service['index_elk']
