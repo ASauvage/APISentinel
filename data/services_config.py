@@ -10,6 +10,6 @@ SERVICE = {
             "production": "https://pokeapi.co/api/v2",
         },
         "headers": {},
-        "uri": "{url}/{api}",
+        "uri": "{url}/{api}"
     }
 }
