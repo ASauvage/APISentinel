@@ -159,7 +159,10 @@ SERVICE = {
                 "recette": None,
                 "production": "https://pokeapi.co/api/v2/",
             },
-            "headers": {},                                  # headers used when your api are requested (can be setup in yaml too)
+            "headers": {},                                  # (optional) headers used when your api are requested (can be setup in yaml too)
+            "options": {                                    # (optional) options used during tests
+                "request_delay": 100                        # (optional) elay between requests in milliseconds
+            },
             "uri": "{url}/{api}/",                          # uri build ('{api}' in uri is the api name)
     }
 }
