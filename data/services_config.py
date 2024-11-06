@@ -10,6 +10,9 @@ SERVICE = {
             "production": "https://pokeapi.co/api/v2",
         },
         "headers": {},
+        "options": {
+            "request_delay": 100
+        },
         "uri": "{url}/{api}"
     }
 }
