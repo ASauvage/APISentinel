@@ -1,0 +1,50 @@
+{
+    "_type": "Array",
+    "_values": [
+        {
+            "_type": "Object",
+            "_properties": {
+                "metadata": {
+                    "_type": "Object",
+                    "_properties":{
+                        "request_id": {
+                            "_type": "Number",
+                            "_format": "int"
+                        },
+                        "optional_field": {
+                            "_type": "Boolean",
+                            "_optional": true
+                        },
+                        "nullable_field": {
+                            "_type": "Boolean",
+                            "_nullable": true
+                        },
+                        "datetime": {
+                            "_type": "String",
+                            "_format": "datetime"
+                        }
+                    }
+                },
+                "data": {
+                    "_type": "Array",
+                    "_minlen": 1,
+                    "_maxlen": 3,
+                    "_values": [
+                        {
+                            "_type": "String",
+                            "_regex": "^[a-z]*$"
+                        }
+                    ]
+                },
+                "enums": {
+                    "_type": "String",
+                    "_enums": [
+                        "on",
+                        "off",
+                        "asauvage"
+                    ]
+                }
+            }
+        }
+    ]
+}
