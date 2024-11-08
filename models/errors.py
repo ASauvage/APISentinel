@@ -123,14 +123,16 @@ class WrongDatetimeFormatError(Error):
     def explicit_content(self):
         return "WrongFormatError"
 
-    def __init__(self, field, received):
+    def __init__(self, field, received, format):
         self.field = field
         self.received = received
+        self.format = format
 
     def __str__(self):
-        return "{}: '{}' not in datetime format".format(
+        return "{}: '{}' not in {} format, got '{}'".format(
             self.explicit_content,
             self.field,
+            self.format,
             self.received
         )
 
@@ -138,6 +140,7 @@ class WrongDatetimeFormatError(Error):
         return dict(
             explicit_content=self.explicit_content,
             field=self.field,
+            format=self.format,
             received=self.received
         )
 
