@@ -38,6 +38,26 @@ class TestErrors(unittest.TestCase):
             expected=['value', 'other']
         )
 
+    def test_wrong_format_error(self):
+        error = WrongFormatError('field', 'int', float)
+        assert error.__str__() == "WrongFormatError: 'field' should be a(n) <class 'float'> but got 'int' instead"
+        assert error.as_dict() == dict(
+            explicit_content="WrongFormatError",
+            field='field',
+            received='int',
+            expected=float
+        )
+
+    def test_wrong_datetime_format_error(self):
+        error = WrongDatetimeFormatError('field', 'not a datetime', 'date')
+        assert error.__str__() == "WrongFormatError: 'field' not in date format, got 'not a datetime'"
+        assert error.as_dict() == dict(
+            explicit_content="WrongFormatError",
+            field='field',
+            format='date',
+            received='not a datetime'
+        )
+
     def test_regex_error(self):
         error = RegexError('field', '(0-9)$')
         assert error.__str__() == "RegexError: 'field' should match pattern '(0-9)$'"
