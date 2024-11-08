@@ -10,7 +10,7 @@ DATA = [
             "request_id": 1234,
             # "optional_field": False,
             "nullable_field": None,
-            "datetime": "2024-11-08T09:20:10Z"
+            "datetime": "2024-11-08T09:20:10"
         },
         "data": [
             "hello",
