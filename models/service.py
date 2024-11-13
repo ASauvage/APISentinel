@@ -13,6 +13,10 @@ class Service:
     def path(self) -> str:
         return self.service['path']
 
+    @property
+    def options(self) -> dict:
+        return self.service['options'] if 'options' in self.service.keys() else {}
+
     def url(self, env: str, api: str) -> str:
         if self.service['url'][env]:
             return self.service['uri'].format(url=self.service['url'][env], api=api)

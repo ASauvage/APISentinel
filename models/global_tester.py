@@ -1,4 +1,5 @@
 import os
+from time import sleep
 import yaml
 from datetime import datetime
 from utils.commons import generate_session_id
@@ -57,3 +58,7 @@ class GlobalTester:
                 "datetime": int(datetime.now().timestamp())
             })
             print("F" if errors else ".", end='')
+            try:
+                sleep(self.service.options['request_delay'] * 0.001)
+            except KeyError:
+                pass

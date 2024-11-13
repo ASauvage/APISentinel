@@ -25,7 +25,7 @@ FORMAT = {
 }
 
 
-def is_mapping_ok(response: dict, mapping_path: str) -> list:
+def is_mapping_ok(response, mapping_path: str) -> list:
     with open(mapping_path, 'r') as file:
         mapping_json = {"_tmpfield": json.load(file)}
 
@@ -68,7 +68,7 @@ def check_field(path: list, mapping: dict, response: dict, errors: list) -> list
                         try:
                             FORMAT[field_value['_format']].fromisoformat(value)
                         except ValueError:
-                            errors.append(WrongDatetimeFormatError(value_path, value))
+                            errors.append(WrongDatetimeFormatError(value_path, value, field_value['_format']))
 
                     elif not isinstance(value, FORMAT[field_value['_format']]):
                         errors.append(WrongFormatError(value_path, type(value), field_value['_format']))
@@ -79,7 +79,7 @@ def check_field(path: list, mapping: dict, response: dict, errors: list) -> list
 
                 # check _regex
                 if '_regex' in field_value and not re.search(field_value['_regex'], value):
-                    errors.append(RegexError(value_path, field_value['_regex']))
+                    errors.append(RegexError(value_path, field_value['_regex'], value))
 
                 # for each type
                 if field_value['_type'] == "Object":
