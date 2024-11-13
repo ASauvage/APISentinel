@@ -28,7 +28,7 @@ class MissingFieldError(Error):
     def __str__(self):
         return "{}: field '{}' is missing".format(
             self.explicit_content,
-            self.field
+            '.'.join(map(str, self.field)),
         )
 
     def as_dict(self):
@@ -43,17 +43,17 @@ class WrongTypeError(Error):
     def explicit_content(self):
         return "WrongTypeError"
 
-    def __init__(self, field: List[str | int], received: type, expected: type):
+    def __init__(self, field: List[str | int], received: type, expected: List[type]):
         self.field = field
         self.received = received
         self.expected = expected
 
     def __str__(self):
-        return "{}: '{}' should be a(n) {} not {}".format(
+        return "{}: '{}' should be a(n) {} not '{}'".format(
             self.explicit_content,
-            self.field,
-            self.expected,
-            self.received
+            '.'.join(map(str, self.field)),
+            [x.__name__ for x in self.expected],
+            self.received.__name__
         )
 
     def as_dict(self):
@@ -78,7 +78,7 @@ class WrongValueError(Error):
     def __str__(self):
         return "{}: '{}' should be in {} but got '{}' instead".format(
             self.explicit_content,
-            self.field,
+            '.'.join(map(str, self.field)),
             self.expected,
             self.received
         )
@@ -97,17 +97,17 @@ class WrongFormatError(Error):
     def explicit_content(self):
         return "WrongFormatError"
 
-    def __init__(self, field: List[str | int], received: str, expected: type):
+    def __init__(self, field: List[str | int], received: type, expected: str):
         self.field = field
         self.received = received
         self.expected = expected
 
     def __str__(self):
-        return "{}: '{}' should be a(n) {} but got '{}' instead".format(
+        return "{}: '{}' should be a(n) '{}' but got '{}' instead".format(
             self.explicit_content,
-            self.field,
+            '.'.join(map(str, self.field)),
             self.expected,
-            self.received
+            self.received.__name__
         )
 
     def as_dict(self):
@@ -130,9 +130,9 @@ class WrongDatetimeFormatError(Error):
         self.format = format
 
     def __str__(self):
-        return "{}: '{}' not in {} format, got '{}'".format(
+        return "{}: '{}' does not follow the '{}' format, got '{}'".format(
             self.explicit_content,
-            self.field,
+            '.'.join(map(str, self.field)),
             self.format,
             self.received
         )
@@ -159,7 +159,7 @@ class RegexError(Error):
     def __str__(self):
         return "{}: '{}' should match pattern '{}' but got '{}'".format(
             self.explicit_content,
-            self.field,
+            '.'.join(map(str, self.field)),
             self.pattern,
             self.value
         )
@@ -186,7 +186,7 @@ class MinLenghtError(Error):
     def __str__(self):
         return "{}: '{}' got {} values but {} minimum required".format(
             self.explicit_content,
-            self.field,
+            '.'.join(map(str, self.field)),
             self.received,
             self.expected
         )
@@ -213,7 +213,7 @@ class MaxLenghtError(Error):
     def __str__(self):
         return "{}: '{}' got {} values but {} maximum required".format(
             self.explicit_content,
-            self.field,
+            '.'.join(map(str, self.field)),
             self.received,
             self.expected
         )
