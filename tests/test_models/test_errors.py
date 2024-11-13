@@ -11,79 +11,79 @@ class TestErrors(unittest.TestCase):
         )
 
     def test_missing_field_error(self):
-        error = MissingFieldError('field')
-        assert error.__str__() == "MissingFieldError: field 'field' is missing"
+        error = MissingFieldError(['field'])
+        assert error.__str__() == "MissingFieldError: field '['field']' is missing"
         assert error.as_dict() == dict(
             explicit_content='MissingFieldError',
-            field='field'
+            field=['field']
         )
 
     def test_wrong_type_error(self):
-        error = WrongTypeError('field', str, int)
-        assert error.__str__() == "WrongTypeError: 'field' should be a(n) <class 'int'> not <class 'str'>"
+        error = WrongTypeError(['field'], str, int)
+        assert error.__str__() == "WrongTypeError: '['field']' should be a(n) <class 'int'> not <class 'str'>"
         assert error.as_dict() == dict(
             explicit_content='WrongTypeError',
-            field='field',
+            field=['field'],
             received=str,
             expected=int
         )
 
     def test_wrong_value_error(self):
-        error = WrongValueError('field', 'vlaue', ['value', 'other'])
-        assert error.__str__() == "WrongValueError: 'field' should be in ['value', 'other'] but got 'vlaue' instead"
+        error = WrongValueError(['field'], 'vlaue', ['value', 'other'])
+        assert error.__str__() == "WrongValueError: '['field']' should be in ['value', 'other'] but got 'vlaue' instead"
         assert error.as_dict() == dict(
             explicit_content='WrongValueError',
-            field='field',
+            field=['field'],
             received='vlaue',
             expected=['value', 'other']
         )
 
     def test_wrong_format_error(self):
-        error = WrongFormatError('field', 'int', float)
-        assert error.__str__() == "WrongFormatError: 'field' should be a(n) <class 'float'> but got 'int' instead"
+        error = WrongFormatError(['field'], 'int', float)
+        assert error.__str__() == "WrongFormatError: '['field']' should be a(n) <class 'float'> but got 'int' instead"
         assert error.as_dict() == dict(
             explicit_content="WrongFormatError",
-            field='field',
+            field=['field'],
             received='int',
             expected=float
         )
 
     def test_wrong_datetime_format_error(self):
-        error = WrongDatetimeFormatError('field', 'not a datetime', 'date')
-        assert error.__str__() == "WrongFormatError: 'field' not in date format, got 'not a datetime'"
+        error = WrongDatetimeFormatError(['field'], 'not a datetime', 'date')
+        assert error.__str__() == "WrongFormatError: '['field']' not in date format, got 'not a datetime'"
         assert error.as_dict() == dict(
             explicit_content="WrongFormatError",
-            field='field',
+            field=['field'],
             format='date',
             received='not a datetime'
         )
 
     def test_regex_error(self):
-        error = RegexError('field', '(0-9)$', 'value')
-        assert error.__str__() == "RegexError: 'field' should match pattern '(0-9)$' but got 'value'"
+        error = RegexError(['field'], '(0-9)$', 'value')
+        assert error.__str__() == "RegexError: '['field']' should match pattern '(0-9)$' but got 'value'"
         assert error.as_dict() == dict(
             explicit_content='RegexError',
-            field='field',
+            field=['field'],
             pattern='(0-9)$',
             value='value'
         )
 
     def test_minlen_error(self):
-        error = MinLenghtError('field', 0, 5)
-        assert error.__str__() == "MinLenghtError: 'field' got 0 values but 5 minimum required"
+        error = MinLenghtError(['field'], 0, 5)
+        assert error.__str__() == "MinLenghtError: '['field']' got 0 values but 5 minimum required"
         assert error.as_dict() == dict(
             explicit_content='MinLenghtError',
-            field='field',
+            field=['field'],
             received=0,
             expected=5
         )
 
     def test_maxlen_error(self):
-        error = MaxLenghtError('field', 5, 0)
-        assert error.__str__() == "MaxLenghtError: 'field' got 5 values but 0 maximum required"
+        error = MaxLenghtError(['field'], 5, 0)
+        assert error.__str__() == "MaxLenghtError: '['field']' got 5 values but 0 maximum required"
         assert error.as_dict() == dict(
             explicit_content='MaxLenghtError',
-            field='field',
+            field=['field'],
             received=5,
             expected=0
         )
