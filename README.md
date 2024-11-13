@@ -161,7 +161,7 @@ SERVICE = {
             },
             "headers": {},                                  # (optional) headers used when your api are requested (can be setup in yaml too)
             "options": {                                    # (optional) options used during tests
-                "request_delay": 100                        # (optional) elay between requests in milliseconds
+                "request_delay": 100                        # (optional) delay between requests in milliseconds
             },
             "uri": "{url}/{api}/",                          # uri build ('{api}' in uri is the api name)
     }
@@ -170,9 +170,11 @@ SERVICE = {
 
 You can then create a new child class in the `shortcut.py` file
 ```python
+from models.global_tester import import GlobalTester
+
 class PokeAPIGlobalTester(GlobalTester):
     def __init__(self, env):
-        super().__init__(env, "pokeapi")
+        super().__init__(env, "pokeapi", **kwargs)
 ```
 
 #### Create endpoint's specifications
@@ -196,7 +198,7 @@ import the `shortcut` file and call your child class:
 from shortcut import PokeAPIGlobalTester
 
 
-PokeAPIGlobalTester('production')
+PokeAPIGlobalTester('production', headers={'specHeader': '1234'})
 ```
 
 > You can specify headers child class arguments.
