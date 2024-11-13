@@ -1,3 +1,4 @@
+from typing import Any, List
 
 
 class Error:
@@ -21,7 +22,7 @@ class MissingFieldError(Error):
     def explicit_content(self):
         return "MissingFieldError"
 
-    def __init__(self, field):
+    def __init__(self, field: List[str | int]):
         self.field = field
 
     def __str__(self):
@@ -42,7 +43,7 @@ class WrongTypeError(Error):
     def explicit_content(self):
         return "WrongTypeError"
 
-    def __init__(self, field, received, expected):
+    def __init__(self, field: List[str | int], received: type, expected: type):
         self.field = field
         self.received = received
         self.expected = expected
@@ -69,7 +70,7 @@ class WrongValueError(Error):
     def explicit_content(self):
         return "WrongValueError"
 
-    def __init__(self, field, received, expected):
+    def __init__(self, field: List[str | int], received: Any, expected: List[Any]):
         self.field = field
         self.received = received
         self.expected = expected
@@ -96,7 +97,7 @@ class WrongFormatError(Error):
     def explicit_content(self):
         return "WrongFormatError"
 
-    def __init__(self, field, received, expected):
+    def __init__(self, field: List[str | int], received: str, expected: type):
         self.field = field
         self.received = received
         self.expected = expected
@@ -123,7 +124,7 @@ class WrongDatetimeFormatError(Error):
     def explicit_content(self):
         return "WrongFormatError"
 
-    def __init__(self, field, received, format):
+    def __init__(self, field: List[str | int], received: str, format: str):
         self.field = field
         self.received = received
         self.format = format
@@ -150,7 +151,7 @@ class RegexError(Error):
     def explicit_content(self):
         return "RegexError"
 
-    def __init__(self, field, pattern, value):
+    def __init__(self, field: List[str | int], pattern: str, value: str):
         self.field = field
         self.pattern = pattern
         self.value = value
@@ -177,7 +178,7 @@ class MinLenghtError(Error):
     def explicit_content(self):
         return "MinLenghtError"
 
-    def __init__(self, field, received, expected):
+    def __init__(self, field: List[str | int], received: int, expected: int):
         self.field = field
         self.received = received
         self.expected = expected
@@ -204,7 +205,7 @@ class MaxLenghtError(Error):
     def explicit_content(self):
         return "MaxLenghtError"
 
-    def __init__(self, field, received, expected):
+    def __init__(self, field: List[str | int], received: int, expected: int):
         self.field = field
         self.received = received
         self.expected = expected
