@@ -59,12 +59,13 @@ class TestErrors(unittest.TestCase):
         )
 
     def test_regex_error(self):
-        error = RegexError('field', '(0-9)$')
-        assert error.__str__() == "RegexError: 'field' should match pattern '(0-9)$'"
+        error = RegexError('field', '(0-9)$', 'value')
+        assert error.__str__() == "RegexError: 'field' should match pattern '(0-9)$' but got 'value'"
         assert error.as_dict() == dict(
             explicit_content='RegexError',
             field='field',
-            pattern='(0-9)$'
+            pattern='(0-9)$',
+            value='value'
         )
 
     def test_minlen_error(self):

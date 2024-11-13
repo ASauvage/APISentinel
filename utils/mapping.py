@@ -79,7 +79,7 @@ def check_field(path: list, mapping: dict, response: dict, errors: list) -> list
 
                 # check _regex
                 if '_regex' in field_value and not re.search(field_value['_regex'], value):
-                    errors.append(RegexError(value_path, field_value['_regex']))
+                    errors.append(RegexError(value_path, field_value['_regex'], value))
 
                 # for each type
                 if field_value['_type'] == "Object":

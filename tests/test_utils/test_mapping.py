@@ -89,8 +89,8 @@ class TestMapping(unittest.TestCase):
         assert len(errors) == 1
         assert isinstance(errors[0], RegexError)
         assert errors[0].as_dict() == dict(explicit_content="RegexError", field=[0, 'data', 1],
-                                           pattern='^[a-z]*$')
-        assert errors[0].__str__() == "RegexError: '[0, 'data', 1]' should match pattern '^[a-z]*$'"
+                                           pattern='^[a-z]*$', value='pl34s3')
+        assert errors[0].__str__() == "RegexError: '[0, 'data', 1]' should match pattern '^[a-z]*$' but got 'pl34s3'"
 
     def test_is_mapping_ok_minlen_error(self):
         alt_data = deepcopy(DATA)

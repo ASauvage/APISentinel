@@ -150,22 +150,25 @@ class RegexError(Error):
     def explicit_content(self):
         return "RegexError"
 
-    def __init__(self, field, pattern):
+    def __init__(self, field, pattern, value):
         self.field = field
         self.pattern = pattern
+        self.value = value
 
     def __str__(self):
-        return "{}: '{}' should match pattern '{}'".format(
+        return "{}: '{}' should match pattern '{}' but got '{}'".format(
             self.explicit_content,
             self.field,
-            self.pattern
+            self.pattern,
+            self.value
         )
 
     def as_dict(self):
         return dict(
             explicit_content=self.explicit_content,
             field=self.field,
-            pattern=self.pattern
+            pattern=self.pattern,
+            value=self.value
         )
 
 
