@@ -14,3 +14,7 @@ class TestCommons(unittest.TestCase):
         assert session_id[:6].isdigit()
         assert session_id[7:13].isdigit()
         assert session_id != generate_session_id()
+
+
+if __name__ == '__main__':
+    unittest.main()
