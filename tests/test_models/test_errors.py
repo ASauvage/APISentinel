@@ -87,3 +87,7 @@ class TestErrors(unittest.TestCase):
             received=5,
             expected=0
         )
+
+
+if __name__ == '__main__':
+    unittest.main()
