@@ -16,7 +16,10 @@ def integrity_test(mapping_path: str) -> list:
     return errors
 
 
-def simulation_test(mapping_path: str) -> dict:
+def simulation_test(mapping_path: str):
+    """
+    Generate a response based on a given mapping.
+    """
     mapping = get_mapping(mapping_path)
 
     def simulate_field(path: list, mapping: dict) -> dict:
