@@ -1,8 +1,7 @@
 import unittest
 import json
-from os import getcwd
 from unittest.mock import patch
-from utils.mapping_tester import integrity_test, simulation_test
+from utils.mapping_tester import simulation_test
 
 
 def mapping(mapping_path):
@@ -11,12 +10,6 @@ def mapping(mapping_path):
 
 
 class TestMappingTester(unittest.TestCase):
-    def test_integrity_test_success(self):
-        pass  # todo
-
-    def test_integrity_test_failure(self):
-        pass  # todo
-
     @patch('utils.mapping_tester.get_mapping', side_effect=mapping)
     def test_simulation_test(self, mockpatch):
         response = simulation_test('test/test')
