@@ -1,20 +1,6 @@
 import os
 import json
 
-# What it should do
-# - build response from mapping
-# - return errors if there are
-
-
-def integrity_test(mapping_path: str) -> list:
-    errors = list()
-
-    mapping = get_mapping(mapping_path)
-
-    # todo check fields properties (warning for aditional)
-
-    return errors
-
 
 def simulation_test(mapping_path: str):
     """
