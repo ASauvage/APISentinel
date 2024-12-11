@@ -34,3 +34,7 @@ class TestRequestApi(unittest.TestCase):
             args=('http://127.0.0.1/api',),
             kwargs={'headers': {'useragent': 'test', 'contenttype': '*/*', 'User-Agent': 'test-mapping', 'referer': 'test-mapping'}}
         )
+
+
+if __name__ == '__main__':
+    unittest.main()

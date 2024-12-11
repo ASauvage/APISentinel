@@ -12,3 +12,7 @@ class TestTester(unittest.TestCase):
         result = apitester('production', Service('pokeapi'), '', api='test', query_specs=dict(), filename="item.json")
         assert len(result) == 1
         assert result[0] == 'error'
+
+
+if __name__ == '__main__':
+    unittest.main()

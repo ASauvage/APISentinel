@@ -113,3 +113,7 @@ class TestMapping(unittest.TestCase):
         assert errors[0].as_dict() == dict(explicit_content="MaxLenghtError", field=[0, 'data'],
                                            expected=3, received=4)
         assert errors[0].__str__() == "MaxLenghtError: '0.data' got 4 values but 3 maximum required"
+
+
+if __name__ == '__main__':
+    unittest.main()

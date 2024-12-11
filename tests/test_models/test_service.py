@@ -18,3 +18,7 @@ class TestService(unittest.TestCase):
             options=dict(request_delay=100),
             uri="{url}/{api}"
         )
+
+
+if __name__ == '__main__':
+    unittest.main()
