@@ -73,15 +73,20 @@ def check_field(path: list, mapping: dict, response: dict, errors: list) -> list
                     elif not isinstance(value, FORMAT[field_value['_format']]):
                         errors.append(WrongFormatError(value_path, type(value), field_value['_format']))
 
-                # check _enum
-                if '_enums' in field_value and value not in field_value['_enums']:
-                    errors.append(WrongValueError(value_path, value, field_value['_enums']))
-
-                # check _regex
-                if '_regex' in field_value and not re.search(field_value['_regex'], value):
-                    errors.append(RegexError(value_path, field_value['_regex'], value))
-
                 # for each type
+                if field_value['_type'] == "String":
+                    # check _enum
+                    if '_enums' in field_value and value not in field_value['_enums']:
+                        errors.append(WrongValueError(value_path, value, field_value['_enums']))
+
+                    # check _regex
+                    if '_regex' in field_value and not re.search(field_value['_regex'], value):
+                        errors.append(RegexError(value_path, field_value['_regex'], value))
+
+                    if '_allow_empty' in field_value and not field_value['_allow_empty']:
+                        if not bool(value):
+                            errors.append(EmptyStringError(value_path))
+
                 if field_value['_type'] == "Object":
                     check_field(value_path, field_value['_properties'], response, errors)
 
