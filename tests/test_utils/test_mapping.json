@@ -11,6 +11,10 @@
                             "_type": "Number",
                             "_format": "int"
                         },
+                        "not_empty_field": {
+                            "_type": "String",
+                            "_allow_empty": false
+                        },
                         "optional_field": {
                             "_type": "Boolean",
                             "_optional": true
