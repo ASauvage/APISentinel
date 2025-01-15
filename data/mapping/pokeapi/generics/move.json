@@ -1,0 +1,55 @@
+{
+    "_type": "Object",
+    "_properties": {
+        "move": {
+            "_type": "Object",
+            "_properties": {
+                "name": {
+                    "_type": "String"
+                },
+                "url": {
+                    "_type": "String",
+                    "_regex": "[(http(s)?):\\/\\/(www\\.)?a-zA-Z0-9@:%._\\+~#=]{2,256}\\.[a-z]{2,6}\\b[-a-zA-Z0-9@:%_\\+.~#?&//=]*"
+                }
+            }
+        },
+        "version_group_details": {
+            "_type": "Array",
+            "_values": [
+                {
+                    "_type": "Object",
+                    "_properties": {
+                        "level_learned_at": {
+                            "_type": "Number",
+                            "_format": "int"
+                        },
+                        "version_group": {
+                            "_type": "Object",
+                            "_properties": {
+                                "name": {
+                                    "_type": "String"
+                                },
+                                "url": {
+                                    "_type": "String",
+                                    "_regex": "[(http(s)?):\\/\\/(www\\.)?a-zA-Z0-9@:%._\\+~#=]{2,256}\\.[a-z]{2,6}\\b[-a-zA-Z0-9@:%_\\+.~#?&//=]*"
+                                }
+                            }
+                        },
+                        "move_learn_method": {
+                            "_type": "Object",
+                            "_properties": {
+                                "name": {
+                                    "_type": "String"
+                                },
+                                "url": {
+                                    "_type": "String",
+                                    "_regex": "[(http(s)?):\\/\\/(www\\.)?a-zA-Z0-9@:%._\\+~#=]{2,256}\\.[a-z]{2,6}\\b[-a-zA-Z0-9@:%_\\+.~#?&//=]*"
+                                }
+                            }
+                        }
+                    }
+                }
+            ]
+        }
+    }
+}
