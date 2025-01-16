@@ -8,6 +8,7 @@ DATA = [
     {
         "metadata": {
             "request_id": 1234,
+            "not_empty_field": "a",
             # "optional_field": False,
             "nullable_field": None,
             "datetime": "2024-11-08T09:20:10"
@@ -91,6 +92,16 @@ class TestMapping(unittest.TestCase):
         assert errors[0].as_dict() == dict(explicit_content="RegexError", field=[0, 'data', 1],
                                            pattern='^[a-z]*$', value='pl34s3')
         assert errors[0].__str__() == "RegexError: '0.data.1' should match pattern '^[a-z]*$' but got 'pl34s3'"
+
+    def test_is_mapping_ok_empty_string_error(self):
+        alt_data = deepcopy(DATA)
+        alt_data[0]['metadata']['not_empty_field'] = ""
+
+        errors = is_mapping_ok(alt_data, 'tests/test_utils/test_mapping.json')
+        assert len(errors) == 1
+        assert isinstance(errors[0], EmptyStringError)
+        assert errors[0].as_dict() == dict(explicit_content="EmptyStringError", field=[0, 'metadata', 'not_empty_field'])
+        assert errors[0].__str__() == "EmptyStringError: '0.metadata.not_empty_field' return an empty string"
 
     def test_is_mapping_ok_minlen_error(self):
         alt_data = deepcopy(DATA)

@@ -3,7 +3,7 @@ import re
 from operator import attrgetter
 
 from models.errors import *
-from utils.commons import get_value
+from utils.commons import get_value, get_mapping_ref
 from datetime import datetime, date, time
 
 TYPE = {
@@ -30,22 +30,27 @@ def is_mapping_ok(response, mapping_path: str) -> list:
         mapping_json = {"_tmpfield": json.load(file)}
 
         errors = []
-        check_field([], mapping_json, response, errors)
+        check_field([], mapping_json, response, errors, '/'.join(mapping_path.split('/')[:-1]))
 
         return errors
 
 
-def check_field(path: list, mapping: dict, response: dict, errors: list) -> list:
+def check_field(path: list, mapping: dict, response: dict, errors: list, ref_path: str) -> list:
     """
 
     :param path: list of path in response (exemple: ["properties", 0, "name"])
     :param mapping: dict of mapping for the path (exemple: {"id": {"_type": "String"}})
     :param response: API response
     :param errors: errors list
+    :ref_path: path for reference files
     :return: error list
     """
     for field_name, field_value in mapping.items():
         try:
+            # check _$ref
+            if '_$ref' in field_value:
+                field_value = get_mapping_ref(field_value, ref_path, field_value['_$ref'])
+
             # variable declaration
             value_path = path + [field_name] if field_name != "_tmpfield" else path
             value_type = TYPE[field_value['_type']].copy()
@@ -73,17 +78,22 @@ def check_field(path: list, mapping: dict, response: dict, errors: list) -> list
                     elif not isinstance(value, FORMAT[field_value['_format']]):
                         errors.append(WrongFormatError(value_path, type(value), field_value['_format']))
 
-                # check _enum
-                if '_enums' in field_value and value not in field_value['_enums']:
-                    errors.append(WrongValueError(value_path, value, field_value['_enums']))
-
-                # check _regex
-                if '_regex' in field_value and not re.search(field_value['_regex'], value):
-                    errors.append(RegexError(value_path, field_value['_regex'], value))
-
                 # for each type
+                if field_value['_type'] == "String":
+                    # check _enum
+                    if '_enums' in field_value and value not in field_value['_enums']:
+                        errors.append(WrongValueError(value_path, value, field_value['_enums']))
+
+                    # check _regex
+                    if '_regex' in field_value and not re.search(field_value['_regex'], value):
+                        errors.append(RegexError(value_path, field_value['_regex'], value))
+
+                    if '_allow_empty' in field_value and not field_value['_allow_empty']:
+                        if not bool(value):
+                            errors.append(EmptyStringError(value_path))
+
                 if field_value['_type'] == "Object":
-                    check_field(value_path, field_value['_properties'], response, errors)
+                    check_field(value_path, field_value['_properties'], response, errors, ref_path)
 
                 if field_value['_type'] == "Array":
                     # check _minlen and _maxlen
@@ -96,7 +106,7 @@ def check_field(path: list, mapping: dict, response: dict, errors: list) -> list
                         tmp_errors = list()
                         for map in field_value['_values']:
                             tmp_errors.append(list())
-                            check_field(value_path + [index], {'_tmpfield': map}, response, tmp_errors[-1])
+                            check_field(value_path + [index], {'_tmpfield': map}, response, tmp_errors[-1], ref_path)
 
                             if len(tmp_errors[-1]) == 0:
                                 break

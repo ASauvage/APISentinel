@@ -1,0 +1,47 @@
+{
+    "_type": "Object",
+    "_properties": {
+        "item": {
+            "_type": "Object",
+            "_properties": {
+                "name": {
+                    "_type": "String"
+                },
+                "url": {
+                    "_type": "String",
+                    "_regex": "[(http(s)?):\\/\\/(www\\.)?a-zA-Z0-9@:%._\\+~#=]{2,256}\\.[a-z]{2,6}\\b[-a-zA-Z0-9@:%_\\+.~#?&//=]*"
+                }
+            }
+        },
+        "version_details": {
+            "_type": "Array",
+            "_values": [
+                {
+                    "_type": "Object",
+                    "_properties": {
+                        "rarity": {
+                            "_type": "Number",
+                            "_format": "int"
+                        },
+                        "version": {
+                            "_type": "Object",
+                            "_properties": {
+                                "name": {
+                                    "_type": "String"
+                                },
+                                "url": {
+                                    "_type": "String",
+                                    "_regex": "[(http(s)?):\\/\\/(www\\.)?a-zA-Z0-9@:%._\\+~#=]{2,256}\\.[a-z]{2,6}\\b[-a-zA-Z0-9@:%_\\+.~#?&//=]*"
+                                }
+                            }
+                        }
+                    }
+                }
+            ]
+        },
+        "location_area_encounters": {
+            "_type": "String",
+            "_optional": true
+        }
+    }
+}

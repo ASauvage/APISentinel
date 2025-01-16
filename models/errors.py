@@ -3,15 +3,15 @@ from typing import Any, List
 
 class Error:
     @property
-    def explicit_content(self):
+    def explicit_content(self) -> str:
         return "UnknownError"
 
-    def __str__(self):
+    def __str__(self) -> str:
         return "{}: Unexpected error occured".format(
             self.explicit_content
         )
 
-    def as_dict(self):
+    def as_dict(self) -> dict:
         return dict(
             explicit_content=self.explicit_content
         )
@@ -19,19 +19,19 @@ class Error:
 
 class MissingFieldError(Error):
     @property
-    def explicit_content(self):
+    def explicit_content(self) -> str:
         return "MissingFieldError"
 
     def __init__(self, field: List[str | int]):
         self.field = field
 
-    def __str__(self):
+    def __str__(self) -> str:
         return "{}: field '{}' is missing".format(
             self.explicit_content,
             '.'.join(map(str, self.field)),
         )
 
-    def as_dict(self):
+    def as_dict(self) -> dict:
         return dict(
             explicit_content=self.explicit_content,
             field=self.field
@@ -40,7 +40,7 @@ class MissingFieldError(Error):
 
 class WrongTypeError(Error):
     @property
-    def explicit_content(self):
+    def explicit_content(self) -> str:
         return "WrongTypeError"
 
     def __init__(self, field: List[str | int], received: type, expected: List[type]):
@@ -48,7 +48,7 @@ class WrongTypeError(Error):
         self.received = received
         self.expected = expected
 
-    def __str__(self):
+    def __str__(self) -> str:
         return "{}: '{}' should be a(n) {} not '{}'".format(
             self.explicit_content,
             '.'.join(map(str, self.field)),
@@ -56,7 +56,7 @@ class WrongTypeError(Error):
             self.received.__name__
         )
 
-    def as_dict(self):
+    def as_dict(self) -> dict:
         return dict(
             explicit_content=self.explicit_content,
             field=self.field,
@@ -67,7 +67,7 @@ class WrongTypeError(Error):
 
 class WrongValueError(Error):
     @property
-    def explicit_content(self):
+    def explicit_content(self) -> str:
         return "WrongValueError"
 
     def __init__(self, field: List[str | int], received: Any, expected: List[Any]):
@@ -75,7 +75,7 @@ class WrongValueError(Error):
         self.received = received
         self.expected = expected
 
-    def __str__(self):
+    def __str__(self) -> str:
         return "{}: '{}' should be in {} but got '{}' instead".format(
             self.explicit_content,
             '.'.join(map(str, self.field)),
@@ -83,7 +83,7 @@ class WrongValueError(Error):
             self.received
         )
 
-    def as_dict(self):
+    def as_dict(self) -> dict:
         return dict(
             explicit_content=self.explicit_content,
             field=self.field,
@@ -94,7 +94,7 @@ class WrongValueError(Error):
 
 class WrongFormatError(Error):
     @property
-    def explicit_content(self):
+    def explicit_content(self) -> str:
         return "WrongFormatError"
 
     def __init__(self, field: List[str | int], received: type, expected: str):
@@ -102,7 +102,7 @@ class WrongFormatError(Error):
         self.received = received
         self.expected = expected
 
-    def __str__(self):
+    def __str__(self) -> str:
         return "{}: '{}' should be a(n) '{}' but got '{}' instead".format(
             self.explicit_content,
             '.'.join(map(str, self.field)),
@@ -110,7 +110,7 @@ class WrongFormatError(Error):
             self.received.__name__
         )
 
-    def as_dict(self):
+    def as_dict(self) -> dict:
         return dict(
             explicit_content=self.explicit_content,
             field=self.field,
@@ -121,7 +121,7 @@ class WrongFormatError(Error):
 
 class WrongDatetimeFormatError(Error):
     @property
-    def explicit_content(self):
+    def explicit_content(self) -> str:
         return "WrongFormatError"
 
     def __init__(self, field: List[str | int], received: str, format: str):
@@ -129,7 +129,7 @@ class WrongDatetimeFormatError(Error):
         self.received = received
         self.format = format
 
-    def __str__(self):
+    def __str__(self) -> str:
         return "{}: '{}' does not follow the '{}' format, got '{}'".format(
             self.explicit_content,
             '.'.join(map(str, self.field)),
@@ -137,7 +137,7 @@ class WrongDatetimeFormatError(Error):
             self.received
         )
 
-    def as_dict(self):
+    def as_dict(self) -> dict:
         return dict(
             explicit_content=self.explicit_content,
             field=self.field,
@@ -148,7 +148,7 @@ class WrongDatetimeFormatError(Error):
 
 class RegexError(Error):
     @property
-    def explicit_content(self):
+    def explicit_content(self) -> str:
         return "RegexError"
 
     def __init__(self, field: List[str | int], pattern: str, value: str):
@@ -156,7 +156,7 @@ class RegexError(Error):
         self.pattern = pattern
         self.value = value
 
-    def __str__(self):
+    def __str__(self) -> str:
         return "{}: '{}' should match pattern '{}' but got '{}'".format(
             self.explicit_content,
             '.'.join(map(str, self.field)),
@@ -164,7 +164,7 @@ class RegexError(Error):
             self.value
         )
 
-    def as_dict(self):
+    def as_dict(self) -> dict:
         return dict(
             explicit_content=self.explicit_content,
             field=self.field,
@@ -173,9 +173,30 @@ class RegexError(Error):
         )
 
 
+class EmptyStringError(Error):
+    @property
+    def explicit_content(self) -> str:
+        return "EmptyStringError"
+
+    def __init__(self, field: List[str | int]):
+        self.field = field
+
+    def __str__(self) -> str:
+        return "{}: '{}' return an empty string".format(
+            self.explicit_content,
+            '.'.join(map(str, self.field))
+        )
+
+    def as_dict(self) -> dict:
+        return dict(
+            explicit_content=self.explicit_content,
+            field=self.field
+        )
+
+
 class MinLenghtError(Error):
     @property
-    def explicit_content(self):
+    def explicit_content(self) -> str:
         return "MinLenghtError"
 
     def __init__(self, field: List[str | int], received: int, expected: int):
@@ -183,7 +204,7 @@ class MinLenghtError(Error):
         self.received = received
         self.expected = expected
 
-    def __str__(self):
+    def __str__(self) -> str:
         return "{}: '{}' got {} values but {} minimum required".format(
             self.explicit_content,
             '.'.join(map(str, self.field)),
@@ -191,7 +212,7 @@ class MinLenghtError(Error):
             self.expected
         )
 
-    def as_dict(self):
+    def as_dict(self) -> dict:
         return dict(
             explicit_content=self.explicit_content,
             field=self.field,
@@ -202,7 +223,7 @@ class MinLenghtError(Error):
 
 class MaxLenghtError(Error):
     @property
-    def explicit_content(self):
+    def explicit_content(self) -> str:
         return "MaxLenghtError"
 
     def __init__(self, field: List[str | int], received: int, expected: int):
@@ -210,7 +231,7 @@ class MaxLenghtError(Error):
         self.received = received
         self.expected = expected
 
-    def __str__(self):
+    def __str__(self) -> str:
         return "{}: '{}' got {} values but {} maximum required".format(
             self.explicit_content,
             '.'.join(map(str, self.field)),
@@ -218,7 +239,7 @@ class MaxLenghtError(Error):
             self.expected
         )
 
-    def as_dict(self):
+    def as_dict(self) -> dict:
         return dict(
             explicit_content=self.explicit_content,
             field=self.field,

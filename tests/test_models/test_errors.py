@@ -68,6 +68,14 @@ class TestErrors(unittest.TestCase):
             value='value'
         )
 
+    def test_empty_string_error(self):
+        error = EmptyStringError(['field', 0, 'subfield'])
+        assert error.__str__() == "EmptyStringError: 'field.0.subfield' return an empty string"
+        assert error.as_dict() == dict(
+            explicit_content='EmptyStringError',
+            field=['field', 0, 'subfield']
+        )
+
     def test_minlen_error(self):
         error = MinLenghtError(['field', 0, 'subfield'], 0, 5)
         assert error.__str__() == "MinLenghtError: 'field.0.subfield' got 0 values but 5 minimum required"

@@ -16,6 +16,7 @@ class TestMappingTester(unittest.TestCase):
         assert response == [dict(
             metadata=dict(
                 request_id="Number/int",
+                not_empty_field="String",
                 optional_field="Boolean",
                 nullable_field="Boolean",
                 datetime="String/datetime"
