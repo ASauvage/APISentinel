@@ -31,9 +31,10 @@ class GlobalTester:
                         extended_paths = specs['extended_paths'] if 'extended_paths' in specs.keys() else extended_paths
                         query_specs = specs['query_specs'] if 'query_specs' in specs.keys() else query_specs
                         query_specs['headers'] = (self.service.headers | query_specs['headers']) if 'headers' in query_specs.keys() else self.service.headers
+                        save_response = specs['save_response'] if 'save_response' in specs.keys() else False
                 query_specs['headers'] = query_specs['headers'] | headers
 
-                self.test_executer(filename=file, api=file[:-5], query_specs=query_specs, extended_paths=extended_paths)
+                self.test_executer(filename=file, api=file[:-5], query_specs=query_specs, extended_paths=extended_paths, save_response=save_response)
 
         MongoCon().save_results(self.tests)
 
@@ -41,22 +42,23 @@ class GlobalTester:
 
     def test_executer(self, **specifications):
         for extended_path in specifications['extended_paths']:
-            errors = apitester(self.env, self.service, extended_path, **specifications)
+            response, errors = apitester(self.env, self.service, extended_path, **specifications)
 
-            self.tests.append({
-                "title": f"Test on /{specifications['api'] + extended_path}",
-                "session_id": self.session_id,
-                "env": self.env,
-                "service": self.service.name,
-                "request": self.service.url(self.env, specifications['api']) + extended_path,
-                "headers": {"User-Agent": "test-mapping", "referer": 'test-mapping', **specifications['query_specs']['headers']},
-                "params": specifications['query_specs']['params'] if 'params' in specifications['query_specs'].keys() else {},
+            self.tests.append(dict(
+                title=f"Test on /{specifications['api'] + extended_path}",
+                session_id=self.session_id,
+                env=self.env,
+                service=self.service.name,
+                request=self.service.url(self.env, specifications['api']) + extended_path,
+                headers={"User-Agent": "test-mapping", "referer": 'test-mapping', **specifications['query_specs']['headers']},
+                params=specifications['query_specs']['params'] if 'params' in specifications['query_specs'].keys() else {},
 
-                "status": False if errors else True,
-                "errors": [error.__str__() for error in errors],
+                status=False if errors else True,
+                errors=[error.__str__() for error in errors],
+                api_response=response,
 
-                "datetime": int(datetime.now().timestamp())
-            })
+                timestamp=int(datetime.now().timestamp())
+            ))
             print("F" if errors else ".", end='')
             try:
                 sleep(self.service.options['request_delay'] * 0.001)
