@@ -24,6 +24,7 @@ class GlobalTester:
         for file in os.listdir('{}/data/mapping/{}'.format(os.getcwd(), self.service.path)):
             if file.endswith('.json'):
                 extended_paths = ['']
+                save_response = False
                 query_specs = {'headers': self.service.headers}
                 if os.path.isfile('{}/data/mapping/{}/{}'.format(os.getcwd(), self.service.path, file[:-4] + 'yaml')):
                     with open('{}/data/mapping/{}/{}'.format(os.getcwd(), self.service.path, file[:-4] + 'yaml'), 'r') as yaml_file:
