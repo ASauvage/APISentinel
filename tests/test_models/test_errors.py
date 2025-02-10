@@ -10,6 +10,14 @@ class TestErrors(unittest.TestCase):
             explicit_content='UnknownError'
         )
 
+    def test_http_code_error(self):
+        error = HttpCodeError(503)
+        assert error.__str__() == "HttpCodeError: Request return an error code 503"
+        assert error.as_dict() == dict(
+            explicit_content="HttpCodeError",
+            status_code=503
+        )
+
     def test_missing_field_error(self):
         error = MissingFieldError(['field', 0, 'subfield'])
         assert error.__str__() == "MissingFieldError: field 'field.0.subfield' is missing"
