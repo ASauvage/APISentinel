@@ -1,6 +1,5 @@
 import os
 import yaml
-from uuid import uuid4
 from time import sleep
 from datetime import datetime
 from utils.commons import generate_session_id
