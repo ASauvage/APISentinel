@@ -54,7 +54,7 @@ class GlobalTester:
                 ),
                 service=self.service.name,
                 env=self.env,
-                request=self.service.url(self.env, specifications['api']) + extended_path,
+                url=self.service.url(self.env, specifications['api'], extended_path, **specifications['query_specs']['params'] if 'params' in specifications['query_specs'].keys() else {}),
                 headers={"User-Agent": "test-mapping", "referer": 'test-mapping', **specifications['query_specs']['headers']},
                 params=specifications['query_specs']['params'] if 'params' in specifications['query_specs'].keys() else {},
 
