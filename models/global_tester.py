@@ -1,6 +1,7 @@
 import os
-from time import sleep
 import yaml
+from uuid import uuid4
+from time import sleep
 from datetime import datetime
 from utils.commons import generate_session_id
 from utils.mongodb import MongoCon
@@ -46,10 +47,13 @@ class GlobalTester:
             response, errors = apitester(self.env, self.service, extended_path, **specifications)
 
             self.tests.append(dict(
-                title=f"Test on /{specifications['api'] + extended_path}",
-                session_id=self.session_id,
-                env=self.env,
+                test_info=dict(
+                    session_id=self.session_id,
+                    title=f"Test on /{specifications['api'] + extended_path}",
+                    tags=['apitester', self.service.name]
+                ),
                 service=self.service.name,
+                env=self.env,
                 request=self.service.url(self.env, specifications['api']) + extended_path,
                 headers={"User-Agent": "test-mapping", "referer": 'test-mapping', **specifications['query_specs']['headers']},
                 params=specifications['query_specs']['params'] if 'params' in specifications['query_specs'].keys() else {},
