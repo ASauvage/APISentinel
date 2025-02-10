@@ -201,11 +201,12 @@ class PokeAPIGlobalTester(GlobalTester):
 #### Create endpoint's specifications
 You can create a YAML file with the same name and location of your mapping file to use some specification with tests.
 ```yaml
-extended_path:  # extend path for your API's url
+save_response: yes  # save API's response in tests results
+extended_path:      # extend path for your API's url
     - '/charizard'
     - '/bulbasaur'
 
-query_specs:  # kwargs for request library (get)
+query_specs:        # kwargs for request library (get)
     headers:
         token: 'mon_token'
 ```
