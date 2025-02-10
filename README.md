@@ -181,7 +181,7 @@ Your test results are stored as documents in the following format:
   },
   "service": "pokeapi",
   "env": "production",
-  "request": "https://pokeapi.co/api/v2/item/master-ball",
+  "url": "https://pokeapi.co/api/v2/item/master-ball",
   "status": true,
   "errors": [],
   "api_response": null,
