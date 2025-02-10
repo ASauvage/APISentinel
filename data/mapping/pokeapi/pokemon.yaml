@@ -1,3 +1,4 @@
+save_response: yes
 extended_paths:
     - '/charizard'
     - '/bulbasaur'

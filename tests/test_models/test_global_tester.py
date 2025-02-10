@@ -16,11 +16,11 @@ class MockedService:
 
 
 class TestGlobalTester(unittest.TestCase):
-    @patch('models.global_tester.apitester', return_value=list())
+    @patch('models.global_tester.apitester', return_value=(None, list()))
     @patch('models.global_tester.Service', side_effect=MockedService)
-    @patch('os.listdir', return_value=['test_api.json'])
-    @patch('yaml.load', return_value=dict(extended_paths=['/extra']))
-    @patch('utils.mongodb.MongoCon.save_results')
+    @patch('models.global_tester.os.listdir', return_value=['test_api.json'])
+    @patch('models.global_tester.yaml.load', return_value=dict(extended_paths=['/extra']))
+    @patch('models.global_tester.MongoCon.save_results')
     def test_test_executer_success(self, mockpatch_apitester, mockpatch_service, mockpatch_listdir, mockpatch_load, mockpatch_save_results):
         tester = GlobalTester('production', 'TestService')
         print(tester.tests[0])
@@ -34,11 +34,11 @@ class TestGlobalTester(unittest.TestCase):
         assert len(tester.tests[0]['errors']) == 0
         mockpatch_save_results.assert_called_once()
 
-    @patch('models.global_tester.apitester', return_value=['fake_error_object'])
+    @patch('models.global_tester.apitester', return_value=(None, ['fake_error_object']))
     @patch('models.global_tester.Service', side_effect=MockedService)
-    @patch('os.listdir', return_value=['test_api.json'])
-    @patch('yaml.load', return_value=dict(extended_paths=['/extra']))
-    @patch('utils.mongodb.MongoCon.save_results')
+    @patch('models.global_tester.os.listdir', return_value=['test_api.json'])
+    @patch('models.global_tester.yaml.load', return_value=dict(extended_paths=['/extra']))
+    @patch('models.global_tester.MongoCon.save_results')
     def test_test_executer_failure(self, mockpatch_apitester, mockpatch_service, mockpatch_listdir, mockpatch_load, mockpatch_save_results):
         tester = GlobalTester('production', 'TestService')
         assert len(tester.tests) == 1

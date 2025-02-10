@@ -1,4 +1,4 @@
-from requests import get
+from requests import get, JSONDecodeError
 
 HEADERS = {
     "User-Agent": "test-mapping",
@@ -11,7 +11,8 @@ def api_get_json(*args, **kwargs):
         kwargs["headers"] = {}
     kwargs["headers"].update(HEADERS)
 
+    response = get(*args, **kwargs)
     try:
-        return get(*args, **kwargs).json()
-    except Exception as e:
+        return response.json()
+    except JSONDecodeError as e:
         raise e
