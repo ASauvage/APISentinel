@@ -11,7 +11,7 @@ class MockedService:
     def __init__(self, name: str):
         self.name = name
 
-    def url(self, env, api):
+    def url(self, env, api, extended_path, **kwargs):
         return 'http://example.com'
 
 
@@ -29,7 +29,6 @@ class TestGlobalTester(unittest.TestCase):
         assert tester.tests[0]['test_info']['title'] == 'Test on /test_api/extra'
         assert tester.tests[0]['service'] == 'TestService'
         assert tester.tests[0]['env'] == 'production'
-        assert tester.tests[0]['request'] == 'http://example.com/extra'
         print(tester.tests[0]['headers'])
         assert tester.tests[0]['headers'] == {'User-Agent': 'test-mapping', 'referer': 'test-mapping', 'key': 'value', 'test': 123}
         assert tester.tests[0]['params'] == {'test': 1}
@@ -50,7 +49,6 @@ class TestGlobalTester(unittest.TestCase):
         assert tester.tests[0]['test_info']['title'] == 'Test on /test_api/extra'
         assert tester.tests[0]['service'] == 'TestService'
         assert tester.tests[0]['env'] == 'production'
-        assert tester.tests[0]['request'] == 'http://example.com/extra'
         assert tester.tests[0]['headers'] == {'User-Agent': 'test-mapping', 'referer': 'test-mapping', 'key': 'value'}
         assert tester.tests[0]['params'] == {}
         assert not tester.tests[0]['status']

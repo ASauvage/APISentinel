@@ -17,9 +17,15 @@ class Service:
     def options(self) -> dict:
         return self.service['options'] if 'options' in self.service.keys() else {}
 
-    def url(self, env: str, api: str) -> str:
+    def url(self, env: str, api: str, extended_path: str = None, **kwargs) -> str:
+        if not extended_path:
+            extended_path = ''
+        url = self.service['uri'].format(url=self.service['url'][env], api=api) + extended_path
+        if kwargs:
+            url += '/?' + '&'.join([f'{key}={value}' for key, value in kwargs.items()])
+
         if self.service['url'][env]:
-            return self.service['uri'].format(url=self.service['url'][env], api=api)
+            return url
         else:
             raise Exception(f"no url defined for {env}")
 
