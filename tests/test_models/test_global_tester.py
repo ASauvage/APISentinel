@@ -16,7 +16,7 @@ class MockedService:
 
 
 class TestGlobalTester(unittest.TestCase):
-    @patch('models.global_tester.apitester', return_value=list())
+    @patch('models.global_tester.apitester', return_value=(None, list()))
     @patch('models.global_tester.Service', side_effect=MockedService)
     @patch('models.global_tester.os.listdir', return_value=['test_api.json'])
     @patch('models.global_tester.yaml.load', return_value=dict(extended_paths=['/extra']))
@@ -34,7 +34,7 @@ class TestGlobalTester(unittest.TestCase):
         assert len(tester.tests[0]['errors']) == 0
         mockpatch_save_results.assert_called_once()
 
-    @patch('models.global_tester.apitester', return_value=['fake_error_object'])
+    @patch('models.global_tester.apitester', return_value=(None, ['fake_error_object']))
     @patch('models.global_tester.Service', side_effect=MockedService)
     @patch('models.global_tester.os.listdir', return_value=['test_api.json'])
     @patch('models.global_tester.yaml.load', return_value=dict(extended_paths=['/extra']))
