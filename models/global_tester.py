@@ -1,6 +1,5 @@
 import os
 import yaml
-from uuid import uuid4
 from time import sleep
 from datetime import datetime
 from utils.commons import generate_session_id
@@ -24,19 +23,23 @@ class GlobalTester:
         print("Your session ID: " + self.session_id)
         for file in os.listdir('{}/data/mapping/{}'.format(os.getcwd(), self.service.path)):
             if file.endswith('.json'):
+                # default specifications
+                query_specs = dict(headers=self.service.headers)
                 extended_paths = ['']
-                save_response = False
-                query_specs = {'headers': self.service.headers}
+                yaml_options = dict(save_response=False, valid_http_code=[200])
+
                 if os.path.isfile('{}/data/mapping/{}/{}'.format(os.getcwd(), self.service.path, file[:-4] + 'yaml')):
                     with open('{}/data/mapping/{}/{}'.format(os.getcwd(), self.service.path, file[:-4] + 'yaml'), 'r') as yaml_file:
                         specs = yaml.load(yaml_file, Loader=yaml.FullLoader)
                         extended_paths = specs['extended_paths'] if 'extended_paths' in specs.keys() else extended_paths
                         query_specs = specs['query_specs'] if 'query_specs' in specs.keys() else query_specs
                         query_specs['headers'] = (self.service.headers | query_specs['headers']) if 'headers' in query_specs.keys() else self.service.headers
-                        save_response = specs['save_response'] if 'save_response' in specs.keys() else False
+
+                        yaml_options['save_response'] = specs['save_response'] if 'save_response' in specs.keys() else False
+                        yaml_options['valid_http_code'] = specs['valid_http_code'] if 'valid_http_code' in specs.keys() else [200]
                 query_specs['headers'] = query_specs['headers'] | headers
 
-                self.test_executer(filename=file, api=file[:-5], query_specs=query_specs, extended_paths=extended_paths, save_response=save_response)
+                self.test_executer(filename=file, api=file[:-5], query_specs=query_specs, extended_paths=extended_paths, **yaml_options)
 
         MongoCon().save_results(self.tests)
 

@@ -1,4 +1,3 @@
-from typing import Any, List
 
 
 class Error:
@@ -7,11 +6,51 @@ class Error:
         return "UnknownError"
 
     def __str__(self) -> str:
-        return "{}: Unexpected error occured".format(
+        return "{}: unexpected error occured".format(
             self.explicit_content
         )
 
-    def as_dict(self) -> dict:
+    def as_dict(self) -> dict[str, any]:
+        return dict(
+            explicit_content=self.explicit_content
+        )
+
+
+class HttpCodeError(Error):
+    @property
+    def explicit_content(self) -> str:
+        return "HttpCodeError"
+
+    def __init__(self, status_code: int):
+        self.status_code = status_code
+
+    def __str__(self) -> str:
+        return "{}: request return an error code {}".format(
+            self.explicit_content,
+            self.status_code
+        )
+
+    def as_dict(self) -> dict[str, any]:
+        return dict(
+            explicit_content=self.explicit_content,
+            status_code=self.status_code
+        )
+
+
+class NotJsonError(Error):
+    @property
+    def explicit_content(self) -> str:
+        return "NotJsonError"
+
+    def __init__(self):
+        pass
+
+    def __str__(self) -> str:
+        return "{}: response did not return content in JSON format".format(
+            self.explicit_content
+        )
+
+    def as_dict(self) -> dict[str, any]:
         return dict(
             explicit_content=self.explicit_content
         )
@@ -22,7 +61,7 @@ class MissingFieldError(Error):
     def explicit_content(self) -> str:
         return "MissingFieldError"
 
-    def __init__(self, field: List[str | int]):
+    def __init__(self, field: list[str | int]):
         self.field = field
 
     def __str__(self) -> str:
@@ -31,7 +70,7 @@ class MissingFieldError(Error):
             '.'.join(map(str, self.field)),
         )
 
-    def as_dict(self) -> dict:
+    def as_dict(self) -> dict[str, any]:
         return dict(
             explicit_content=self.explicit_content,
             field=self.field
@@ -43,7 +82,7 @@ class WrongTypeError(Error):
     def explicit_content(self) -> str:
         return "WrongTypeError"
 
-    def __init__(self, field: List[str | int], received: type, expected: List[type]):
+    def __init__(self, field: list[str | int], received: type, expected: list[type]):
         self.field = field
         self.received = received
         self.expected = expected
@@ -56,7 +95,7 @@ class WrongTypeError(Error):
             self.received.__name__
         )
 
-    def as_dict(self) -> dict:
+    def as_dict(self) -> dict[str, any]:
         return dict(
             explicit_content=self.explicit_content,
             field=self.field,
@@ -70,7 +109,7 @@ class WrongValueError(Error):
     def explicit_content(self) -> str:
         return "WrongValueError"
 
-    def __init__(self, field: List[str | int], received: Any, expected: List[Any]):
+    def __init__(self, field: list[str | int], received: any, expected: list[any]):
         self.field = field
         self.received = received
         self.expected = expected
@@ -83,7 +122,7 @@ class WrongValueError(Error):
             self.received
         )
 
-    def as_dict(self) -> dict:
+    def as_dict(self) -> dict[str, any]:
         return dict(
             explicit_content=self.explicit_content,
             field=self.field,
@@ -97,7 +136,7 @@ class WrongFormatError(Error):
     def explicit_content(self) -> str:
         return "WrongFormatError"
 
-    def __init__(self, field: List[str | int], received: type, expected: str):
+    def __init__(self, field: list[str | int], received: type, expected: str):
         self.field = field
         self.received = received
         self.expected = expected
@@ -110,7 +149,7 @@ class WrongFormatError(Error):
             self.received.__name__
         )
 
-    def as_dict(self) -> dict:
+    def as_dict(self) -> dict[str, any]:
         return dict(
             explicit_content=self.explicit_content,
             field=self.field,
@@ -124,7 +163,7 @@ class WrongDatetimeFormatError(Error):
     def explicit_content(self) -> str:
         return "WrongFormatError"
 
-    def __init__(self, field: List[str | int], received: str, format: str):
+    def __init__(self, field: list[str | int], received: str, format: str):
         self.field = field
         self.received = received
         self.format = format
@@ -137,7 +176,7 @@ class WrongDatetimeFormatError(Error):
             self.received
         )
 
-    def as_dict(self) -> dict:
+    def as_dict(self) -> dict[str, any]:
         return dict(
             explicit_content=self.explicit_content,
             field=self.field,
@@ -151,7 +190,7 @@ class RegexError(Error):
     def explicit_content(self) -> str:
         return "RegexError"
 
-    def __init__(self, field: List[str | int], pattern: str, value: str):
+    def __init__(self, field: list[str | int], pattern: str, value: str):
         self.field = field
         self.pattern = pattern
         self.value = value
@@ -164,7 +203,7 @@ class RegexError(Error):
             self.value
         )
 
-    def as_dict(self) -> dict:
+    def as_dict(self) -> dict[str, any]:
         return dict(
             explicit_content=self.explicit_content,
             field=self.field,
@@ -178,7 +217,7 @@ class EmptyStringError(Error):
     def explicit_content(self) -> str:
         return "EmptyStringError"
 
-    def __init__(self, field: List[str | int]):
+    def __init__(self, field: list[str | int]):
         self.field = field
 
     def __str__(self) -> str:
@@ -187,7 +226,7 @@ class EmptyStringError(Error):
             '.'.join(map(str, self.field))
         )
 
-    def as_dict(self) -> dict:
+    def as_dict(self) -> dict[str, any]:
         return dict(
             explicit_content=self.explicit_content,
             field=self.field
@@ -199,7 +238,7 @@ class MinLenghtError(Error):
     def explicit_content(self) -> str:
         return "MinLenghtError"
 
-    def __init__(self, field: List[str | int], received: int, expected: int):
+    def __init__(self, field: list[str | int], received: int, expected: int):
         self.field = field
         self.received = received
         self.expected = expected
@@ -212,7 +251,7 @@ class MinLenghtError(Error):
             self.expected
         )
 
-    def as_dict(self) -> dict:
+    def as_dict(self) -> dict[str, any]:
         return dict(
             explicit_content=self.explicit_content,
             field=self.field,
@@ -226,7 +265,7 @@ class MaxLenghtError(Error):
     def explicit_content(self) -> str:
         return "MaxLenghtError"
 
-    def __init__(self, field: List[str | int], received: int, expected: int):
+    def __init__(self, field: list[str | int], received: int, expected: int):
         self.field = field
         self.received = received
         self.expected = expected
@@ -239,7 +278,7 @@ class MaxLenghtError(Error):
             self.expected
         )
 
-    def as_dict(self) -> dict:
+    def as_dict(self) -> dict[str, any]:
         return dict(
             explicit_content=self.explicit_content,
             field=self.field,
