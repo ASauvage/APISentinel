@@ -6,7 +6,7 @@ class Error:
         return "UnknownError"
 
     def __str__(self) -> str:
-        return "{}: Unexpected error occured".format(
+        return "{}: unexpected error occured".format(
             self.explicit_content
         )
 
@@ -25,7 +25,7 @@ class HttpCodeError(Error):
         self.status_code = status_code
 
     def __str__(self) -> str:
-        return "{}: Request return an error code {}".format(
+        return "{}: request return an error code {}".format(
             self.explicit_content,
             self.status_code
         )
@@ -34,6 +34,25 @@ class HttpCodeError(Error):
         return dict(
             explicit_content=self.explicit_content,
             status_code=self.status_code
+        )
+
+
+class NotJsonError(Error):
+    @property
+    def explicit_content(self) -> str:
+        return "NotJsonError"
+
+    def __init__(self):
+        pass
+
+    def __str__(self) -> str:
+        return "{}: response did not return content in JSON format".format(
+            self.explicit_content
+        )
+
+    def as_dict(self) -> dict[str, any]:
+        return dict(
+            explicit_content=self.explicit_content
         )
 
 
