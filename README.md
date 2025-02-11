@@ -3,7 +3,7 @@
 This project uses Python to test your API with predefined mappings.
 
 > [!WARNING] 
-> Currently, ApiTester only supports JSON format and will return a NotJSONError error if this is not the case
+> Currently, ApiTester only supports JSON format and will return a `NotJsonError` error if this is not the case
 
 ## Requirements
 
