@@ -53,7 +53,8 @@ class GlobalTester:
                 test_info=dict(
                     session_id=self.session_id,
                     title=f"Test on /{specifications['api'] + extended_path}",
-                    tags=['apitester', self.service.name]
+                    tags=['apitester', self.service.name],
+                    version="1.5.0"
                 ),
                 service=self.service.name,
                 env=self.env,
