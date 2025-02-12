@@ -47,7 +47,6 @@ class TestGlobalTester(unittest.TestCase):
         assert tester.tests[0]['test_info']['title'] == 'Test on /test_api/extra'
         assert tester.tests[0]['service'] == 'TestService'
         assert tester.tests[0]['env'] == 'production'
-        print(tester.tests[0]['headers'])
         assert tester.tests[0]['headers'] == {'User-Agent': 'test-mapping', 'referer': 'test-mapping', 'key': 'value'}
         assert tester.tests[0]['params'] == {}
         assert tester.tests[0]['status']
@@ -70,7 +69,6 @@ class TestGlobalTester(unittest.TestCase):
         assert tester.tests[0]['test_info']['title'] == 'Test on /test_api/extra'
         assert tester.tests[0]['service'] == 'TestService'
         assert tester.tests[0]['env'] == 'production'
-        print(tester.tests[0]['headers'])
         assert tester.tests[0]['headers'] == {'User-Agent': 'test-mapping', 'referer': 'test-mapping', 'key': 'value', 'test': 123, 'secret': '****************'}
         assert tester.tests[0]['params'] == {'test': 1}
         assert tester.tests[0]['status']
