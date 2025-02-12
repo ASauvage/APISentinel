@@ -19,10 +19,12 @@ def query_specs_secret(query_specs: dict) -> tuple[dict, dict]:
 
     for spec_name, spec_value in query_specs.items():
         for key, value in spec_value.items():
-            value = str(value)
-            if value.startswith("$secret:"):
-                query_specs[spec_name][key] = value[8:]
-                query_specs_hidden[spec_name][key] = "****************"
+            try:
+                if value.startswith("$secret:"):
+                    query_specs[spec_name][key] = value[8:]
+                    query_specs_hidden[spec_name][key] = "****************"
+            except AttributeError:
+                pass
 
     return query_specs, query_specs_hidden
 
