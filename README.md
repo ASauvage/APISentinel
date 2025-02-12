@@ -180,11 +180,13 @@ extended_path:      # extend path for your API's url
     - '/bulbasaur'
 query_specs:        # kwargs for request library (get)
     headers:
-        token: 'mon_token'
+        token: '$secret:mon_token'
     params:
         id: 2
 ```
 Each path attribute are optional, even the YAML file itself!
+
+If you have credentials you don't want saved in the database, prefix any headers or parameters value with `$secret:`.
 
 ### Run API Tests
 Import the `shortcut` file and call your child class:
