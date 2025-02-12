@@ -1,20 +1,26 @@
 # API Tester
 
-This project use Python to test your api with predefined mapping.
+This project uses Python to test your API with predefined mappings.
+
+> [!WARNING] 
+> Currently, ApiTester only supports JSON format and will return a `NotJsonError` error if this is not the case
 
 ## Requirements
+
 - Python 3.9 or higher
-- MongoDB server (url customisable in `utils/mongodb.py`)
+- MongoDB server (URL customizable in `utils/mongodb.py`)
 
-## How to set up
-### Create your mapping
+## Setup
 
-First you have to create a JSON file named the same as your api service:
->exemple: if your request URL is `{url}/pokemon/`, then you have to named your file `pokemon.json`
+### Create Your Mapping
 
-You have to put your mappings in `data/mapping/your_service_folder/`.
-Once the JSON file created, you have to define your API response in it.
-All following JSON object are suported by the tester:
+First, you need to create a JSON file named after your API service:
+
+> Example: If your request URL is `{url}/pokemon/`, then you must name your file `pokemon.json`.
+
+Your mappings should be placed in `data/mapping/your_service_folder/`.
+Once the JSON file is created, you must define your API response in it.
+The tester supports the following JSON object types:
 
 - `Number`
 - `String`
@@ -23,8 +29,8 @@ All following JSON object are suported by the tester:
 - `Array`
 - `Null`
 
-#### Number type
-To define a field of type `Number`: 
+#### Number Type
+To define a field of type `Number`:
 
 ```json
 {
@@ -34,17 +40,16 @@ To define a field of type `Number`:
 }
 ```
 
-These properties are avalaible for `Number` field: 
+Available properties for `Number` fields:
 
-- `_type` a String that define the type of field (here `Number`). Return `WrongTypeValue` if the type doesn't match
-- `_$ref` (optional) A String containing the name of a generic object (see Generics)
-- `_format` (optional) a String that define the type format of field (can be `int`, `float` or `double`)
-- `_optional` (optional) a Boolean that define if the field is optional. Return an error of type `MissingFIeldError` if set to `false` and the field is missing
-- `_nullable` (optional) a Boolean that define if the field can be `null`. Return an `WrongValueError` if set to `false` and the field is `null`
+- `_type`: A string defining the field type (`Number`). Returns `WrongTypeValue` if the type does not match.
+- `_$ref` (optional): A string containing the name of a generic object (see Generics).
+- `_format` (optional): A string defining the field format (`int`, `float`, or `double`).
+- `_optional` (optional): A boolean defining whether the field is optional. Returns a `MissingFieldError` if set to `false` and the field is missing.
+- `_nullable` (optional): A boolean defining whether the field can be `null`. Returns a `WrongValueError` if set to `false` and the field is `null`.
 
-
-#### String type
-To define a field of type `String`: 
+#### String Type
+To define a field of type `String`:
 
 ```json
 {
@@ -54,20 +59,19 @@ To define a field of type `String`:
 }
 ```
 
-These properties are avalaible for `String` field: 
+Available properties for `String` fields:
 
-- `_type` a String that define the type of field (here `String`). Return `WrongTypeValue` if the type doesn't match
-- `_$ref` (optional) A String containing the name of a generic object (see Generics)
-- `_format` (optional) a String that define the type format of field (can be `datetime`, `date` or `time`)
-- `_enums` (optional) an Array containing all enumerations available of this field. Return an `WrongEnumsError` if value isn't in this Array
-- `_regex` (optional) A String containing a regular expression pattern. Return `RegexError` if the pattern doesn't match
-- `_allow_empty` (optional) a Boolean that define if the string can be empty. Return `EmptyStringError` if set to `false` and the field is empty
-- `_optional` (optional) a Boolean that define if the field is optional. Return an error of type `MissingFIeldError` if set to `false` and the field is missing
-- `_nullable` (optional) a Boolean that define if the field can be `null`. Return an `WrongValueError` if set to `false` and the field is `null`
+- `_type`: A string defining the field type (`String`). Returns `WrongTypeValue` if the type does not match.
+- `_$ref` (optional): A string containing the name of a generic object (see Generics).
+- `_format` (optional): A string defining the format (`datetime`, `date`, or `time`).
+- `_enums` (optional): An array of valid enumerations. Returns a `WrongEnumsError` if the value is not in this array.
+- `_regex` (optional): A string containing a regex pattern. Returns `RegexError` if the pattern does not match.
+- `_allow_empty` (optional): A boolean defining whether the string can be empty. Returns `EmptyStringError` if set to `false` and the field is empty.
+- `_optional` (optional): A boolean defining whether the field is optional. Returns `MissingFieldError` if set to `false` and the field is missing.
+- `_nullable` (optional): A boolean defining whether the field can be `null`. Returns `WrongValueError` if set to `false` and the field is `null`.
 
-
-#### Boolean type
-To define a field of type `Boolean`: 
+#### Boolean Type
+To define a field of type `Boolean`:
 
 ```json
 {
@@ -77,16 +81,15 @@ To define a field of type `Boolean`:
 }
 ```
 
-These properties are avalaible for `Boolean` field: 
+Available properties for `Boolean` fields:
 
-- `_type` a String that define the type of field (here `Boolean`). Return `WrongTypeValue` if the type doesn't match
-- `_$ref` (optional) A String containing the name of a generic object (see Generics)
-- `_optional` (optional) a Boolean that define if the field is optional. Return an error of type `MissingFIeldError` if set to `false` and the field is missing
-- `_nullable` (optional) a Boolean that define if the field can be `null`. Return an `WrongValueError` if set to `false` and the field is `null`
+- `_type`: A string defining the field type (`Boolean`). Returns `WrongTypeValue` if the type does not match.
+- `_$ref` (optional): A string containing the name of a generic object (see Generics).
+- `_optional` (optional): A boolean defining whether the field is optional. Returns `MissingFieldError` if set to `false` and the field is missing.
+- `_nullable` (optional): A boolean defining whether the field can be `null`. Returns `WrongValueError` if set to `false` and the field is `null`.
 
-
-#### Object type
-To define a field of type `Object`: 
+#### Object Type
+To define a field of type `Object`:
 
 ```json
 {
@@ -101,17 +104,16 @@ To define a field of type `Object`:
 }
 ```
 
-These properties are avalaible for `Object` field:
+Available properties for `Object` fields:
 
-- `_type` a String that define the type of field (here `Object`). Return `WrongTypeValue` if the type doesn't match
-- `_$ref` (optional) A String containing the name of a generic object (see Generics)
-- `_properties` an Object containing all properties of this Object. All this field will be tested and matching error will be returned
-- `_optional` (optional) a Boolean that define if the field is optional. Return an error of type `MissingFIeldError` if set to `false` and the field is missing
-- `_nullable` (optional) a Boolean that define if the field can be `null`. Return an `WrongValueError` if set to `false` and the field is `null`
+- `_type`: A string defining the field type (`Object`). Returns `WrongTypeValue` if the type does not match.
+- `_$ref` (optional): A string containing the name of a generic object (see Generics).
+- `_properties`: An object containing all properties of this object.
+- `_optional` (optional): A boolean defining whether the field is optional.
+- `_nullable` (optional): A boolean defining whether the field can be `null`.
 
-
-#### Array type
-To define a field of type `Array`: 
+#### Array Type
+To define a field of type `Array`:
 
 ```json
 {
@@ -126,104 +128,96 @@ To define a field of type `Array`:
 }
 ```
 
-These properties are avalaible for `Array` field:
+Available properties for `Array` fields:
 
-- `_type` a String that define the type of field (here `Array`). Return `WrongTypeValue` if the type doesn't match
-- `_$ref` (optional) A String containing the name of a generic object (see Generics)
-- `_values` an Array containing all possible values of this Array. All this value will be tested and matching error will be returned
-- `_minlen` (optional) an Integer that define minimal lenght of this Array 
-- `_maxlen` (optional) an Integer that define maximal lenght of this Array
-- `_optional` (optional) a Boolean that define if the field is optional. Return an error of type `MissingFIeldError` if set to `false` and the field is missing
-- `_nullable` (optional) a Boolean that define if the field can be `null`. Return an `WrongValueError` if set to `false` and the field is `null`
+- `_type`: A string defining the field type (`Array`).
+- `_$ref` (optional): A string containing the name of a generic object (see Generics).
+- `_values`: An array containing all possible values.
+- `_minlen` (optional): An integer defining the minimum length.
+- `_maxlen` (optional): An integer defining the maximum length.
+- `_optional` (optional): A boolean defining whether the field is optional.
+- `_nullable` (optional): A boolean defining whether the field can be `null`.
 
----------
+### Create Your Service Configuration
 
-You have to start with unamed field in your json file
-```json
-{
-    "_type": "Array",
-    "_values": [
-        {
-            "_type": "Object",
-            "_properties": {}
-        }
-    ]
-}
-```
-
-#### Generics
-
-You can create generic object by adding mapping file in the `generics` folder inside your service's folder.
-With this you will be able to call `"_$ref"` inside your field specifications.
-```json
-{
-    "_type": "Object",
-    "_properties": {
-        "reference": {
-            "_optional": true,
-            "_$ref": "reference_object"
-        }
-    }
-}
-```
-
-### Create your service configuration
-In the python file `data/service_config.py`, you can add your service config in the `SERVICE` variable.
+In `data/service_config.py`, add your service configuration in the `SERVICE` variable:
 
 ```python
 SERVICE = {
     "pokeapi": {
-            "path": "/pokeapi/",                            # path to your folder (from `data/mapping`)
-            "url": {                                        # server urls of your api
-                "localhost": None,
-                "snapshot": None,
-                "recette": None,
-                "production": "https://pokeapi.co/api/v2/",
-            },
-            "headers": {},                                  # (optional) headers used when your api are requested (can be setup in yaml too)
-            "options": {                                    # (optional) options used during tests
-                "request_delay": 100                        # (optional) delay between requests in milliseconds
-            },
-            "uri": "{url}/{api}/",                          # uri build ('{api}' in uri is the api name)
+        "path": "/pokeapi/",  # Path to your folder (from `data/mapping`)
+        "url": {  # API server URLs
+            "localhost": None,
+            "snapshot": None,
+            "recette": None,
+            "production": "https://pokeapi.co/api/v2/",
+        },
+        "headers": {},  # (Optional) Headers used when requesting your API
+        "options": {  # (Optional) Options used during tests
+            "request_delay": 100  # (Optional) Delay between requests in milliseconds
+        },
+        "uri": "{url}/{api}/",  # URI structure ('{api}' represents the API name)
     }
 }
 ```
 
 You can then create a new child class in the `shortcut.py` file
 ```python
-from models.global_tester import import GlobalTester
-
+from models.global_tester import GlobalTester
 class PokeAPIGlobalTester(GlobalTester):
-    def __init__(self, env):
+    def __init__(self, env, **kwargs):
         super().__init__(env, "pokeapi", **kwargs)
 ```
 
 #### Create endpoint's specifications
 You can create a YAML file with the same name and location of your mapping file to use some specification with tests.
 ```yaml
-extended_path:  # extend path for your API's url
+save_response: yes  # save API's response in tests results
+valid_http_code:    # define which http code must not return an error (only code 200 will not return an error by default)
+    - 200
+extended_path:      # extend path for your API's url
     - '/charizard'
     - '/bulbasaur'
-
-query_specs:  # kwargs for request library (get)
+query_specs:        # kwargs for request library (get)
     headers:
-        token: 'mon_token'
+        token: '$secret:mon_token'
+    params:
+        id: 2
 ```
-
 Each path attribute are optional, even the YAML file itself!
 
-## How to test your API
-import the `shortcut` file and call your child class:
+If you have credentials you don't want saved in the database, prefix any headers or parameters value with `$secret:`.
+
+### Run API Tests
+Import the `shortcut` file and call your child class:
 
 ```python
 from shortcut import PokeAPIGlobalTester
 
-
 PokeAPIGlobalTester('production', headers={'specHeader': '1234'})
 ```
 
-> You can specify headers child class arguments.
+This will generate a session ID to find your test results in MongoDB.
 
-your will get a session ID to find your tests results in mongoDB.
+Your test results are stored as documents in the following format:
 
-**You can use [ApiTester Dashboard](https://github.com/ASauvage/ApiTester_Dashboard) to analyze the results.** 
+```json
+{
+  "_id": { "$oid": "67aa13defaa83cf8308484e2" },
+  "test_info": {
+    "session_id": "250210-155733-842a194b",
+    "title": "Test on /item/master-ball",
+    "tags": ["apitester", "pokeapi"]
+  },
+  "service": "pokeapi",
+  "env": "production",
+  "url": "https://pokeapi.co/api/v2/item/master-ball",
+  "status": true,
+  "errors": [],
+  "api_response": null,
+  "timestamp": 1739199453
+}
+```
+
+**You can use [ApiTester Dashboard](https://github.com/ASauvage/ApiTester_Dashboard) to analyze the results.**
+

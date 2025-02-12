@@ -5,9 +5,24 @@ from models.errors import *
 class TestErrors(unittest.TestCase):
     def test_error(self):
         error = Error()
-        assert error.__str__() == "UnknownError: Unexpected error occured"
+        assert error.__str__() == "UnknownError: unexpected error occured"
         assert error.as_dict() == dict(
             explicit_content='UnknownError'
+        )
+
+    def test_http_code_error(self):
+        error = HttpCodeError(503)
+        assert error.__str__() == "HttpCodeError: request return an error code 503"
+        assert error.as_dict() == dict(
+            explicit_content="HttpCodeError",
+            status_code=503
+        )
+
+    def test_not_json_error(self):
+        error = NotJsonError()
+        assert error.__str__() == "NotJsonError: response did not return content in JSON format"
+        assert error.as_dict() == dict(
+            explicit_content="NotJsonError"
         )
 
     def test_missing_field_error(self):

@@ -8,7 +8,7 @@ class TestService(unittest.TestCase):
         assert service.name == 'pokeapi'
         assert service.path == '/pokeapi/'
         assert service.options == dict(request_delay=100)
-        assert service.url('production', 'test') == "https://pokeapi.co/api/v2/test"
+        assert service.url('production', 'test', '/extra_path', param1=2, param2=1) == "https://pokeapi.co/api/v2/test/extra_path/?param1=2&param2=1"
         assert service.headers == dict()
 
         assert service.service == dict(

@@ -1,3 +1,5 @@
+valid_http_code:
+    - 200
 extended_paths:
     - '/master-ball'
     - '/potion'

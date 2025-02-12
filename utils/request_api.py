@@ -1,4 +1,4 @@
-from requests import get
+from requests import get, Response
 
 HEADERS = {
     "User-Agent": "test-mapping",
@@ -6,12 +6,9 @@ HEADERS = {
 }
 
 
-def api_get_json(*args, **kwargs):
+def api_get_json(*args, **kwargs) -> Response:
     if "headers" not in kwargs:
         kwargs["headers"] = {}
     kwargs["headers"].update(HEADERS)
 
-    try:
-        return get(*args, **kwargs).json()
-    except Exception as e:
-        raise e
+    return get(*args, **kwargs)
