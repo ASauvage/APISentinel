@@ -2,10 +2,10 @@ import os
 import yaml
 from time import sleep
 from datetime import datetime
-from utils.commons import generate_session_id
 from utils.mongodb import MongoCon
 from models.tester import apitester
 from models.service import Service
+from utils.commons import generate_session_id, query_specs_secret
 
 
 class GlobalTester:
@@ -46,6 +46,8 @@ class GlobalTester:
         print("\nYour session ID: " + self.session_id)
 
     def test_executer(self, **specifications):
+        specifications['query_specs'], query_specs_hidden = query_specs_secret(specifications['query_specs'])
+
         for extended_path in specifications['extended_paths']:
             response, errors = apitester(self.env, self.service, extended_path, **specifications)
 
@@ -59,8 +61,8 @@ class GlobalTester:
                 service=self.service.name,
                 env=self.env,
                 url=self.service.url(self.env, specifications['api'], extended_path, **specifications['query_specs']['params'] if 'params' in specifications['query_specs'].keys() else {}),
-                headers={"User-Agent": "test-mapping", "referer": 'test-mapping', **specifications['query_specs']['headers']},
-                params=specifications['query_specs']['params'] if 'params' in specifications['query_specs'].keys() else {},
+                headers={"User-Agent": "test-mapping", "referer": 'test-mapping', **query_specs_hidden['headers']},
+                params=query_specs_hidden['params'] if 'params' in query_specs_hidden.keys() else {},
 
                 status=False if errors else True,
                 errors=[error.__str__() for error in errors],
