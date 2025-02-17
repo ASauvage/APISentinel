@@ -5,9 +5,9 @@ from models.errors import *
 class TestErrors(unittest.TestCase):
     def test_error(self):
         error = Error()
-        assert error.__str__() == "UnknownError: unexpected error occured"
+        assert error.__str__() == "Error: unexpected error occured"
         assert error.as_dict() == dict(
-            explicit_content='UnknownError'
+            explicit_content='Error'
         )
 
     def test_http_code_error(self):

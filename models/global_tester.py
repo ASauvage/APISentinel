@@ -2,22 +2,22 @@ import os
 import yaml
 from time import sleep
 from datetime import datetime
-from utils.mongodb import MongoCon
+
 from models.tester import apitester
 from models.service import Service
+from utils.mongodb import MongoCon
 from utils.commons import generate_session_id, query_specs_secret
 
 
 class GlobalTester:
     def __init__(self, env: str, service: str, headers: dict = None):
+        if not headers:
+            headers = dict()
+
         self.session_id = generate_session_id()
         self.env = env
         self.service = Service(service)
-
         self.tests = list()
-
-        if not headers:
-            headers = {}
 
         print(f"Service: {self.service.name}\nEnv: {self.env}")
         print("Your session ID: " + self.session_id)

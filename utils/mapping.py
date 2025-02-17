@@ -1,10 +1,10 @@
 import json
 import re
 from operator import attrgetter
+from datetime import datetime, date, time
 
 from models.errors import *
 from utils.commons import get_value, get_mapping_ref
-from datetime import datetime, date, time
 
 TYPE = {
     'Object': [dict],
