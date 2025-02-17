@@ -65,9 +65,9 @@ class TestErrors(unittest.TestCase):
 
     def test_wrong_datetime_format_error(self):
         error = WrongDatetimeFormatError(['field', 0, 'subfield'], 'not a datetime', 'date')
-        assert error.__str__() == "WrongFormatError: 'field.0.subfield' does not follow the 'date' format, got 'not a datetime'"
+        assert error.__str__() == "WrongDatetimeFormatError: 'field.0.subfield' does not follow the 'date' format, got 'not a datetime'"
         assert error.as_dict() == dict(
-            explicit_content="WrongFormatError",
+            explicit_content="WrongDatetimeFormatError",
             field=['field', 0, 'subfield'],
             format='date',
             received='not a datetime'
