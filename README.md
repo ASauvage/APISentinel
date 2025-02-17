@@ -2,9 +2,6 @@
 
 This project uses Python to test your API with predefined mappings.
 
-> [!WARNING] 
-> Currently, ApiTester only supports JSON format and will return a `NotJsonError` error if this is not the case
-
 ## Requirements
 
 - Python 3.9 or higher
@@ -30,7 +27,6 @@ The tester supports the following JSON object types:
 - `Null`
 
 #### Number Type
-
 To define a field of type `Number`:
 
 ```json
@@ -50,7 +46,6 @@ Available properties for `Number` fields:
 - `_nullable` (optional): A boolean defining whether the field can be `null`. Returns a `WrongValueError` if set to `false` and the field is `null`.
 
 #### String Type
-
 To define a field of type `String`:
 
 ```json
@@ -73,7 +68,6 @@ Available properties for `String` fields:
 - `_nullable` (optional): A boolean defining whether the field can be `null`. Returns `WrongValueError` if set to `false` and the field is `null`.
 
 #### Boolean Type
-
 To define a field of type `Boolean`:
 
 ```json
@@ -92,7 +86,6 @@ Available properties for `Boolean` fields:
 - `_nullable` (optional): A boolean defining whether the field can be `null`. Returns `WrongValueError` if set to `false` and the field is `null`.
 
 #### Object Type
-
 To define a field of type `Object`:
 
 ```json
@@ -117,7 +110,6 @@ Available properties for `Object` fields:
 - `_nullable` (optional): A boolean defining whether the field can be `null`.
 
 #### Array Type
-
 To define a field of type `Array`:
 
 ```json
@@ -135,13 +127,34 @@ To define a field of type `Array`:
 
 Available properties for `Array` fields:
 
-- `_type`: A string defining the field type (`Array`).
+- `_type`: A string defining the field type (`Array`). Returns `WrongTypeValue` if the type does not match.
 - `_$ref` (optional): A string containing the name of a generic object (see Generics).
-- `_values`: An array containing all possible values.
-- `_minlen` (optional): An integer defining the minimum length.
-- `_maxlen` (optional): An integer defining the maximum length.
+- `_values`: An array defining the expected structure of elements in the array.
+- `_minlen` (optional): An integer defining the minimum length of the array.
+- `_maxlen` (optional): An integer defining the maximum length of the array.
 - `_optional` (optional): A boolean defining whether the field is optional.
 - `_nullable` (optional): A boolean defining whether the field can be `null`.
+
+### Using Generics and `_$ref`
+
+You can create generic objects by adding mapping files in the `generics` folder inside your service's folder.
+This allows you to reference predefined structures in your field specifications.
+
+Example:
+
+```json
+{
+    "_type": "Object",
+    "_properties": {
+        "reference": {
+            "_optional": true,
+            "_$ref": "reference_object"
+        }
+    }
+}
+```
+
+This means that the `reference` field will use the structure defined in `reference_object.json` within the `generics` folder.
 
 ### Create Your Service Configuration
 
@@ -166,37 +179,7 @@ SERVICE = {
 }
 ```
 
-You can then create a new child class in the `shortcut.py` file
-```python
-from models.global_tester import GlobalTester
-
-class PokeAPIGlobalTester(GlobalTester):
-    def __init__(self, env, **kwargs):
-        super().__init__(env, "pokeapi", **kwargs)
-```
-
-#### Create endpoint's specifications
-
-You can create a YAML file with the same name and location of your mapping file to use some specification with tests.
-```yaml
-save_response: yes  # save API's response in tests results
-valid_http_code:    # define which http code must not return an error (only code 200 will not return an error by default)
-    - 200
-extended_path:      # extend path for your API's url
-    - '/charizard'
-    - '/bulbasaur'
-query_specs:        # kwargs for request library (get)
-    headers:
-        token: '$secret:mon_token'
-    params:
-        id: 2
-```
-Each path attribute are optional, even the YAML file itself!
-
-If you have credentials you don't want saved in the database, prefix any headers or parameters value with `$secret:`.
-
 ### Run API Tests
-
 Import the `shortcut` file and call your child class:
 
 ```python
@@ -206,26 +189,6 @@ PokeAPIGlobalTester('production', headers={'specHeader': '1234'})
 ```
 
 This will generate a session ID to find your test results in MongoDB.
-
-Your test results are stored as documents in the following format:
-
-```json
-{
-  "_id": { "$oid": "67aa13defaa83cf8308484e2" },
-  "test_info": {
-    "session_id": "250210-155733-842a194b",
-    "title": "Test on /item/master-ball",
-    "tags": ["apitester", "pokeapi"]
-  },
-  "service": "pokeapi",
-  "env": "production",
-  "url": "https://pokeapi.co/api/v2/item/master-ball",
-  "status": true,
-  "errors": [],
-  "api_response": null,
-  "timestamp": 1739199453
-}
-```
 
 **You can use [ApiTester Dashboard](https://github.com/ASauvage/ApiTester_Dashboard) to analyze the results.**
 
