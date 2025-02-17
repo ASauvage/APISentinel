@@ -1,4 +1,4 @@
-# API Tester
+# APITester
 
 This project uses Python to test your API with predefined mappings.
 
@@ -30,6 +30,7 @@ The tester supports the following JSON object types:
 - `Null`
 
 #### Number Type
+
 To define a field of type `Number`:
 
 ```json
@@ -49,6 +50,7 @@ Available properties for `Number` fields:
 - `_nullable` (optional): A boolean defining whether the field can be `null`. Returns a `WrongValueError` if set to `false` and the field is `null`.
 
 #### String Type
+
 To define a field of type `String`:
 
 ```json
@@ -71,6 +73,7 @@ Available properties for `String` fields:
 - `_nullable` (optional): A boolean defining whether the field can be `null`. Returns `WrongValueError` if set to `false` and the field is `null`.
 
 #### Boolean Type
+
 To define a field of type `Boolean`:
 
 ```json
@@ -89,6 +92,7 @@ Available properties for `Boolean` fields:
 - `_nullable` (optional): A boolean defining whether the field can be `null`. Returns `WrongValueError` if set to `false` and the field is `null`.
 
 #### Object Type
+
 To define a field of type `Object`:
 
 ```json
@@ -113,6 +117,7 @@ Available properties for `Object` fields:
 - `_nullable` (optional): A boolean defining whether the field can be `null`.
 
 #### Array Type
+
 To define a field of type `Array`:
 
 ```json
@@ -145,18 +150,18 @@ In `data/service_config.py`, add your service configuration in the `SERVICE` var
 ```python
 SERVICE = {
     "pokeapi": {
-        "path": "/pokeapi/",  # Path to your folder (from `data/mapping`)
-        "url": {  # API server URLs
+        "path": "/pokeapi/",        # Path to your folder (from `data/mapping`)
+        "url": {                    # API server URLs
             "localhost": None,
             "snapshot": None,
             "recette": None,
             "production": "https://pokeapi.co/api/v2/",
         },
-        "headers": {},  # (Optional) Headers used when requesting your API
-        "options": {  # (Optional) Options used during tests
-            "request_delay": 100  # (Optional) Delay between requests in milliseconds
+        "headers": {},              # (Optional) Headers used when requesting your API
+        "options": {                # (Optional) Options used during tests
+            "request_delay": 100    # (Optional) Delay between requests in milliseconds
         },
-        "uri": "{url}/{api}/",  # URI structure ('{api}' represents the API name)
+        "uri": "{url}/{api}/",      # URI structure ('{api}' represents the API name)
     }
 }
 ```
@@ -164,12 +169,14 @@ SERVICE = {
 You can then create a new child class in the `shortcut.py` file
 ```python
 from models.global_tester import GlobalTester
+
 class PokeAPIGlobalTester(GlobalTester):
     def __init__(self, env, **kwargs):
         super().__init__(env, "pokeapi", **kwargs)
 ```
 
 #### Create endpoint's specifications
+
 You can create a YAML file with the same name and location of your mapping file to use some specification with tests.
 ```yaml
 save_response: yes  # save API's response in tests results
@@ -189,6 +196,7 @@ Each path attribute are optional, even the YAML file itself!
 If you have credentials you don't want saved in the database, prefix any headers or parameters value with `$secret:`.
 
 ### Run API Tests
+
 Import the `shortcut` file and call your child class:
 
 ```python
