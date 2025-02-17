@@ -182,7 +182,35 @@ SERVICE = {
 }
 ```
 
+You can then create a new child class in the `shortcut.py` file
+```python
+from models.global_tester import GlobalTester
+class PokeAPIGlobalTester(GlobalTester):
+    def __init__(self, env, **kwargs):
+        super().__init__(env, "pokeapi", **kwargs)
+```
+
+#### Create endpoint's specifications
+You can create a YAML file with the same name and location of your mapping file to use some specification with tests.
+```yaml
+save_response: yes  # save API's response in tests results
+valid_http_code:    # define which http code must not return an error (only code 200 will not return an error by default)
+    - 200
+extended_path:      # extend path for your API's url
+    - '/charizard'
+    - '/bulbasaur'
+query_specs:        # kwargs for request library (get)
+    headers:
+        token: '$secret:mon_token'
+    params:
+        id: 2
+```
+Each path attribute are optional, even the YAML file itself!
+
+If you have credentials you don't want saved in the database, prefix any headers or parameters value with `$secret:`.
+
 ### Run API Tests
+
 Import the `shortcut` file and call your child class:
 
 ```python
