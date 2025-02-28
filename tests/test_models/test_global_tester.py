@@ -24,13 +24,13 @@ class TestGlobalTester(unittest.TestCase):
     def test_test_executer_success(self, mockpatch_apitester, mockpatch_service, mockpatch_listdir, mockpatch_isfile, mockpatch_save_results):
         tester = GlobalTester('production', 'TestService')
         assert len(tester.tests) == 1
-        assert tester.tests[0]['test_info']['title'] == 'Test on /test_api'
-        assert tester.tests[0]['service'] == 'TestService'
-        assert tester.tests[0]['env'] == 'production'
+        assert tester.tests[0]['title'] == 'Test on /test_api'
+        assert tester.tests[0]['test_info']['service'] == 'TestService'
+        assert tester.tests[0]['test_info']['env'] == 'production'
         assert tester.tests[0]['headers'] == {'User-Agent': 'test-mapping', 'referer': 'test-mapping', 'key': 'value'}
         assert tester.tests[0]['params'] == {}
         assert tester.tests[0]['status']
-        assert len(tester.tests[0]['errors']) == 0
+        assert len(tester.tests[0]['errors_list']) == 0
         assert tester.tests[0]['api_response'] is None
         mockpatch_save_results.assert_called_once()
 
@@ -44,13 +44,13 @@ class TestGlobalTester(unittest.TestCase):
         tester = GlobalTester('production', 'TestService')
         print(tester.tests[0])
         assert len(tester.tests) == 2
-        assert tester.tests[0]['test_info']['title'] == 'Test on /test_api/extra'
-        assert tester.tests[0]['service'] == 'TestService'
-        assert tester.tests[0]['env'] == 'production'
+        assert tester.tests[0]['title'] == 'Test on /test_api/extra'
+        assert tester.tests[0]['test_info']['service'] == 'TestService'
+        assert tester.tests[0]['test_info']['env'] == 'production'
         assert tester.tests[0]['headers'] == {'User-Agent': 'test-mapping', 'referer': 'test-mapping', 'key': 'value'}
         assert tester.tests[0]['params'] == {}
         assert tester.tests[0]['status']
-        assert len(tester.tests[0]['errors']) == 0
+        assert len(tester.tests[0]['errors_list']) == 0
         assert tester.tests[0]['api_response'] is None
         mockpatch_save_results.assert_called()
 
@@ -66,13 +66,13 @@ class TestGlobalTester(unittest.TestCase):
         tester = GlobalTester('production', 'TestService')
         print(tester.tests[0])
         assert len(tester.tests) == 1
-        assert tester.tests[0]['test_info']['title'] == 'Test on /test_api/extra'
-        assert tester.tests[0]['service'] == 'TestService'
-        assert tester.tests[0]['env'] == 'production'
+        assert tester.tests[0]['title'] == 'Test on /test_api/extra'
+        assert tester.tests[0]['test_info']['service'] == 'TestService'
+        assert tester.tests[0]['test_info']['env'] == 'production'
         assert tester.tests[0]['headers'] == {'User-Agent': 'test-mapping', 'referer': 'test-mapping', 'key': 'value', 'test': 123, 'secret': '****************'}
         assert tester.tests[0]['params'] == {'test': 1}
         assert tester.tests[0]['status']
-        assert len(tester.tests[0]['errors']) == 0
+        assert len(tester.tests[0]['errors_list']) == 0
         assert tester.tests[0]['api_response'] is None
         mockpatch_save_results.assert_called_once()
 
@@ -85,15 +85,16 @@ class TestGlobalTester(unittest.TestCase):
     def test_test_executer_failure(self, mockpatch_apitester, mockpatch_service, mockpatch_listdir, mockpatch_isfile, mockpatch_save_results):
         tester = GlobalTester('production', 'TestService')
         assert len(tester.tests) == 1
-        assert tester.tests[0]['test_info']['title'] == 'Test on /test_api/extra'
-        assert tester.tests[0]['service'] == 'TestService'
-        assert tester.tests[0]['env'] == 'production'
+        assert tester.tests[0]['title'] == 'Test on /test_api/extra'
+        assert tester.tests[0]['test_info']['service'] == 'TestService'
+        assert tester.tests[0]['test_info']['env'] == 'production'
         assert tester.tests[0]['headers'] == {'User-Agent': 'test-mapping', 'referer': 'test-mapping', 'key': 'value'}
         assert tester.tests[0]['params'] == {}
         assert not tester.tests[0]['status']
-        assert len(tester.tests[0]['errors']) == 1
+        assert len(tester.tests[0]['errors_list']) == 1
         assert tester.tests[0]['api_response'] is None
         mockpatch_save_results.assert_called_once()
+
 
 if __name__ == '__main__':
     unittest.main()

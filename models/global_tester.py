@@ -52,20 +52,20 @@ class GlobalTester:
             response, errors = apitester(self.env, self.service, extended_path, **specifications)
 
             self.tests.append(dict(
+                title=f"Test on /{specifications['api'] + extended_path}",
                 test_info=dict(
                     session_id=self.session_id,
-                    title=f"Test on /{specifications['api'] + extended_path}",
+                    service=self.service.name,
+                    env=self.env,
                     tags=['apitester', self.service.name],
-                    version="1.5.0"
+                    version="1.5.1"
                 ),
-                service=self.service.name,
-                env=self.env,
                 url=self.service.url(self.env, specifications['api'], extended_path, **specifications['query_specs']['params'] if 'params' in specifications['query_specs'].keys() else {}),
                 headers={"User-Agent": "test-mapping", "referer": 'test-mapping', **query_specs_hidden['headers']},
                 params=query_specs_hidden['params'] if 'params' in query_specs_hidden.keys() else {},
 
                 status=False if errors else True,
-                errors=[error.__str__() for error in errors],
+                errors_list=[error.__str__() for error in errors],
                 api_response=response,
 
                 timestamp=int(datetime.now().timestamp())

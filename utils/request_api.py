@@ -1,8 +1,9 @@
 from requests import get, Response
 
 HEADERS = {
+    "Content-Type": "application/json",
     "User-Agent": "test-mapping",
-    "referer": 'test-mapping'
+    "referer": "test-mapping"
 }
 
 
