@@ -1,4 +1,4 @@
-# APISentinel
+![APISentinel](APISentinel.png)
 
 This project uses Python to test your API with predefined mappings.
 
