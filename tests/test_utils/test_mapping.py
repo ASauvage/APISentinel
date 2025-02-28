@@ -78,9 +78,9 @@ class TestMapping(unittest.TestCase):
         errors = is_mapping_ok(alt_data, 'tests/test_utils/test_mapping.json')
         assert len(errors) == 1
         assert isinstance(errors[0], WrongDatetimeFormatError)
-        assert errors[0].as_dict() == dict(explicit_content="WrongFormatError", field=[0, 'metadata', 'datetime'],
+        assert errors[0].as_dict() == dict(explicit_content="WrongDatetimeFormatError", field=[0, 'metadata', 'datetime'],
                                            format='datetime', received='not a datetime')
-        assert errors[0].__str__() == "WrongFormatError: '0.metadata.datetime' does not follow the 'datetime' format, got 'not a datetime'"
+        assert errors[0].__str__() == "WrongDatetimeFormatError: '0.metadata.datetime' does not follow the 'datetime' format, got 'not a datetime'"
 
     def test_is_mapping_ok_regex_error(self):
         alt_data = deepcopy(DATA)

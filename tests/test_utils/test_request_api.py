@@ -24,7 +24,7 @@ class TestRequestApi(unittest.TestCase):
         response = api_get_json('http://127.0.0.1/api')
         assert response.json() == dict(
             args=('http://127.0.0.1/api',),
-            kwargs={'headers': {'User-Agent': 'test-mapping', 'referer': 'test-mapping'}}
+            kwargs={'headers': {'Content-Type': 'application/json', 'User-Agent': 'test-mapping', 'referer': 'test-mapping'}}
         )
 
     @patch('utils.request_api.get', side_effect=mocked_get)
@@ -32,7 +32,7 @@ class TestRequestApi(unittest.TestCase):
         response = api_get_json('http://127.0.0.1/api', headers=dict(useragent='test', contenttype="*/*"))
         assert response.json() == dict(
             args=('http://127.0.0.1/api',),
-            kwargs={'headers': {'useragent': 'test', 'contenttype': '*/*', 'User-Agent': 'test-mapping', 'referer': 'test-mapping'}}
+            kwargs={'headers': {'useragent': 'test', 'contenttype': '*/*', 'Content-Type': 'application/json', 'User-Agent': 'test-mapping', 'referer': 'test-mapping'}}
         )
 
 

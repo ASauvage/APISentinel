@@ -3,7 +3,7 @@
 class Error:
     @property
     def explicit_content(self) -> str:
-        return "UnknownError"
+        return self.__class__.__name__
 
     def __str__(self) -> str:
         return "{}: unexpected error occured".format(
@@ -17,10 +17,6 @@ class Error:
 
 
 class HttpCodeError(Error):
-    @property
-    def explicit_content(self) -> str:
-        return "HttpCodeError"
-
     def __init__(self, status_code: int):
         self.status_code = status_code
 
@@ -38,10 +34,6 @@ class HttpCodeError(Error):
 
 
 class NotJsonError(Error):
-    @property
-    def explicit_content(self) -> str:
-        return "NotJsonError"
-
     def __init__(self):
         pass
 
@@ -57,10 +49,6 @@ class NotJsonError(Error):
 
 
 class MissingFieldError(Error):
-    @property
-    def explicit_content(self) -> str:
-        return "MissingFieldError"
-
     def __init__(self, field: list[str | int]):
         self.field = field
 
@@ -78,10 +66,6 @@ class MissingFieldError(Error):
 
 
 class WrongTypeError(Error):
-    @property
-    def explicit_content(self) -> str:
-        return "WrongTypeError"
-
     def __init__(self, field: list[str | int], received: type, expected: list[type]):
         self.field = field
         self.received = received
@@ -105,10 +89,6 @@ class WrongTypeError(Error):
 
 
 class WrongValueError(Error):
-    @property
-    def explicit_content(self) -> str:
-        return "WrongValueError"
-
     def __init__(self, field: list[str | int], received: any, expected: list[any]):
         self.field = field
         self.received = received
@@ -132,10 +112,6 @@ class WrongValueError(Error):
 
 
 class WrongFormatError(Error):
-    @property
-    def explicit_content(self) -> str:
-        return "WrongFormatError"
-
     def __init__(self, field: list[str | int], received: type, expected: str):
         self.field = field
         self.received = received
@@ -159,10 +135,6 @@ class WrongFormatError(Error):
 
 
 class WrongDatetimeFormatError(Error):
-    @property
-    def explicit_content(self) -> str:
-        return "WrongFormatError"
-
     def __init__(self, field: list[str | int], received: str, format: str):
         self.field = field
         self.received = received
@@ -186,10 +158,6 @@ class WrongDatetimeFormatError(Error):
 
 
 class RegexError(Error):
-    @property
-    def explicit_content(self) -> str:
-        return "RegexError"
-
     def __init__(self, field: list[str | int], pattern: str, value: str):
         self.field = field
         self.pattern = pattern
@@ -213,10 +181,6 @@ class RegexError(Error):
 
 
 class EmptyStringError(Error):
-    @property
-    def explicit_content(self) -> str:
-        return "EmptyStringError"
-
     def __init__(self, field: list[str | int]):
         self.field = field
 
@@ -234,10 +198,6 @@ class EmptyStringError(Error):
 
 
 class MinLenghtError(Error):
-    @property
-    def explicit_content(self) -> str:
-        return "MinLenghtError"
-
     def __init__(self, field: list[str | int], received: int, expected: int):
         self.field = field
         self.received = received
@@ -261,10 +221,6 @@ class MinLenghtError(Error):
 
 
 class MaxLenghtError(Error):
-    @property
-    def explicit_content(self) -> str:
-        return "MaxLenghtError"
-
     def __init__(self, field: list[str | int], received: int, expected: int):
         self.field = field
         self.received = received

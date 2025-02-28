@@ -5,9 +5,9 @@ from models.errors import *
 class TestErrors(unittest.TestCase):
     def test_error(self):
         error = Error()
-        assert error.__str__() == "UnknownError: unexpected error occured"
+        assert error.__str__() == "Error: unexpected error occured"
         assert error.as_dict() == dict(
-            explicit_content='UnknownError'
+            explicit_content='Error'
         )
 
     def test_http_code_error(self):
@@ -65,9 +65,9 @@ class TestErrors(unittest.TestCase):
 
     def test_wrong_datetime_format_error(self):
         error = WrongDatetimeFormatError(['field', 0, 'subfield'], 'not a datetime', 'date')
-        assert error.__str__() == "WrongFormatError: 'field.0.subfield' does not follow the 'date' format, got 'not a datetime'"
+        assert error.__str__() == "WrongDatetimeFormatError: 'field.0.subfield' does not follow the 'date' format, got 'not a datetime'"
         assert error.as_dict() == dict(
-            explicit_content="WrongFormatError",
+            explicit_content="WrongDatetimeFormatError",
             field=['field', 0, 'subfield'],
             format='date',
             received='not a datetime'
