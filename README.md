@@ -1,9 +1,9 @@
-# APITester
+# APISentinel
 
 This project uses Python to test your API with predefined mappings.
 
 > [!WARNING] 
-> Currently, ApiTester only supports JSON format and will return a `NotJsonError` error if this is not the case
+> Currently, APISentinel only supports JSON format and will return a `NotJsonError` error if this is not the case
 
 ## Requirements
 
@@ -221,5 +221,5 @@ PokeAPIGlobalTester('production', headers={'specHeader': '1234'})
 
 This will generate a session ID to find your test results in MongoDB.
 
-**You can use [ApiTester Dashboard](https://github.com/ASauvage/ApiTester_Dashboard) to analyze the results.**
+**You can use [APISentinel Dashboard](https://github.com/ASauvage/APISentinel_Dashboard) to analyze the results.**
 

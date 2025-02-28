@@ -58,7 +58,7 @@ class GlobalTester:
                     service=self.service.name,
                     env=self.env,
                     tags=['apitester', self.service.name],
-                    version="1.5.1"
+                    version="1.6.0"
                 ),
                 url=self.service.url(self.env, specifications['api'], extended_path, **specifications['query_specs']['params'] if 'params' in specifications['query_specs'].keys() else {}),
                 headers={"User-Agent": "test-mapping", "referer": 'test-mapping', **query_specs_hidden['headers']},
