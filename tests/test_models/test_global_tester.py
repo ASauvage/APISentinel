@@ -42,7 +42,6 @@ class TestGlobalTester(unittest.TestCase):
     @patch('models.global_tester.MongoCon')
     def test_test_executer_success_extended_path(self, mockpatch_apitester, mockpatch_service, mockpatch_listdir, mockpatch_isfile, mockpatch_save_results):
         tester = GlobalTester('production', 'TestService')
-        print(tester.tests[0])
         assert len(tester.tests) == 2
         assert tester.tests[0]['title'] == 'Test on /test_api/extra'
         assert tester.tests[0]['test_info']['service'] == 'TestService'
@@ -64,7 +63,6 @@ class TestGlobalTester(unittest.TestCase):
     @patch('models.global_tester.MongoCon')
     def test_test_executer_query_specs(self, mockpatch_apitester, mockpatch_service, mockpatch_listdir, mockpatch_isfile, mockpatch_save_results):
         tester = GlobalTester('production', 'TestService')
-        print(tester.tests[0])
         assert len(tester.tests) == 1
         assert tester.tests[0]['title'] == 'Test on /test_api/extra'
         assert tester.tests[0]['test_info']['service'] == 'TestService'
