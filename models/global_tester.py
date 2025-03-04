@@ -26,7 +26,11 @@ class GlobalTester:
                 # default specifications
                 query_specs = dict(headers=self.service.headers)
                 extended_paths = ['']
-                yaml_options = dict(save_response=False, valid_http_code=[200])
+                yaml_options = dict(
+                    save_response=False,
+                    save_response_on_error=False,
+                    valid_http_code=[200]
+                )
 
                 if os.path.isfile('{}/data/mapping/{}/{}'.format(os.getcwd(), self.service.path, file[:-4] + 'yaml')):
                     with open('{}/data/mapping/{}/{}'.format(os.getcwd(), self.service.path, file[:-4] + 'yaml'), 'r') as yaml_file:
@@ -36,6 +40,7 @@ class GlobalTester:
                         query_specs['headers'] = (self.service.headers | query_specs['headers']) if 'headers' in query_specs.keys() else self.service.headers
 
                         yaml_options['save_response'] = specs['save_response'] if 'save_response' in specs.keys() else False
+                        yaml_options['save_response_on_error'] = specs['save_response_on_error'] if 'save_response_on_error' in specs.keys() else False
                         yaml_options['valid_http_code'] = specs['valid_http_code'] if 'valid_http_code' in specs.keys() else [200]
                 query_specs['headers'] = query_specs['headers'] | headers
 

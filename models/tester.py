@@ -23,4 +23,7 @@ def apitester(env: str, service: Service, extended_path: str, **specifications) 
     else:
         errors = [HttpCodeError(response.status_code)]
 
+    if errors and specifications['save_response_on_error']:
+        resp_to_save = response.text
+
     return resp_to_save, errors
