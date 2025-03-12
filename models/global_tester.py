@@ -6,7 +6,6 @@ from datetime import datetime
 from .tester import apitester
 from .service import Service
 from .results_manager import results_manager
-from utils.mongodb import MongoCon
 from utils.commons import generate_session_id, query_specs_secret
 
 
