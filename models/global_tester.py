@@ -3,8 +3,9 @@ import yaml
 from time import sleep
 from datetime import datetime
 
-from models.tester import apitester
-from models.service import Service
+from .tester import apitester
+from .service import Service
+from .results_manager import results_manager
 from utils.mongodb import MongoCon
 from utils.commons import generate_session_id, query_specs_secret
 
@@ -46,7 +47,7 @@ class GlobalTester:
 
                 self.test_executer(filename=file, api=file[:-5], query_specs=query_specs, extended_paths=extended_paths, **yaml_options)
 
-        MongoCon().save_results(self.tests)
+        results_manager(self.tests)
 
         print("\nYour session ID: " + self.session_id)
 
