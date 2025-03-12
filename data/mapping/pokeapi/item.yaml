@@ -1,3 +1,4 @@
+save_response_on_error: yes
 valid_http_code:
     - 200
 extended_paths:

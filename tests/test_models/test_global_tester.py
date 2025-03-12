@@ -20,8 +20,8 @@ class TestGlobalTester(unittest.TestCase):
     @patch('models.global_tester.Service', side_effect=MockedService)
     @patch('models.global_tester.os.listdir', return_value=['test_api.json'])
     @patch('models.global_tester.os.path.isfile', return_value=False)
-    @patch('models.global_tester.MongoCon')
-    def test_test_executer_success(self, mockpatch_apitester, mockpatch_service, mockpatch_listdir, mockpatch_isfile, mockpatch_save_results):
+    @patch('models.global_tester.results_manager')
+    def test_test_executer_success(self, mockpatch_apitester, mockpatch_service, mockpatch_listdir, mockpatch_isfile, mockpatch_results_manager):
         tester = GlobalTester('production', 'TestService')
         assert len(tester.tests) == 1
         assert tester.tests[0]['title'] == 'Test on /test_api'
@@ -32,17 +32,16 @@ class TestGlobalTester(unittest.TestCase):
         assert tester.tests[0]['status']
         assert len(tester.tests[0]['errors_list']) == 0
         assert tester.tests[0]['api_response'] is None
-        mockpatch_save_results.assert_called_once()
+        mockpatch_results_manager.assert_called_once()
 
     @patch('models.global_tester.apitester', return_value=(None, list()))
     @patch('models.global_tester.Service', side_effect=MockedService)
     @patch('models.global_tester.os.listdir', return_value=['test_api.json'])
     @patch('models.global_tester.os.path.isfile', return_value=True)
     @patch('models.global_tester.open', new=mock_open(read_data='extended_paths:\n- /extra\n- /extra2'))
-    @patch('models.global_tester.MongoCon')
-    def test_test_executer_success_extended_path(self, mockpatch_apitester, mockpatch_service, mockpatch_listdir, mockpatch_isfile, mockpatch_save_results):
+    @patch('models.global_tester.results_manager')
+    def test_test_executer_success_extended_path(self, mockpatch_apitester, mockpatch_service, mockpatch_listdir, mockpatch_isfile, mockpatch_results_manager):
         tester = GlobalTester('production', 'TestService')
-        print(tester.tests[0])
         assert len(tester.tests) == 2
         assert tester.tests[0]['title'] == 'Test on /test_api/extra'
         assert tester.tests[0]['test_info']['service'] == 'TestService'
@@ -52,7 +51,7 @@ class TestGlobalTester(unittest.TestCase):
         assert tester.tests[0]['status']
         assert len(tester.tests[0]['errors_list']) == 0
         assert tester.tests[0]['api_response'] is None
-        mockpatch_save_results.assert_called()
+        mockpatch_results_manager.assert_called()
 
     @patch('models.global_tester.apitester', return_value=(None, list()))
     @patch('models.global_tester.Service', side_effect=MockedService)
@@ -61,10 +60,9 @@ class TestGlobalTester(unittest.TestCase):
     @patch('models.global_tester.open', new=mock_open(
         read_data='extended_paths:\n- /extra\nquery_specs:\n  headers:\n    test: 123\n    secret: $secret:test\n  params:\n    test: 1\n'
     ))
-    @patch('models.global_tester.MongoCon')
-    def test_test_executer_query_specs(self, mockpatch_apitester, mockpatch_service, mockpatch_listdir, mockpatch_isfile, mockpatch_save_results):
+    @patch('models.global_tester.results_manager')
+    def test_test_executer_query_specs(self, mockpatch_apitester, mockpatch_service, mockpatch_listdir, mockpatch_isfile, mockpatch_results_manager):
         tester = GlobalTester('production', 'TestService')
-        print(tester.tests[0])
         assert len(tester.tests) == 1
         assert tester.tests[0]['title'] == 'Test on /test_api/extra'
         assert tester.tests[0]['test_info']['service'] == 'TestService'
@@ -74,15 +72,15 @@ class TestGlobalTester(unittest.TestCase):
         assert tester.tests[0]['status']
         assert len(tester.tests[0]['errors_list']) == 0
         assert tester.tests[0]['api_response'] is None
-        mockpatch_save_results.assert_called_once()
+        mockpatch_results_manager.assert_called_once()
 
     @patch('models.global_tester.apitester', return_value=(None, ['fake_error_object']))
     @patch('models.global_tester.Service', side_effect=MockedService)
     @patch('models.global_tester.os.listdir', return_value=['test_api.json'])
     @patch('models.global_tester.os.path.isfile', return_value=True)
     @patch('models.global_tester.open', new=mock_open(read_data="extended_paths:\n- /extra\n"))
-    @patch('models.global_tester.MongoCon')
-    def test_test_executer_failure(self, mockpatch_apitester, mockpatch_service, mockpatch_listdir, mockpatch_isfile, mockpatch_save_results):
+    @patch('models.global_tester.results_manager')
+    def test_test_executer_failure(self, mockpatch_apitester, mockpatch_service, mockpatch_listdir, mockpatch_isfile, mockpatch_results_manager):
         tester = GlobalTester('production', 'TestService')
         assert len(tester.tests) == 1
         assert tester.tests[0]['title'] == 'Test on /test_api/extra'
@@ -93,7 +91,7 @@ class TestGlobalTester(unittest.TestCase):
         assert not tester.tests[0]['status']
         assert len(tester.tests[0]['errors_list']) == 1
         assert tester.tests[0]['api_response'] is None
-        mockpatch_save_results.assert_called_once()
+        mockpatch_results_manager.assert_called_once()
 
 
 if __name__ == '__main__':

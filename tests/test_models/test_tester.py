@@ -16,7 +16,7 @@ class TestTester(unittest.TestCase):
                     is_mapping_ok=MagicMock(return_value=['error']))
     def test_tester_save_response_false(self):
         response, result = apitester('production', Service('pokeapi'), '', api='test', query_specs=dict(), filename="item.json",
-                                     save_response=False, valid_http_code=[200])
+                                     save_response=False, save_response_on_error=False, valid_http_code=[200])
         assert response is None
         assert len(result) == 1
         assert result[0] == 'error'
@@ -26,7 +26,7 @@ class TestTester(unittest.TestCase):
                     is_mapping_ok=MagicMock(return_value=['error']))
     def test_tester_save_response_true(self):
         response, result = apitester('production', Service('pokeapi'), '', api='test', query_specs=dict(), filename="item.json",
-                                     save_response=True , valid_http_code=[200])
+                                     save_response=True, save_response_on_error=False, valid_http_code=[200])
         assert response == '{"metadata": {"request_id": 1234}}'
         assert len(result) == 1
         assert result[0] == 'error'
@@ -36,7 +36,7 @@ class TestTester(unittest.TestCase):
                     is_mapping_ok=MagicMock(return_value=[]))
     def test_tester_http_code_error(self):
         response, result = apitester('production', Service('pokeapi'), '', api='test', query_specs=dict(), filename="item.json",
-                                     save_response=False, valid_http_code=[400])
+                                     save_response=False, save_response_on_error=False, valid_http_code=[400])
         assert response is None
         assert len(result) == 1
         assert result[0].__str__() == 'HttpCodeError: request return an error code 200'
